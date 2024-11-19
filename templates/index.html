@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Priyadharsan Jayaseelan - Resume</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/GLTFLoader.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
         :root {
@@ -126,6 +127,13 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        #3d-container {
+            width: 100%;
+            height: 500px;
+            margin-top: 40px;
+            background-color: #ddd; /* Background for the 3D canvas */
+        }
     </style>
 </head>
 <body>
@@ -142,6 +150,13 @@
             </div>
         </div>
     </header>
+
+    <section id="3dface">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">3D Robot Face Reveal</h2>
+            <div id="3d-container"></div>
+        </div>
+    </section>
 
     <section id="skills">
         <div class="container">
@@ -182,87 +197,53 @@
         </div>
     </section>
 
-    <section id="experience">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Work Experience</h2>
-            <div class="experience-card" data-aos="fade-up">
-                <h3>Culinary Operational Assistant</h3>
-                <h4>Kent State University | Aug 2024 - Present</h4>
-                <ul>
-                    <li>Optimized staff scheduling using SQL queries</li>
-                    <li>Developed custom data structures for inventory management</li>
-                    <li>Improved operational efficiency by 20%</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="education">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Education</h2>
-            <div class="education-card" data-aos="fade-up">
-                <h3>Bachelor of Computer Science</h3>
-                <h4>Kent State University | GPA: 3.77 | Aug 2023 - May 2027</h4>
-            </div>
-        </div>
-    </section>
-
-    <section id="activities">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Activities</h2>
-            <div class="activities-card" data-aos="fade-up">
-                <h3>ALD Honor Society Member</h3>
-                <h4>Kent State University | Dec 2023 - Present</h4>
-                <ul>
-                    <li>Led bi-monthly mentoring initiatives</li>
-                    <li>Increased Honor Society participation by 30%</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
     <script>
-        // Initialize AOS
+        // Initialize AOS (for animations)
         AOS.init({
             duration: 800,
             offset: 100,
             once: true
         });
 
-        // 3D Face Reveal Animation (Placeholder Cube)
-        let scene, camera, renderer, mesh;
+        // 3D Robot Face Reveal Animation (Using GLTFLoader to load a 3D face model)
+        let scene, camera, renderer, faceModel;
 
         function init() {
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             renderer = new THREE.WebGLRenderer();
             renderer.setSize(window.innerWidth, window.innerHeight);
-            document.body.appendChild(renderer.domElement);
+            document.getElementById('3d-container').appendChild(renderer.domElement);
 
-            // Geometric face structure (cube as a placeholder)
-            const geometry = new THREE.BoxGeometry(2, 2, 2);
-            const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
-            mesh = new THREE.Mesh(geometry, material);
-            scene.add(mesh);
+            // Load a 3D robot face model (replace URL with your model)
+            const loader = new THREE.GLTFLoader();
+            loader.load('https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/models/RobotExpressive/RobotExpressive.glb', function(gltf) {
+                faceModel = gltf.scene;
+                scene.add(faceModel);
+                animate();
+            }, undefined, function(error) {
+                console.error(error);
+            });
 
             camera.position.z = 5;
-
-            animate();
         }
 
         function animate() {
             requestAnimationFrame(animate);
 
-            // Rotate the cube (simulating face reveal)
-            mesh.rotation.x += 0.01;
-            mesh.rotation.y += 0.01;
+            if (faceModel) {
+                // Rotate the model for effect
+                faceModel.rotation.x += 0.01;
+                faceModel.rotation.y += 0.01;
+            }
 
             renderer.render(scene, camera);
         }
 
+        // Start the scene
         init();
 
-        // Handle window resize
+        // Handle window resizing
         window.addEventListener('resize', function() {
             renderer.setSize(window.innerWidth, window.innerHeight);
             camera.aspect = window.innerWidth / window.innerHeight;
