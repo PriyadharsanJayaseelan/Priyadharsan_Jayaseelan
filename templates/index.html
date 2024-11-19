@@ -14,9 +14,6 @@
             --text: #2c3e50;
             --bg: #ecf0f1;
             --card-bg: #ffffff;
-            --neon-green: #00ff00;
-            --neon-blue: #00ccff;
-            --neon-pink: #ff00ff;
         }
 
         * {
@@ -32,23 +29,16 @@
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
-            font-size: 16px;
         }
 
-        /* Matrix Rain Effect */
-        #matrix-rain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            z-index: -1;
-            pointer-events: none;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        /* Opening Gate Animation */
-        .gate-container {
+        /* Techie Animation Loader */
+        .techie-loader {
             position: fixed;
             top: 0;
             left: 0;
@@ -59,29 +49,24 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            overflow: hidden;
         }
 
-        .gate {
-            width: 0;
-            height: 100%;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-green), var(--neon-pink));
-            position: absolute;
-            transition: all 2s ease-in-out;
-            z-index: 9999;
+        .techie-box {
+            color: #0f0; /* Matrix green color */
+            font-family: 'Courier New', Courier, monospace;
+            white-space: nowrap;
+            line-height: 1.5;
         }
 
-        .gate-left {
-            left: 0;
-            clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);
+        .techie-line {
+            margin-bottom: 10px;
         }
 
-        .gate-right {
-            right: 0;
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        #loading-line {
+            color: #ff0; /* Yellow for the loading text */
         }
 
-        /* Resume Content Styles */
+        /* Header Styles */
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
@@ -94,7 +79,7 @@
         .profile-info h1 {
             font-size: 3em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
         .contact-info {
@@ -130,6 +115,7 @@
             margin: 10px auto;
         }
 
+        /* Skills Grid */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -141,7 +127,7 @@
             background: var(--card-bg);
             padding: 25px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
         }
 
@@ -162,7 +148,7 @@
             padding: 30px;
             margin-bottom: 30px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             position: relative;
             overflow: hidden;
         }
@@ -192,7 +178,7 @@
             background: var(--card-bg);
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             margin-bottom: 30px;
         }
 
@@ -206,9 +192,21 @@
             background: var(--card-bg);
             padding: 25px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             margin-bottom: 30px;
             border-left: 4px solid var(--accent);
+        }
+
+        /* Matrix Rain Effect */
+        #matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2); /* Semi-transparent background for the rain */
+            z-index: -1; /* Put behind the content */
+            pointer-events: none;
         }
 
         /* Responsive Design */
@@ -228,14 +226,22 @@
     </style>
 </head>
 <body>
+    <!-- Techie Animation Loader -->
+    <div class="techie-loader" id="techie-loader">
+        <div class="techie-box" id="techie-box">
+            <div class="techie-line">const PRIYADHARSAN = {</div>
+            <div class="techie-line">  name: 'Priyadharsan Jayaseelan',</div>
+            <div class="techie-line">  skills: ['C++', 'Python', 'SQL'],</div>
+            <div class="techie-line">  university: 'Kent State University',</div>
+            <div class="techie-line">  gpa: 3.77,</div>
+            <div class="techie-line">  status: 'Innovating Future Tech'</div>
+            <div class="techie-line">};</div>
+            <div class="techie-line" id="loading-line">Loading profile...</div>
+        </div>
+    </div>
+
     <!-- Matrix Rain Canvas -->
     <canvas id="matrix-rain"></canvas>
-
-    <!-- Opening Animation (Gate Opening) -->
-    <div class="gate-container" id="gate-container">
-        <div class="gate gate-left"></div>
-        <div class="gate gate-right"></div>
-    </div>
 
     <!-- Main Resume Content -->
     <header>
@@ -259,12 +265,21 @@
                     <h3>Programming Languages</h3>
                     <div class="skill-item">
                         <p>C++</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-width="90"></div>
+                        </div>
                     </div>
                     <div class="skill-item">
                         <p>Python</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-width="85"></div>
+                        </div>
                     </div>
                     <div class="skill-item">
                         <p>SQL</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-width="80"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -282,9 +297,8 @@
                     <h3>Technical Skills</h3>
                     <ul>
                         <li>Database Management</li>
-                        <li>Object-Oriented Programming (OOP)</li>
-                        <li>Web Development</li>
-                        <li>Networking & Cybersecurity</li>
+                        <li>Inventory System Operations</li>
+                        <li>Data Analysis</li>
                     </ul>
                 </div>
             </div>
@@ -294,23 +308,25 @@
     <section id="experience">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Work Experience</h2>
-
+            
             <div class="experience-card" data-aos="fade-up">
-                <h3>Software Developer Intern</h3>
-                <h4>ABC Corp. | June 2023 - Present</h4>
-                <p>
-                    - Worked on software development using Python and C++. 
-                    - Designed and optimized algorithms to improve system performance.
-                </p>
+                <h3>Culinary Operational Assistant</h3>
+                <h4>Kent State University | Aug 2024 - Present</h4>
+                <ul>
+                    <li>Optimized staff scheduling using SQL queries</li>
+                    <li>Developed custom data structures for inventory management</li>
+                    <li>Improved operational efficiency by 20%</li>
+                </ul>
             </div>
 
             <div class="experience-card" data-aos="fade-up" data-aos-delay="100">
-                <h3>Web Development Intern</h3>
-                <h4>XYZ Solutions | January 2023 - May 2023</h4>
-                <p>
-                    - Developed interactive web applications using HTML, CSS, JavaScript.
-                    - Worked on client-side and server-side programming to ensure seamless integration.
-                </p>
+                <h3>Technical Lab Support Assistant</h3>
+                <h4>Aristo Public School | Aug 2022 - Feb 2023</h4>
+                <ul>
+                    <li>Provided technical support and troubleshooting</li>
+                    <li>Streamlined lab operations</li>
+                    <li>Organized coding activities and group projects</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -318,11 +334,17 @@
     <section id="education">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Education</h2>
-
+            
             <div class="education-card" data-aos="fade-up">
-                <h3>Bachelor of Science in Computer Science</h3>
-                <p>Kent State University | Expected Graduation: May 2025</p>
-                <p>Relevant Coursework: Data Structures, Operating Systems, Web Development</p>
+                <h3>Bachelor of Computer Science</h3>
+                <h4>Kent State University | GPA: 3.77 | Aug 2023 - May 2027</h4>
+                <p>Relevant Coursework:</p>
+                <ul>
+                    <li>Advanced C++ Projects</li>
+                    <li>Data Structures & Algorithms</li>
+                    <li>Object-Oriented Programming</li>
+                    <li>Database Operations</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -330,23 +352,21 @@
     <section id="activities">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Activities</h2>
-
+            
             <div class="activities-card" data-aos="fade-up">
-                <h3>Vice President</h3>
-                <p>Computer Science Club | September 2023 - Present</p>
-                <p>Organize coding challenges and hackathons to encourage student participation in tech activities.</p>
-            </div>
-
-            <div class="activities-card" data-aos="fade-up" data-aos-delay="100">
-                <h3>Volunteer</h3>
-                <p>Code For Good | January 2023 - Present</p>
-                <p>Helping local non-profits with web development and software solutions to improve their digital presence.</p>
+                <h3>ALD Honor Society Member</h3>
+                <h4>Kent State University | Dec 2023 - Present</h4>
+                <ul>
+                    <li>Led bi-monthly mentoring initiatives</li>
+                    <li>Increased Honor Society participation by 30%</li>
+                    <li>Spearheaded faculty-student engagement programs</li>
+                </ul>
             </div>
         </div>
     </section>
 
     <script>
-        // Initialize AOS (Animate On Scroll)
+        // Initialize AOS
         AOS.init({
             duration: 800,
             offset: 100,
@@ -369,18 +389,19 @@
             drops[i] = Math.random() * canvas.height;
         }
 
+        // Draw the rain
         function drawMatrixRain() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.1)"; // Clear background with slight fade
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; 
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            ctx.fillStyle = "#00FF00"; // Green color for text
+            ctx.fillStyle = '#0F0'; 
             ctx.font = `${fontSize}px monospace`;
 
             for (let i = 0; i < drops.length; i++) {
                 const text = characters[Math.floor(Math.random() * characters.length)];
                 ctx.fillText(text, i * fontSize, drops[i]);
 
-                if (drops[i] > canvas.height + Math.random() * 10000) {
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
                     drops[i] = 0;
                 }
 
@@ -388,20 +409,22 @@
             }
         }
 
-        setInterval(drawMatrixRain, 33);
+        setInterval(drawMatrixRain, 35);
 
-        // Gate animation effect
-        window.onload = function () {
-            const gateLeft = document.querySelector('.gate-left');
-            const gateRight = document.querySelector('.gate-right');
-            setTimeout(() => {
-                gateLeft.style.width = '50%';
-                gateRight.style.width = '50%';
-            }, 100);
-            setTimeout(() => {
-                document.querySelector('#gate-container').style.display = 'none';
-            }, 3000); // Hide the gate after the animation
-        }
+        // Ensure canvas size is correct on window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            drops.length = 0;
+            for (let i = 0; i < canvas.width / fontSize; i++) {
+                drops[i] = Math.random() * canvas.height;
+            }
+        });
+
+        // Hide the loader after the page is fully loaded
+        window.onload = () => {
+            document.getElementById('techie-loader').style.display = 'none';
+        };
     </script>
 </body>
 </html>
