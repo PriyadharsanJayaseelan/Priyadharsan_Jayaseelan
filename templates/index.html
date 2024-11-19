@@ -1,84 +1,355 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Priyadharsan's Resume</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priyadharsan Jayaseelan - Resume</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --text: #2c3e50;
+            --bg: #ecf0f1;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 100px 0 50px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .profile-info h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary);
+            font-size: 2.5em;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--secondary);
+            margin: 10px auto;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+        }
+
+        /* Experience Cards */
+        .experience-card {
+            background: var(--card-bg);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--secondary);
+        }
+
+        .experience-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .experience-card h4 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        /* Education Section */
+        .education-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .education-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* Activities Section */
+        .activities-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            border-left: 4px solid var(--accent);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-info h1 {
+                font-size: 2em;
+            }
+            
+            .section-title {
+                font-size: 2em;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-progress {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--secondary);
+            width: 0;
+            transition: width 1.5s ease;
+        }
+    </style>
 </head>
 <body>
-  <h1>PRIYADHARSAN JAYASEELAN</h1>
-  <p>Kent, Ohio +1 (234) 296-2703 priyadharsanjayaseelan@gmail.com</p>
+    <header>
+        <div class="container">
+            <div class="profile-info">
+                <h1 data-aos="fade-down">PRIYADHARSAN JAYASEELAN</h1>
+                <div class="contact-info" data-aos="fade-up">
+                    <p>📍 Kent, Ohio</p>
+                    <p>📞 +1 (234) 296-2703</p>
+                    <p>✉️ priyadharsanjayaseelan@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </header>
 
-  <h2>SKILLS & TOOLS KNOWLEDGE</h2>
-  <h3>Programming Languages & Technologies</h3>
-  <ul>
-    <li>C++ (Data Structures)</li>
-    <li>Python</li>
-    <li>SQL</li>
-  </ul>
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Skills & Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Programming Languages</h3>
+                    <div class="skill-item">
+                        <p>C++</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <p>Python</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <p>SQL</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-width="80"></div>
+                        </div>
+                    </div>
+                </div>
 
-  <h3>Development Environments & Tools</h3>
-  <ul>
-    <li>VS code</li>
-    <li>Xcode</li>
-    <li>Python IDLE</li>
-    <li>MySQL Workbench</li>
-  </ul>
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Development Tools</h3>
+                    <ul>
+                        <li>VS Code</li>
+                        <li>Xcode</li>
+                        <li>Python IDLE</li>
+                        <li>MySQL Workbench</li>
+                    </ul>
+                </div>
 
-  <h3>Version Control & Operating Systems</h3>
-  <ul>
-    <li>SVN (Subversion)</li>
-    <li>Linux (Command Line Interface, Terminal Operations)</li>
-  </ul>
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Technical Skills</h3>
+                    <ul>
+                        <li>Database Management</li>
+                        <li>Inventory System Operations</li>
+                        <li>Data Analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <h3>Software Proficiency</h3>
-  <ul>
-    <li>Microsoft Office Suite (Excel, PowerPoint, Word)</li>
-    <li>Content Creation Tools (VSCO, VN Editor)</li>
-  </ul>
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Work Experience</h2>
+            
+            <div class="experience-card" data-aos="fade-up">
+                <h3>Culinary Operational Assistant</h3>
+                <h4>Kent State University | Aug 2024 - Present</h4>
+                <ul>
+                    <li>Optimized staff scheduling using SQL queries</li>
+                    <li>Developed custom data structures for inventory management</li>
+                    <li>Improved operational efficiency by 20%</li>
+                </ul>
+            </div>
 
-  <h3>Technical Skills</h3>
-  <ul>
-    <li>Database Management</li>
-    <li>Inventory System Operations</li>
-    <li>Quantitative & Qualitative Analysis</li>
-  </ul>
+            <div class="experience-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Technical Lab Support Assistant</h3>
+                <h4>Aristo Public School | Aug 2022 - Feb 2023</h4>
+                <ul>
+                    <li>Provided technical support and troubleshooting</li>
+                    <li>Streamlined lab operations</li>
+                    <li>Organized coding activities and group projects</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-  <h3>Professional Competencies</h3>
-  <ul>
-    <li>Effective Communication</li>
-    <li>Adaptability in Fast-paced Environments</li>
-  </ul>
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Education</h2>
+            
+            <div class="education-card" data-aos="fade-up">
+                <h3>Bachelor of Computer Science</h3>
+                <h4>Kent State University | GPA: 3.77 | Aug 2023 - May 2027</h4>
+                <p>Relevant Coursework:</p>
+                <ul>
+                    <li>Advanced C++ Projects</li>
+                    <li>Data Structures & Algorithms</li>
+                    <li>Object-Oriented Programming</li>
+                    <li>Database Operations</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-  <h2>EDUCATION</h2>
-  <h3>Bachelor of Computer Science | Kent State University | GPA - 3.77 | Aug 2023 - May 2027</h3>
-  <h4>Relevant Coursework and Projects</h4>
-  <ul>
-    <li>Developed advanced C++ projects in Big Integer arithmetic, String manipulation libraries, Custom data structures (Stacks, Queues), Object-oriented programming principles with Big-3 implementations, Template-based programming, Assembler development and Database operations.</li>
-    <li>Actively expanding technical expertise through exploring innovative programming paradigms and currently working on Python automation scripts for streamlining repetitive tasks and Building data analysis projects using Pandas and NumPy libraries.</li>
-  </ul>
+    <section id="activities">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Activities</h2>
+            
+            <div class="activities-card" data-aos="fade-up">
+                <h3>ALD Honor Society Member</h3>
+                <h4>Kent State University | Dec 2023 - Present</h4>
+                <ul>
+                    <li>Led bi-monthly mentoring initiatives</li>
+                    <li>Increased Honor Society participation by 30%</li>
+                    <li>Spearheaded faculty-student engagement programs</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-  <h2>WORK EXPERIENCES</h2>
-  <h3>Culinary Operational Assistant | Kent State University</h3>
-  <h4>Aug 2024 - Present</h4>
-  <ul>
-    <li>Optimized staff scheduling by maintaining accurate shift records and using SQL queries to match employee availability and skills to station assignments, ensuring smooth daily operations and timely workflow updates for management.</li>
-    <li>Developed custom data structures like priority queues and hash tables to optimize inventory and procurement processes. These innovations automated vendor ordering based on stock thresholds and enabled faster access to product information, significantly improving inventory management and reducing supply chain delays.</li>
-    <li>Improved operational efficiency by accurately tracking data, generating detailed reports in Microsoft Word format, and providing comprehensive visualizations like charts and graphs to senior management, resulting in a 20% increase in process efficiency.</li>
-  </ul>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: true
+        });
 
-  <h3>Technical Lab Support Assistant | Aristo Public School</h3>
-  <h4>Aug 2022 - Feb 2023</h4>
-  <ul>
-    <li>Provided direct technical support to students by troubleshooting code issues and assisting with platform navigation, enhancing student productivity and improving overall lab efficiency by 15%.</li>
-    <li>Streamlined lab operations by updating software on Windows and Mac, setting up quiz pages, and ensuring all tools and equipment were ready, resulting in minimal downtime and smooth, uninterrupted sessions for students and staff.</li>
-    <li>Fostered team collaboration by organizing engaging activities like coding puzzles and group quizzes in Python and C++, enhancing peer relationships and encouraging teamwork in lab projects.</li>
-  </ul>
+        // Animate skill progress bars
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                setTimeout(() => {
+                    bar.style.width = width + '%';
+                }, 500);
+            });
+        }
 
-  <h2>ACTIVITIES</h2>
-  <h3>ALD Honor Society Member | Kent State University</h3>
-  <h4>Dec 2023 - Present</h4>
-  <ul>
-    <li>Led bi-monthly mentoring initiatives, boosting student retention and GPA.</li>
-    <li>Spearheaded faculty-student engagement programs, enhancing collaborative learning and increasing Honor Society participation by 30% through strategic event coordination using Canva to create eye-catching flyers.</li>
-  </ul>
+        // Run animations when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            animateProgressBars();
+        });
+    </script>
 </body>
 </html>
