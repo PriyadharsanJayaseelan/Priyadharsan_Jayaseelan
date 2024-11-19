@@ -27,6 +27,7 @@
             background-color: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            perspective: 1000px;
         }
 
         .container {
@@ -37,17 +38,50 @@
 
         /* Header Styles */
         header {
+            position: relative;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             padding: 100px 0 50px;
             text-align: center;
             clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            overflow: hidden;
+            animation: headerPulse 5s infinite alternate;
+        }
+
+        @keyframes headerPulse {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .matrix-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .profile-info {
+            position: relative;
+            z-index: 2;
+            transform-style: preserve-3d;
         }
 
         .profile-info h1 {
             font-size: 3em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: glitch 2s infinite;
+        }
+
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px, 0) skew(0deg); }
+            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
         }
 
         .contact-info {
@@ -58,155 +92,52 @@
             flex-wrap: wrap;
         }
 
-        /* Section Styles */
+        /* Hover Effects for Sections */
         section {
-            padding: 60px 0;
+            transition: all 0.3s ease;
         }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--primary);
-            font-size: 2.5em;
-            position: relative;
+        section:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 3px;
-            background: var(--secondary);
-            margin: 10px auto;
+        /* New Tech Animations */
+        .skill-category, .experience-card, .education-card, .activities-card {
+            transition: all 0.3s ease;
+            will-change: transform;
         }
 
-        /* Skills Grid */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .skill-category {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-        }
-
-        .skill-category h3 {
-            color: var(--secondary);
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--secondary);
-            padding-bottom: 10px;
-        }
-
-        /* Experience Cards */
-        .experience-card {
-            background: var(--card-bg);
-            padding: 30px;
-            margin-bottom: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .experience-card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background: var(--secondary);
-        }
-
-        .experience-card h3 {
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .experience-card h4 {
-            color: var(--secondary);
-            margin-bottom: 15px;
-        }
-
-        /* Education Section */
-        .education-card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        .education-card h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        /* Activities Section */
-        .activities-card {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-            border-left: 4px solid var(--accent);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .profile-info h1 {
-                font-size: 2em;
-            }
-            
-            .section-title {
-                font-size: 2em;
-            }
-            
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation Classes */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .skill-progress {
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 4px;
-            margin-top: 8px;
-            overflow: hidden;
+        .skill-category:hover, 
+        .experience-card:hover, 
+        .education-card:hover, 
+        .activities-card:hover {
+            transform: translateZ(50px) rotate3d(1, 1, 1, 2deg);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.15);
         }
 
         .progress-bar {
-            height: 100%;
-            background: var(--secondary);
-            width: 0;
-            transition: width 1.5s ease;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            background-size: 200% 100%;
+            animation: progressAnimation 3s linear infinite;
+        }
+
+        @keyframes progressAnimation {
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
+
+        /* Matrix Rain Effect */
+        @keyframes matrix-rain {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
         }
     </style>
 </head>
 <body>
     <header>
+        <!-- Matrix Background -->
+        <svg class="matrix-background" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"></svg>
         <div class="container">
             <div class="profile-info">
                 <h1 data-aos="fade-down">PRIYADHARSAN JAYASEELAN</h1>
@@ -219,114 +150,6 @@
         </div>
     </header>
 
-    <section id="skills">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Skills & Expertise</h2>
-            <div class="skills-grid">
-                <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
-                    <h3>Programming Languages</h3>
-                    <div class="skill-item">
-                        <p>C++</p>
-                        <div class="skill-progress">
-                            <div class="progress-bar" data-width="90"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <p>Python</p>
-                        <div class="skill-progress">
-                            <div class="progress-bar" data-width="85"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <p>SQL</p>
-                        <div class="skill-progress">
-                            <div class="progress-bar" data-width="80"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
-                    <h3>Development Tools</h3>
-                    <ul>
-                        <li>VS Code</li>
-                        <li>Xcode</li>
-                        <li>Python IDLE</li>
-                        <li>MySQL Workbench</li>
-                    </ul>
-                </div>
-
-                <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
-                    <h3>Technical Skills</h3>
-                    <ul>
-                        <li>Database Management</li>
-                        <li>Inventory System Operations</li>
-                        <li>Data Analysis</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="experience">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Work Experience</h2>
-            
-            <div class="experience-card" data-aos="fade-up">
-                <h3>Culinary Operational Assistant</h3>
-                <h4>Kent State University | Aug 2024 - Present</h4>
-                <ul>
-                    <li>Optimized staff scheduling using SQL queries</li>
-                    <li>Developed custom data structures for inventory management</li>
-                    <li>Improved operational efficiency by 20%</li>
-                </ul>
-            </div>
-
-            <div class="experience-card" data-aos="fade-up" data-aos-delay="100">
-                <h3>Technical Lab Support Assistant</h3>
-                <h4>Aristo Public School | Aug 2022 - Feb 2023</h4>
-                <ul>
-                    <li>Provided technical support and troubleshooting</li>
-                    <li>Streamlined lab operations</li>
-                    <li>Organized coding activities and group projects</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="education">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Education</h2>
-            
-            <div class="education-card" data-aos="fade-up">
-                <h3>Bachelor of Computer Science</h3>
-                <h4>Kent State University | GPA: 3.77 | Aug 2023 - May 2027</h4>
-                <p>Relevant Coursework:</p>
-                <ul>
-                    <li>Advanced C++ Projects</li>
-                    <li>Data Structures & Algorithms</li>
-                    <li>Object-Oriented Programming</li>
-                    <li>Database Operations</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="activities">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Activities</h2>
-            
-            <div class="activities-card" data-aos="fade-up">
-                <h3>ALD Honor Society Member</h3>
-                <h4>Kent State University | Dec 2023 - Present</h4>
-                <ul>
-                    <li>Led bi-monthly mentoring initiatives</li>
-                    <li>Increased Honor Society participation by 30%</li>
-                    <li>Spearheaded faculty-student engagement programs</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
     <script>
         // Initialize AOS
         AOS.init({
@@ -334,6 +157,22 @@
             offset: 100,
             once: true
         });
+
+        // Matrix Rain Effect
+        function createMatrixRain(svg) {
+            const chars = '01';
+            for (let i = 0; i < 100; i++) {
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', Math.random() * 1200);
+                text.setAttribute('y', Math.random() * -200);
+                text.setAttribute('fill', 'rgba(46, 204, 113, 0.3)');
+                text.setAttribute('font-family', 'monospace');
+                text.setAttribute('font-size', '10');
+                text.textContent = chars[Math.floor(Math.random() * chars.length)];
+                text.style.animation = `matrix-rain ${Math.random() * 5 + 3}s linear infinite ${Math.random() * -10}s`;
+                svg.appendChild(text);
+            }
+        }
 
         // Animate skill progress bars
         function animateProgressBars() {
@@ -348,6 +187,10 @@
 
         // Run animations when page loads
         document.addEventListener('DOMContentLoaded', () => {
+            const matrixBackground = document.querySelector('.matrix-background');
+            if (matrixBackground) {
+                createMatrixRain(matrixBackground);
+            }
             animateProgressBars();
         });
     </script>
