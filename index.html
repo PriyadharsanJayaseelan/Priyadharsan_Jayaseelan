@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Priyadharsan Jayaseelan - Resume</title>
+    <title>Priyadharsan Jayaseelan - Portfolio</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
@@ -11,8 +11,8 @@
             --primary: #2c3e50;
             --secondary: #3498db;
             --accent: #e74c3c;
-            --text: #2c3e50;
-            --bg: #ecf0f1;
+            --text: #ffffff;
+            --bg: rgba(0, 0, 0, 0.8);
             --card-bg: #ffffff;
         }
 
@@ -26,86 +26,43 @@
         body {
             background-color: var(--bg);
             color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
+            font-family: 'Segoe UI', sans-serif;
             position: relative;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Techie Animation Loader */
-        .techie-loader {
+        /* Loader */
+        .loader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #000, #112240);
+            background: rgba(0, 0, 0, 0.8);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
+            visibility: hidden;
         }
 
-        .techie-box {
-            color: #0f0; /* Matrix green color */
-            font-family: 'Courier New', Courier, monospace;
-            background: rgba(17, 34, 64, 0.8);
-            padding: 30px;
-            border-radius: 10px;
-            border: 2px solid #64ffda;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .techie-line {
-            opacity: 0;
-            overflow: hidden;
-            white-space: nowrap;
-            animation: typing 1s steps(40, end) forwards;
-            margin-bottom: 10px;
-            color: #64ffda;
+        .loader .techie {
+            font-family: 'Courier New', monospace;
+            font-size: 2em;
+            color: #0f0;
+            letter-spacing: 2px;
+            animation: typing 2s steps(30) 1s normal forwards;
         }
 
         @keyframes typing {
-            from { width: 0; opacity: 0; }
-            to { width: 100%; opacity: 1; }
+            from { width: 0; }
+            to { width: 100%; }
         }
 
-        .techie-line:nth-child(1) { animation-delay: 0.5s; }
-        .techie-line:nth-child(2) { animation-delay: 1.5s; }
-        .techie-line:nth-child(3) { animation-delay: 2.5s; }
-        .techie-line:nth-child(4) { animation-delay: 3.5s; }
-        .techie-line:nth-child(5) { animation-delay: 4.5s; }
-        .techie-line:nth-child(6) { animation-delay: 5.5s; }
-        .techie-line:nth-child(7) { animation-delay: 6.5s; }
-
-        #loading-line {
-            color: #ff6b6b;
-            animation-delay: 7.5s;
-        }
-
-        .enter-btn {
-            display: none;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #64ffda;
-            color: #0a192f;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .enter-btn:hover {
-            background-color: #ff6b6b;
-            transform: scale(1.05);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
         /* Matrix Rain Effect */
@@ -115,327 +72,190 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.4);
             z-index: -1;
             pointer-events: none;
         }
 
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 100px 0 50px;
-            text-align: center;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-            z-index: 1;
-        }
-
-        .profile-info h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .contact-info {
-            margin-top: 20px;
+        /* Menu Section */
+        .menu {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 80px;
+            padding: 0;
         }
 
-        /* About Section */
-        .about-text {
+        .menu li {
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .menu li:hover {
+            color: var(--accent);
+        }
+
+        /* Content Section (Initially Hidden) */
+        .content {
+            display: none;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            color: var(--text);
+            text-align: left;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .content h2 {
+            font-size: 2.5em;
+            color: var(--accent);
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .content p {
             font-size: 1.2em;
             line-height: 1.8;
-            margin-top: 20px;
-            color: var(--text);
         }
 
-        .about-text span {
+        /* Typing Animation */
+        .typing {
+            display: inline-block;
+            border-right: 2px solid var(--accent);
             font-family: 'Brush Script MT', cursive;
             font-size: 1.5em;
-            color: var(--accent);
-            display: inline-block;
-            white-space: nowrap;
-            border-right: 2px solid var(--accent);
+            color: var(--text);
             padding-right: 5px;
-            animation: typing 2s steps(40) 1s infinite normal both;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .skill-category {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-        }
-
-        .skill-category h3 {
-            color: var(--secondary);
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--secondary);
-            padding-bottom: 10px;
-        }
-
-        /* Experience Cards */
-        .experience-card {
-            background: var(--card-bg);
-            padding: 30px;
-            margin-bottom: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            position: relative;
+            white-space: nowrap;
             overflow: hidden;
+            animation: typing 2s steps(30) 1s infinite normal both;
         }
 
-        .experience-card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background: var(--secondary);
-        }
-
-        .experience-card h3 {
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .experience-card h4 {
-            color: var(--secondary);
-            margin-bottom: 15px;
-        }
-
-        /* Education Section */
-        .education-card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        .education-card h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        /* Activities Section */
-        .activities-card {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-            border-left: 4px solid var(--accent);
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .profile-info h1 {
+            .menu h1 {
+                font-size: 2.5em;
+            }
+
+            .menu ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .menu li {
+                font-size: 1.2em;
+            }
+
+            .content h2 {
                 font-size: 2em;
             }
 
-            .section-title {
-                font-size: 2em;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
+            .content {
+                padding: 20px;
+                max-width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Techie Animation Loader -->
-    <div class="techie-loader" id="techie-loader">
-        <div class="techie-box" id="techie-box">
-            <div class="techie-line">const PRIYADHARSAN = {</div>
-            <div class="techie-line">  name: 'Priyadharsan Jayaseelan',</div>
-            <div class="techie-line">  skills: ['C++', 'Python', 'SQL'],</div>
-            <div class="techie-line">  university: 'Kent State University',</div>
-            <div class="techie-line">  gpa: 3.77,</div>
-            <div class="techie-line">  status: 'Innovating Future Tech'</div>
-            <div class="techie-line">};</div>
-            <div class="techie-line" id="loading-line">Loading profile...</div>
-            <button class="enter-btn" id="enter-btn">ENTER MY DIGITAL WORLD</button>     
-        </div>
+    <!-- Techie Loader -->
+    <div class="loader" id="loader">
+        <span class="techie">Entering your world...</span>
     </div>
 
     <!-- Matrix Rain Canvas -->
     <canvas id="matrix-rain"></canvas>
 
-    <!-- Main Resume Content (Initially Hidden) -->
-    <div id="main-content" style="display:none;">
-        <header>
-            <div class="container">
-                <div class="profile-info">
-                    <h1 data-aos="fade-down">PRIYADHARSAN JAYASEELAN</h1>
-                    <div class="contact-info" data-aos="fade-up">
-                        <p>📍 Kent, Ohio</p>    
-                        <p>📞 +1 (234) 296-2703</p>
-                        <p>✉️ priyadharsanjayaseelan@gmail.com</p>
-                    </div>
-                </div>
-            </div>
-        </header>
+    <!-- Main Portfolio Menu -->
+    <div class="menu">
+        <h1>Priyadharsan Jayaseelan</h1>
+        <ul>
+            <li id="aboutBtn">About Me</li>
+            <li id="skillsBtn">Skills</li>
+            <li id="workBtn">Work</li>
+            <li id="activitiesBtn">Activities</li>
+        </ul>
+    </div>
 
-        <section id="about" data-aos="fade-up">
-            <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <p class="about-text">
-                    <span>Passionate Software Engineer</span> with a drive for solving complex problems and a keen interest in tech innovations. My expertise spans across programming languages, database management, and system design. I'm currently pursuing a Computer Science degree at Kent State University and enjoy experimenting with new technologies.
-                </p>
-            </div>
-        </section>
+    <!-- About Me Section -->
+    <div class="content" id="aboutContent">
+        <h2>About Me</h2>
+        <p class="typing">I am a passionate software engineer, driven by curiosity and a desire to solve complex problems. My journey in tech started at a young age, and I have since honed my skills in various programming languages and technologies. Currently, I am pursuing a degree in Computer Science at Kent State University, with a focus on Data Structures and Algorithms.</p>
+    </div>
 
-        <!-- Skills Section -->
-        <section id="skills">
-            <div class="container">
-                <h2 class="section-title" data-aos="fade-up">Skills & Expertise</h2>
-                <div class="skills-grid">
-                    <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
-                        <h3>Programming Languages</h3>
-                        <div class="skill-item">
-                            <p>C++</p>
-                            <div class="skill-progress">
-                                <div class="progress-bar" style="width: 90%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <p>Python</p>
-                            <div class="skill-progress">
-                                <div class="progress-bar" style="width: 85%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <p>SQL</p>
-                            <div class="skill-progress">
-                                <div class="progress-bar" style="width: 80%;"></div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Skills Section -->
+    <div class="content" id="skillsContent">
+        <h2>Skills</h2>
+        <p class="typing">
+            <strong>Programming Languages & Technologies:</strong> C++ (Data Structures), Python, SQL<br>
+            <strong>Development Environments & Tools:</strong> VS code, Xcode, Python IDLE, MySQL Workbench<br>
+            <strong>Version Control & Operating Systems:</strong> SVN (Subversion), Linux (Command Line Interface, Terminal Operations)<br>
+            <strong>Software Proficiency:</strong> MS Office Suite (Excel, PowerPoint, Word), Content Creation Tools (VSCO, VN Editor, Canva)<br>
+            <strong>Technical Skills:</strong> Database Management, Inventory System Operations, Quantitative & Qualitative Analysis<br>
+            <strong>Professional Competencies:</strong> Effective Communication, Adaptability in Fast-paced Environments
+        </p>
+    </div>
 
-                    <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
-                        <h3>Development Tools</h3>
-                        <ul>
-                            <li>VS Code</li>
-                            <li>Xcode</li>
-                            <li>Python IDLE</li>
-                            <li>MySQL Workbench</li>
-                        </ul>
-                    </div>
+    <!-- Work Section -->
+    <div class="content" id="workContent">
+        <h2>Work Experience</h2>
+        <p class="typing">
+            <strong>Culinary Operational Assistant | Kent State University | Aug 2024 - Present</strong><br>
+            • Optimized staff scheduling by maintaining accurate shift records and using SQL queries to match employee availability and skills to station assignments.<br>
+            • Developed unique data structures, such as priority queues and hash tables, to enhance inventory and procurement processes.<br>
+            • Improved operational efficiency by generating detailed reports in Microsoft Word format, resulting in a 20% increase in process efficiency.<br><br>
 
-                    <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
-                        <h3>Technical Skills</h3>
-                        <ul>
-                            <li>Database Management</li>
-                            <li>Inventory System Operations</li>
-                            <li>Data Analysis</li>
-                        </ul>
-                    </div>
-                </div>
-            </div> 
-        </section>
+            <strong>Technical Lab Support Assistant | Aristo Public School | Aug 2022 - Feb 2023</strong><br>
+            • Provided technical support to students, troubleshooting code issues and improving lab efficiency by 15%.<br>
+            • Streamlined lab operations by updating software and ensuring all tools and equipment were ready.<br>
+            • Fostered team collaboration through engaging activities like coding puzzles and quizzes.
+        </p>
+    </div>
 
-        <!-- Work Experience Section -->
-        <section id="experience">
-            <div class="container">
-                <h2 class="section-title" data-aos="fade-up">Work Experience</h2>
-                
-                <div class="experience-card" data-aos="fade-up">
-                    <h3>Culinary Operational Assistant</h3>
-                    <h4>Kent State University | Aug 2024 - Present</h4>
-                    <ul>
-                        <li>Optimized staff scheduling using SQL queries</li>
-                        <li>Developed custom data structures for inventory management</li>
-                        <li>Improved operational efficiency by 20%</li>
-                    </ul>
-                </div>
-
-                <div class="experience-card" data-aos="fade-up" data-aos-delay="100">
-                    <h3>Technical Lab Support Assistant</h3>
-                    <h4>Aristo Public School | Aug 2022 - Feb 2023</h4>
-                    <ul>
-                        <li>Provided technical support and troubleshooting</li>
-                        <li>Streamlined lab operations</li>
-                        <li>Organized coding activities and group projects</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Education Section -->
-        <section id="education">
-            <div class="container">
-                <h2 class="section-title" data-aos="fade-up">Education</h2>
-                
-                <div class="education-card" data-aos="fade-up">
-                    <h3>Bachelor of Computer Science</h3>
-                    <h4>Kent State University | GPA: 3.77 | Aug 2023 - May 2027</h4>
-                    <p>Relevant Coursework:</p>
-                    <ul>
-                        <li>Advanced C++ Projects</li>
-                        <li>Data Structures & Algorithms</li>
-                        <li>Object-Oriented Programming</li>
-                        <li>Database Operations</li> 
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Activities Section -->
-        <section id="activities">
-            <div class="container">
-                <h2 class="section-title" data-aos="fade-up">Activities</h2>
-                
-                <div class="activities-card" data-aos="fade-up">
-                    <h3>ALD Honor Society Member</h3>
-                    <h4>Kent State University | Dec 2023 - Present</h4>
-                    <ul>
-                        <li>Led bi-monthly mentoring initiatives</li>
-                        <li>Increased Honor Society participation by 30%</li>
-                        <li>Spearheaded faculty-student engagement programs</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+    <!-- Activities Section -->
+    <div class="content" id="activitiesContent">
+        <h2>Activities</h2>
+        <p class="typing">
+            <strong>ALD Honor Society Member | Kent State University | Dec 2023 - Present</strong><br>
+            • Led bi-monthly mentoring initiatives, boosting student retention and GPA.<br>
+            • Spearheaded faculty-student engagement programs, enhancing collaborative learning and increasing participation by 30%.
+        </p>
     </div>
 
     <script>
+        // Techie Loader
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').style.visibility = 'hidden';
+            }, 3000); // Hide loader after 3 seconds
+        });
+
         // Matrix Rain Effect
         const canvas = document.getElementById("matrix-rain");
         const ctx = canvas.getContext("2d");
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@$%&*#^!';
         const fontSize = 16;
-        
+
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
         const cols = Math.floor(canvas.width / 20) + 1;
         const ypos = Array(cols).fill(0);
-        
+
         function draw() {
             ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = "#0f0";
             ctx.font = "20px monospace";
-            
+
             for (let i = 0; i < cols; i++) {
                 const text = String.fromCharCode(Math.random() * 128);
                 ctx.fillText(text, i * 20, ypos[i] * 20);
@@ -448,20 +268,39 @@
 
         setInterval(draw, 35);
 
-        // Loader animation & transition to resume content
-        const techieLoader = document.getElementById("techie-loader");
-        const enterBtn = document.getElementById("enter-btn");
-        const mainContent = document.getElementById("main-content");
+        // Handle clicks on the menu
+        const aboutBtn = document.getElementById("aboutBtn");
+        const skillsBtn = document.getElementById("skillsBtn");
+        const workBtn = document.getElementById("workBtn");
+        const activitiesBtn = document.getElementById("activitiesBtn");
 
-        // Wait for loader animation to finish before transitioning
-        setTimeout(() => {
-            enterBtn.style.display = "block"; // Show the "Enter" button
-        }, 7500);
+        const aboutContent = document.getElementById("aboutContent");
+        const skillsContent = document.getElementById("skillsContent");
+        const workContent = document.getElementById("workContent");
+        const activitiesContent = document.getElementById("activitiesContent");
 
-        enterBtn.addEventListener("click", () => {
-            techieLoader.style.display = "none"; // Hide loader
-            mainContent.style.display = "block"; // Show resume content
-            AOS.init(); // Reinitialize animations
+        // Clear all content and show the clicked one
+        function showContent(content) {
+            const contents = [aboutContent, skillsContent, workContent, activitiesContent];
+            contents.forEach(sec => sec.style.display = "none"); // Hide all sections
+            content.style.display = "block"; // Show clicked section
+        }
+
+        // Event listeners
+        aboutBtn.addEventListener("click", () => {
+            showContent(aboutContent);
+        });
+
+        skillsBtn.addEventListener("click", () => {
+            showContent(skillsContent);
+        });
+
+        workBtn.addEventListener("click", () => {
+            showContent(workContent);
+        });
+
+        activitiesBtn.addEventListener("click", () => {
+            showContent(activitiesContent);
         });
     </script>
 </body>
