@@ -1,145 +1,339 @@
-<div class="outer">
-	<i class="fa fa-arrow-circle-up" id="arrow" aria-hidden="true"></i>
-	<div class="inner">
-		<!--
-		HEADER
-    SECTION
--->
-		<header>
-			<div class="container-fluid clearfix">
-				<div class="row">
-					<i class="fa fa-bars nav-toggle" aria-hidden="true"></i>
-					<nav role="navigation">
-						<i class="fa fa-times nav-toggle" aria-hidden="true"></i>
-						<ul class="list-unstyled" id="nav">
-							<li>
-								<a class="nav-link" href="#intro"><span>About</span></a>
-								<div class="underline"></div>
-							</li>
-							<li>
-								<a class="nav-link" href="#skills"><span>Skills</span></a>
-								<div class="underline"></div>
-							</li>
-							<li>
-								<a class="nav-link" href="#portfolio"><span>Portfolio</span></a>
-								<div class="underline"></div>
-							</li>
-							<li>
-								<a class="nav-link" href="#contacts"><span>Contacts</span></a>
-								<div class="underline"></div>
-							</li>
-						</ul>
-					</nav>
-				</div>
-				<h1 class="titanic naked">Hi.</h1>
-			</div>
-		</header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #64ffda;
+            --text: #2c3e50;
+            --bg: #ecf0f1;
+            --card-bg: #ffffff;
+        }
 
-		<!--
-		INTRODUCTION
-		SECTION
--->
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-		<main id="main">
-			<div class="container">
-				<div class="row">
-					<div id="intro">
-						My name is Islam Ibakaev. Here at FreecodeCamp i learn to be a junior frontend developer. I love coding as all of you do.
-					</div>
-				</div>
-			</div>
-		</main>
-		<section class="skills-sec">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-10 col-xs-offset-1">
-						<h2>Skills</h2>
-					</div>
-					<div class="col-xs-8 col-xs-offset-2">
-						<div id="skills">
-							<img class="img-responsive skill toR" src="https://www.dropbox.com/s/ptiub25akn0arv1/js.png?dl=1" alt="js icon" />
-							<img class="img-responsive skill" src="https://www.dropbox.com/s/mg6l07shpizexrm/css3.png?dl=1" alt="css icon" />
-							<img class="img-responsive skill toL" src="https://www.dropbox.com/s/gpnimluvvf99aln/html5.png?dl=1" alt="html icon" />
-							<img src="https://www.dropbox.com/s/imyppai6tbkcy66/bootstrap.png?dl=1" alt="bootstrap icon" class="img-responsive skill toR" />
-							<img src="https://www.dropbox.com/s/qbirqpen1rap569/jquery.png?dl=1" alt="jquery icon" class="img-responsive skill" />
-							<img src="https://www.dropbox.com/s/3qcvkhy12pmmyy9/gitpng.png?dl=1" alt="git icon" class="img-responsive skill toL" />
-							<img src="https://www.dropbox.com/s/4258cs4sxun3ogs/sass.png?dl=1" alt="sass icon" class="img-responsive skill toR" />
-							<img src="https://www.dropbox.com/s/8k7szo5mjfz7n7g/gulp.png?dl=1" alt="gulp icon" class="img-responsive skill" />
-							<img src="https://www.dropbox.com/s/addcu8z0r6xxrpn/react.png?dl=1" alt="react icon" class="img-responsive skill toL" />
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-		<!--
-		PORTFOLIO
-    SECTION
--->
+        /* Loader Animation */
+        .techie-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000, #112240);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
 
-		<section class="portfolio-sec">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-10 col-xs-offset-1">
-						<h2>Portfolio</h2>
-					</div>
-					<div class="col-xs-12">
-						<div id="portfolio">
-							<div class="project">
-								<a href="https://codepen.io/dagman/pen/BKddGL" target="_blank"><img src="https://www.dropbox.com/s/jlt6wt35u88kqmv/weather.png?dl=1" alt="weather_app" class="img-responsive" /></a>
-							</div>
-							<div class="project">
-								<a href="https://codepen.io/dagman/pen/oxqzLx" target="_blank"><img src="https://www.dropbox.com/s/pmqf1y6q1zf5win/pomodoro.png?dl=1" alt="pomodoto_timer" class="img-responsive" /></a>
-							</div>
-							<div class="project">
-								<a href="https://codepen.io/dagman/pen/NNXdxw" target="_blank"><img src="https://www.dropbox.com/s/rb7jycwtwxtkt7d/calculator.png?dl=1" alt="calculator" class="img-responsive" /></a>
-							</div>
-							<div class="project">
-								<a href="https://codepen.io/dagman/pen/oxdYgW" target="_blank"><img src="https://www.dropbox.com/s/8hpioow2c68c97w/simon.png?dl=1" alt="simon_game" class="img-responsive" /></a>
-							</div>
-							<div class="project">
-								<a href="https://codepen.io/dagman/pen/yOzemP" target="_blank"><img src="https://www.dropbox.com/s/f49kdhi98ygoqif/quote.png?dl=1" alt="quote_machine" class="img-responsive" /></a>
-							</div>
-							<div class="project">
-								<a href="https://codepen.io/dagman/pen/jqZbje" target="_blank"><img src="https://www.dropbox.com/s/canzxmzo98vd1bj/tictactoe.png?dl=1" alt="tic_tac_toe" class="img-responsive" /></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+        .techie-box {
+            color: var(--accent);
+            font-family: 'Courier New', Courier, monospace;
+            background: rgba(17, 34, 64, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid var(--accent);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
 
-	</div>
-	<!--
-		FOOTER
-    SECTION
--->
-	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-10 col-xs-offset-1">
-					<h2>Get in Touch</h2>
-				</div>
-				<div class="col-xs-12">
-					<div id="contacts">
-						<div class="row">
-							<div class="col-lg-3 col-sm-6">
-								<a class="contact-link awesome" href="#">mail</a>
-							</div>
-							<div class="col-lg-3 col-sm-6">
-								<a class="contact-link awesome" href="#">linkedIn</a>
-							</div>
-							<div class="col-lg-3 col-sm-6">
-								<a class="contact-link awesome" href="#">facebook</a>
-							</div>
-							<div class="col-lg-3 col-sm-6">
-								<a class="contact-link awesome" href="#">freecodecamp</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
+        .techie-line {
+            opacity: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 1s steps(40, end) forwards;
+            margin-bottom: 10px;
+        }
 
-</div>
+        @keyframes typing {
+            from { width: 0; opacity: 0; }
+            to { width: 100%; opacity: 1; }
+        }
+
+        .enter-btn {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: var(--accent);
+            color: #0a192f;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(44, 62, 80, 0.95);
+            padding: 20px 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px 0;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-item i {
+            font-size: 2em;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .skills-grid, .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader Animation -->
+    <div class="techie-loader" id="techie-loader">
+        <div class="techie-box">
+            <div class="techie-line">const PORTFOLIO = {</div>
+            <div class="techie-line">  name: 'Your Name',</div>
+            <div class="techie-line">  title: 'Frontend Developer',</div>
+            <div class="techie-line">  skills: ['HTML', 'CSS', 'JavaScript'],</div>
+            <div class="techie-line">  status: 'Available for opportunities'</div>
+            <div class="techie-line">};</div>
+            <button class="enter-btn" id="enter-btn">ENTER PORTFOLIO</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" style="display:none;">
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <header id="about">
+            <div class="container">
+                <h1 data-aos="fade-down">Your Name</h1>
+                <p data-aos="fade-up">Frontend Developer</p>
+            </div>
+        </header>
+
+        <section id="skills">
+            <div class="container">
+                <h2 data-aos="fade-up">Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category" data-aos="fade-up">
+                        <h3>Frontend</h3>
+                        <ul>
+                            <li>HTML5</li>
+                            <li>CSS3</li>
+                            <li>JavaScript</li>
+                            <li>React</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
+                        <h3>Tools</h3>
+                        <ul>
+                            <li>Git</li>
+                            <li>VS Code</li>
+                            <li>Webpack</li>
+                            <li>npm</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <div class="container">
+                <h2 data-aos="fade-up">Portfolio</h2>
+                <div class="portfolio-grid">
+                    <!-- Add your project cards here -->
+                    <div class="project-card" data-aos="fade-up">
+                        <img src="/api/placeholder/400/300" alt="Project 1">
+                        <div class="project-info">
+                            <h3>Project 1</h3>
+                            <p>Description of project 1</p>
+                        </div>
+                    </div>
+                    <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                        <img src="/api/placeholder/400/300" alt="Project 2">
+                        <div class="project-info">
+                            <h3>Project 2</h3>
+                            <p>Description of project 2</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2 data-aos="fade-up">Contact</h2>
+                <div class="contact-grid">
+                    <div class="contact-item" data-aos="fade-up">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p>your.email@example.com</p>
+                    </div>
+                    <div class="contact-item" data-aos="fade-up" data-aos-delay="100">
+                        <i class="fab fa-linkedin"></i>
+                        <h3>LinkedIn</h3>
+                        <p>linkedin.com/in/yourprofile</p>
+                    </div>
+                    <div class="contact-item" data-aos="fade-up" data-aos-delay="200">
+                        <i class="fab fa-github"></i>
+                        <h3>GitHub</h3>
+                        <p>github.com/yourusername</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Initialize loader animation
+        const techieLoader = document.getElementById("techie-loader");
+        const enterBtn = document.getElementById("enter-btn");
+        const mainContent = document.getElementById("main-content");
+
+        setTimeout(() => {
+            enterBtn.style.display = "block";
+        }, 3000);
+
+        enterBtn.addEventListener("click", () => {
+            techieLoader.style.display = "none";
+            mainContent.style.display = "block";
+            AOS.init({
+                duration: 1000,
+                once: true
+            });
+        });
+    </script>
+</body>
+</html>
