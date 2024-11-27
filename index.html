@@ -1,20 +1,18 @@
 
-
-
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Portfolio</title>
+    <title>Priyadharsan Jayaseelan - Resume</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         :root {
             --primary: #2c3e50;
             --secondary: #3498db;
-            --accent: #64ffda;
+            --accent: #e74c3c;
             --text: #2c3e50;
             --bg: #ecf0f1;
             --card-bg: #ffffff;
@@ -32,9 +30,16 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Loader Animation */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Techie Animation Loader */
         .techie-loader {
             position: fixed;
             top: 0;
@@ -49,12 +54,12 @@
         }
 
         .techie-box {
-            color: var(--accent);
+            color: #0f0; /* Matrix green color */
             font-family: 'Courier New', Courier, monospace;
             background: rgba(17, 34, 64, 0.8);
             padding: 30px;
             border-radius: 10px;
-            border: 2px solid var(--accent);
+            border: 2px solid #64ffda;
             max-width: 500px;
             width: 100%;
             text-align: center;
@@ -66,6 +71,7 @@
             white-space: nowrap;
             animation: typing 1s steps(40, end) forwards;
             margin-bottom: 10px;
+            color: #64ffda;
         }
 
         @keyframes typing {
@@ -73,11 +79,24 @@
             to { width: 100%; opacity: 1; }
         }
 
+        .techie-line:nth-child(1) { animation-delay: 0.5s; }
+        .techie-line:nth-child(2) { animation-delay: 1.5s; }
+        .techie-line:nth-child(3) { animation-delay: 2.5s; }
+        .techie-line:nth-child(4) { animation-delay: 3.5s; }
+        .techie-line:nth-child(5) { animation-delay: 4.5s; }
+        .techie-line:nth-child(6) { animation-delay: 5.5s; }
+        .techie-line:nth-child(7) { animation-delay: 6.5s; }
+
+        #loading-line {
+            color: #ff6b6b;
+            animation-delay: 7.5s;
+        }
+
         .enter-btn {
             display: none;
             margin-top: 20px;
             padding: 10px 20px;
-            background-color: var(--accent);
+            background-color: #64ffda;
             color: #0a192f;
             border: none;
             border-radius: 5px;
@@ -86,50 +105,75 @@
             transition: all 0.3s ease;
         }
 
-        /* Navigation */
-        nav {
+        .enter-btn:hover {
+            background-color: #ff6b6b;
+            transform: scale(1.05);
+        }
+
+        /* Matrix Rain Effect */
+        #matrix-rain {
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
-            background: rgba(44, 62, 80, 0.95);
-            padding: 20px 0;
-            z-index: 100;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: -1;
+            pointer-events: none;
         }
 
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            gap: 30px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--accent);
-        }
-
-        /* Header */
+        /* Header Styles */
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 150px 0 100px;
+            padding: 100px 0 50px;
             text-align: center;
             clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            z-index: 1;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .profile-info h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
-        /* Skills Section */
+        .contact-info {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 60px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary);
+            font-size: 2.5em;
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--secondary);
+            margin: 10px auto;
+        }
+
+        /* Skills Grid */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -149,193 +193,273 @@
             transform: translateY(-5px);
         }
 
-        /* Portfolio Section */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 40px 0;
+        .skill-category h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
         }
 
-        .project-card {
+        /* Experience Cards */
+        .experience-card {
             background: var(--card-bg);
+            padding: 30px;
+            margin-bottom: 30px;
             border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
         }
 
-        .project-card:hover {
-            transform: translateY(-10px);
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--secondary);
         }
 
-        .project-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
+        .experience-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
         }
 
-        .project-info {
-            padding: 20px;
-        }
-
-        /* Contact Section */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .contact-item {
-            text-align: center;
-            padding: 20px;
-            background: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .contact-item i {
-            font-size: 2em;
+        .experience-card h4 {
             color: var(--secondary);
             margin-bottom: 15px;
         }
 
+        /* Education Section */
+        .education-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .education-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* Activities Section */
+        .activities-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            border-left: 4px solid var(--accent);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                align-items: center;
+            .profile-info h1 {
+                font-size: 2em;
             }
 
-            .skills-grid, .portfolio-grid {
+            .section-title {
+                font-size: 2em;
+            }
+
+            .skills-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Loader Animation -->
+    <!-- Techie Animation Loader -->
     <div class="techie-loader" id="techie-loader">
-        <div class="techie-box">
-            <div class="techie-line">const PORTFOLIO = {</div>
-            <div class="techie-line">  name: 'Your Name',</div>
-            <div class="techie-line">  title: 'Frontend Developer',</div>
-            <div class="techie-line">  skills: ['HTML', 'CSS', 'JavaScript'],</div>
-            <div class="techie-line">  status: 'Available for opportunities'</div>
+        <div class="techie-box" id="techie-box">
+            <div class="techie-line">const PRIYADHARSAN = {</div>
+            <div class="techie-line">  name: 'Priyadharsan Jayaseelan',</div>
+            <div class="techie-line">  skills: ['C++', 'Python', 'SQL'],</div>
+            <div class="techie-line">  university: 'Kent State University',</div>
+            <div class="techie-line">  gpa: 3.77,</div>
+            <div class="techie-line">  status: 'Innovating Future Tech'</div>
             <div class="techie-line">};</div>
-            <button class="enter-btn" id="enter-btn">ENTER PORTFOLIO</button>
+            <div class="techie-line" id="loading-line">Loading profile...</div>
+            <button class="enter-btn" id="enter-btn">ENTER MY DIGITAL WORLD</button>     
         </div>
     </div>
 
-    <!-- Main Content -->
-    <div id="main-content" style="display:none;">
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrix-rain"></canvas>
 
-        <header id="about">
+    <!-- Main Resume Content (Initially Hidden) -->
+    <div id="main-content" style="display:none;">
+        <header>
             <div class="container">
-                <h1 data-aos="fade-down">Your Name</h1>
-                <p data-aos="fade-up">Frontend Developer</p>
+                <div class="profile-info">
+                    <h1 data-aos="fade-down">PRIYADHARSAN JAYASEELAN</h1>
+                    <div class="contact-info" data-aos="fade-up">
+                        <p>📍 Kent, Ohio</p>    
+                        <p>📞 +1 (234) 296-2703</p>
+                        <p>✉️ priyadharsanjayaseelan@gmail.com</p>
+                    </div>
+                </div>
             </div>
         </header>
 
+
         <section id="skills">
             <div class="container">
-                <h2 data-aos="fade-up">Skills</h2>
+                <h2 class="section-title" data-aos="fade-up">Skills & Expertise</h2>
                 <div class="skills-grid">
-                    <div class="skill-category" data-aos="fade-up">
-                        <h3>Frontend</h3>
-                        <ul>
-                            <li>HTML5</li>
-                            <li>CSS3</li>
-                            <li>JavaScript</li>
-                            <li>React</li>
-                        </ul>
+                    <div class="skill-category" data-aos="fade-up" data-aos-delay="100"> 
+                        <h3>Programming Languages</h3>
+                        <div class="skill-item">
+                            <p>C++</p>
+                            <div class="skill-progress">
+                                <div class="progress-bar" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <p>Python</p>
+                            <div class="skill-progress">
+                                <div class="progress-bar" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <p>SQL</p>
+                            <div class="skill-progress">
+                                <div class="progress-bar" data-width="80"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
-                        <h3>Tools</h3>
+
+                    <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Development Tools</h3>
                         <ul>
-                            <li>Git</li>
                             <li>VS Code</li>
-                            <li>Webpack</li>
-                            <li>npm</li>
+                            <li>Xcode</li>
+                            <li>Python IDLE</li>
+                            <li>MySQL Workbench</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
+                        <h3>Technical Skills</h3>
+                        <ul>
+                            <li>Database Management</li>
+                            <li>Inventory System Operations</li>
+                            <li>Data Analysis</li>
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> 
         </section>
 
-        <section id="portfolio">
+        <section id="experience">
             <div class="container">
-                <h2 data-aos="fade-up">Portfolio</h2>
-                <div class="portfolio-grid">
-                    <!-- Add your project cards here -->
-                    <div class="project-card" data-aos="fade-up">
-                        <img src="/api/placeholder/400/300" alt="Project 1">
-                        <div class="project-info">
-                            <h3>Project 1</h3>
-                            <p>Description of project 1</p>
-                        </div>
-                    </div>
-                    <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                        <img src="/api/placeholder/400/300" alt="Project 2">
-                        <div class="project-info">
-                            <h3>Project 2</h3>
-                            <p>Description of project 2</p>
-                        </div>
-                    </div>
+                <h2 class="section-title" data-aos="fade-up">Work Experience</h2>
+                
+                <div class="experience-card" data-aos="fade-up">
+                    <h3>Culinary Operational Assistant</h3>
+                    <h4>Kent State University | Aug 2024 - Present</h4>
+                    <ul>
+                        <li>Optimized staff scheduling using SQL queries</li>
+                        <li>Developed custom data structures for inventory management</li>
+                        <li>Improved operational efficiency by 20%</li>
+                    </ul>
+                </div>
+
+                <div class="experience-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Technical Lab Support Assistant</h3>
+                    <h4>Aristo Public School | Aug 2022 - Feb 2023</h4>
+                    <ul>
+                        <li>Provided technical support and troubleshooting</li>
+                        <li>Streamlined lab operations</li>
+                        <li>Organized coding activities and group projects</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <section id="contact">
+        <section id="education">
             <div class="container">
-                <h2 data-aos="fade-up">Contact</h2>
-                <div class="contact-grid">
-                    <div class="contact-item" data-aos="fade-up">
-                        <i class="fas fa-envelope"></i>
-                        <h3>Email</h3>
-                        <p>your.email@example.com</p>
-                    </div>
-                    <div class="contact-item" data-aos="fade-up" data-aos-delay="100">
-                        <i class="fab fa-linkedin"></i>
-                        <h3>LinkedIn</h3>
-                        <p>linkedin.com/in/yourprofile</p>
-                    </div>
-                    <div class="contact-item" data-aos="fade-up" data-aos-delay="200">
-                        <i class="fab fa-github"></i>
-                        <h3>GitHub</h3>
-                        <p>github.com/yourusername</p>
-                    </div>
+                <h2 class="section-title" data-aos="fade-up">Education</h2>
+                
+                <div class="education-card" data-aos="fade-up">
+                    <h3>Bachelor of Computer Science</h3>
+                    <h4>Kent State University | GPA: 3.77 | Aug 2023 - May 2027</h4>
+                    <p>Relevant Coursework:</p>
+                    <ul>
+                        <li>Advanced C++ Projects</li>
+                        <li>Data Structures & Algorithms</li>
+                        <li>Object-Oriented Programming</li>
+                        <li>Database Operations</li> 
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="activities">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">Activities</h2>
+                
+                <div class="activities-card" data-aos="fade-up">
+                    <h3>ALD Honor Society Member</h3>
+                    <h4>Kent State University | Dec 2023 - Present</h4>
+                    <ul>
+                        <li>Led bi-monthly mentoring initiatives</li>
+                        <li>Increased Honor Society participation by 30%</li>
+                        <li>Spearheaded faculty-student engagement programs</li>
+                    </ul>
                 </div>
             </div>
         </section>
     </div>
 
     <script>
-        // Initialize loader animation
+        // Matrix Rain Effect
+        const canvas = document.getElementById("matrix-rain");
+        const ctx = canvas.getContext("2d");
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@$%&*#^!';
+        const fontSize = 16;
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const cols = Math.floor(canvas.width / 20) + 1;
+        const ypos = Array(cols).fill(0);
+        
+        function draw() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#0f0";
+            ctx.font = "20px monospace";
+            
+            for (let i = 0; i < cols; i++) {
+                const text = String.fromCharCode(Math.random() * 128);
+                ctx.fillText(text, i * 20, ypos[i] * 20);
+                if (ypos[i] * 20 > canvas.height && Math.random() > 0.975) {
+                    ypos[i] = 0;
+                }
+                ypos[i]++;
+            }
+        }
+
+        setInterval(draw, 35);
+
+        // Loader animation & transition to resume content
         const techieLoader = document.getElementById("techie-loader");
         const enterBtn = document.getElementById("enter-btn");
         const mainContent = document.getElementById("main-content");
 
+        // Wait for loader animation to finish before transitioning
         setTimeout(() => {
-            enterBtn.style.display = "block";
-        }, 3000);
+            enterBtn.style.display = "block"; // Show the "Enter" button
+        }, 7500);
 
         enterBtn.addEventListener("click", () => {
-            techieLoader.style.display = "none";
-            mainContent.style.display = "block";
-            AOS.init({
-                duration: 1000,
-                once: true
-            });
+            techieLoader.style.display = "none"; // Hide loader
+            mainContent.style.display = "block"; // Show resume content
+            AOS.init(); // Reinitialize animations
         });
     </script>
 </body>
