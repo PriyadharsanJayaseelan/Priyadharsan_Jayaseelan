@@ -220,6 +220,68 @@
                 transform: translateY(0);
             }
         }
+        /* Education Section Styles */
+        .education-section {
+            padding: 40px 0;
+        }
+        
+        .education-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--secondary);
+            transition: transform 0.3s ease;
+        }
+        
+        .education-item:hover {
+            transform: translateX(10px);
+        }
+        
+        .education-degree {
+            color: var(--secondary);
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .education-school {
+        color: var(--text);
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        }
+
+        .education-date {
+        color: var(--text-secondary);
+        font-size: 0.9em;
+        margin-bottom: 15px;
+        }
+
+        .education-details {
+        color: var(--text-secondary);
+        }
+
+       .achievement-list {
+        margin-top: 15px;
+        padding-left: 20px;
+        }
+
+        .achievement-list li {
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+        position: relative;
+        padding-left: 15px;
+        }
+
+        .achievement-list li::before {
+        content: '▹';
+        position: absolute;
+        left: -15px;
+        color: var(--secondary);
+        }
+
+        
+
+
 
         /* Work Section */
         .work-grid {
@@ -391,7 +453,45 @@
                 grid-template-columns: 1fr;
             }
         }
-    </style>
+        /* Enhance content readability */
+        .content-section {
+            position: relative;
+            z-index: 1;
+        }
+        .section-container {
+
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Enhance matrix rain visibility */
+        #matrix-rain {
+        opacity: 0.15;  /* Reduce opacity for better readability */
+        }
+
+        /* Navigation enhancement */
+        .main-nav {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+       .nav-link.active {
+       color: var(--secondary);
+       }
+
+       .nav-link.active::after {
+       width: 100%;
+       }
+        
+        </style>
+    
+
+
+
+
+
 </head>
 <body>
     <!-- Techie Animation Loader -->
@@ -417,6 +517,7 @@
         <nav class="main-nav">
             <div class="nav-container">
                 <a href="#home" class="nav-link">Home</a>
+                <a href="#education" class="nav-link">Education</a>
                 <a href="#work" class="nav-link">Work</a>
                 <a href="#experience" class="nav-link">Experience</a>
                 <a href="#skills" class="nav-link">Skills</a>
@@ -439,6 +540,42 @@
                 </div>
             </div>
         </section>
+
+
+        <section id="education" class="content-section">
+            <div class="section-container">
+                <div class="education-section">
+                    <div class="education-item" data-aos="fade-up">
+                        <h3 class="education-degree">Bachelor of Science in Computer Science</h3>
+                        <div class="education-school">Kent State University</div>
+                        <div class="education-date">Expected Graduation: May 2024</div>
+                        <div class="education-details">
+                            <p>Current GPA: 3.77/4.0</p>
+                            <ul class="achievement-list">
+                                <li>Dean's List: Fall 2021 - Present</li>
+                                <li>Member of Computer Science Honor Society</li>
+                                <li>Received Academic Excellence Scholarship</li>
+                                <li>Relevant Coursework: Data Structures, Algorithms, Database Systems, Machine Learning</li>
+                            </ul>
+                        </div>
+                    </div>
+        
+                    <div class="education-item" data-aos="fade-up">
+                        <h3 class="education-degree">High School Diploma</h3>
+                        <div class="education-school">Your High School Name</div>
+                        <div class="education-date">Graduated: May 2020</div>
+                        <div class="education-details">
+                            <ul class="achievement-list">
+                                <li>Valedictorian</li>
+                                <li>President of Computer Science Club</li>
+                                <li>First Place in State Programming Competition</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
 
         <!-- Work Section -->
         <section id="work" class="content-section">
@@ -625,22 +762,23 @@
         }
 
         function drawMatrix() {
-            ctx.fillStyle = 'rgba(10, 25, 47, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(10, 25, 47, 0.025)'; // Reduced opacity
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            ctx.fillStyle = '#64ffda';
-            ctx.font = fontSize + 'px monospace';
+    ctx.fillStyle = 'rgba(100, 255, 218, 0.35)'; // Lighter color with reduced opacity
+    ctx.font = fontSize + 'px monospace';
 
-            for (let i = 0; i < drops.length; i++) {
-                const text = letters[Math.floor(Math.random() * letters.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.98) {
+            drops[i] = 0;
         }
+        drops[i]++;
+    }
+}
+
 
         // Loader Animation
         window.onload = function() {
@@ -667,11 +805,17 @@
             const sections = document.querySelectorAll('.content-section');
 
             function showSection(sectionId) {
-                sections.forEach(section => {
-                    section.classList.remove('active');
-                });
-                document.querySelector(sectionId).classList.add('active');
-            }
+    sections.forEach(section => {
+        section.classList.remove('active');
+    });
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if(link.getAttribute('href') === sectionId) {
+            link.classList.add('active');
+        }
+    });
+    document.querySelector(sectionId).classList.add('active');
+}
 
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
