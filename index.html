@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Priyadharsan Jayaseelan - Portfolio</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <style>
+        /* Root Colors */
         :root {
             --primary: #2c3e50;
             --secondary: #3498db;
             --accent: #e74c3c;
-            --text: #ffffff;
-            --bg: rgba(0, 0, 0, 0.8);
-            --card-bg: #ffffff;
+            --bg: rgba(0, 0, 0, 0.9);
+            --text: #fff;
+            --content-bg: rgba(0, 0, 0, 0.7);
         }
 
+        /* Universal Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
         }
 
+        /* Body */
         body {
             background-color: var(--bg);
             color: var(--text);
-            font-family: 'Segoe UI', sans-serif;
-            position: relative;
             overflow-x: hidden;
+            margin: 0;
         }
 
         /* Loader */
@@ -38,31 +41,31 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            visibility: hidden;
+            visibility: visible;
         }
 
         .loader .techie {
+            font-size: 3em;
+            color: #0F0;
             font-family: 'Courier New', monospace;
-            font-size: 2em;
-            color: #0f0;
-            letter-spacing: 2px;
-            animation: typing 2s steps(30) 1s normal forwards;
+            animation: typing 4s steps(40) 1s infinite;
+            white-space: nowrap;
+            overflow: hidden;
         }
 
         @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
+            from {
+                width: 0;
+            }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+            to {
+                width: 100%;
+            }
         }
 
         /* Matrix Rain Effect */
@@ -72,23 +75,35 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.3);
             z-index: -1;
-            pointer-events: none;
         }
 
-        /* Menu Section */
+        /* Navigation Bar */
         .menu {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-top: 80px;
-            padding: 0;
+        }
+
+        .menu ul {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            list-style-type: none;
         }
 
         .menu li {
             font-size: 1.5em;
+            font-weight: bold;
             cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             transition: color 0.3s ease;
         }
 
@@ -96,29 +111,31 @@
             color: var(--accent);
         }
 
-        /* Content Section (Initially Hidden) */
+        /* Content Section */
         .content {
             display: none;
-            padding: 40px;
+            padding: 60px 20px;
             max-width: 900px;
-            margin: 0 auto;
-            color: var(--text);
-            text-align: left;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            transition: opacity 0.5s ease-in-out;
+            margin: 40px auto;
+            background: var(--content-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
         }
 
         .content h2 {
-            font-size: 2.5em;
+            font-size: 3em;
             color: var(--accent);
-            margin-bottom: 30px;
-            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
         }
 
         .content p {
             font-size: 1.2em;
             line-height: 1.8;
+            color: #ddd;
         }
 
         /* Typing Animation */
@@ -134,49 +151,45 @@
             animation: typing 2s steps(30) 1s infinite normal both;
         }
 
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
+        /* Fade In Animation */
+        .fadeIn {
+            animation: fadeIn 1.5s ease-in-out forwards;
         }
 
-        /* Responsive Design */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .menu h1 {
-                font-size: 2.5em;
-            }
-
-            .menu ul {
-                flex-direction: column;
-                gap: 20px;
-            }
-
             .menu li {
                 font-size: 1.2em;
             }
 
-            .content h2 {
-                font-size: 2em;
-            }
-
             .content {
                 padding: 20px;
-                max-width: 100%;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Techie Loader -->
     <div class="loader" id="loader">
-        <span class="techie">Entering your world...</span>
+        <span class="techie">Entering Your World...</span>
     </div>
 
     <!-- Matrix Rain Canvas -->
     <canvas id="matrix-rain"></canvas>
 
-    <!-- Main Portfolio Menu -->
+    <!-- Main Menu -->
     <div class="menu">
-        <h1>Priyadharsan Jayaseelan</h1>
         <ul>
             <li id="aboutBtn">About Me</li>
             <li id="skillsBtn">Skills</li>
@@ -188,35 +201,24 @@
     <!-- About Me Section -->
     <div class="content" id="aboutContent">
         <h2>About Me</h2>
-        <p class="typing">I am a passionate software engineer, driven by curiosity and a desire to solve complex problems. My journey in tech started at a young age, and I have since honed my skills in various programming languages and technologies. Currently, I am pursuing a degree in Computer Science at Kent State University, with a focus on Data Structures and Algorithms.</p>
+        <p class="typing">
+            I am a passionate software engineer driven by curiosity and a desire to solve complex problems. I am currently pursuing a Computer Science degree at Kent State University, specializing in Data Structures, Algorithms, and Software Engineering. I enjoy crafting solutions through code and applying technology to make life simpler.
+        </p>
     </div>
 
     <!-- Skills Section -->
     <div class="content" id="skillsContent">
         <h2>Skills</h2>
         <p class="typing">
-            <strong>Programming Languages & Technologies:</strong> C++ (Data Structures), Python, SQL<br>
-            <strong>Development Environments & Tools:</strong> VS code, Xcode, Python IDLE, MySQL Workbench<br>
-            <strong>Version Control & Operating Systems:</strong> SVN (Subversion), Linux (Command Line Interface, Terminal Operations)<br>
-            <strong>Software Proficiency:</strong> MS Office Suite (Excel, PowerPoint, Word), Content Creation Tools (VSCO, VN Editor, Canva)<br>
-            <strong>Technical Skills:</strong> Database Management, Inventory System Operations, Quantitative & Qualitative Analysis<br>
-            <strong>Professional Competencies:</strong> Effective Communication, Adaptability in Fast-paced Environments
+            I specialize in programming languages such as <strong>C++</strong>, <strong>Python</strong>, and <strong>SQL</strong>. I am also proficient with tools like Visual Studio Code, Xcode, MySQL Workbench, and various databases. My expertise includes building robust software solutions, optimizing workflows, and automating tasks.
         </p>
     </div>
 
-    <!-- Work Section -->
+    <!-- Work Experience Section -->
     <div class="content" id="workContent">
         <h2>Work Experience</h2>
         <p class="typing">
-            <strong>Culinary Operational Assistant | Kent State University | Aug 2024 - Present</strong><br>
-            • Optimized staff scheduling by maintaining accurate shift records and using SQL queries to match employee availability and skills to station assignments.<br>
-            • Developed unique data structures, such as priority queues and hash tables, to enhance inventory and procurement processes.<br>
-            • Improved operational efficiency by generating detailed reports in Microsoft Word format, resulting in a 20% increase in process efficiency.<br><br>
-
-            <strong>Technical Lab Support Assistant | Aristo Public School | Aug 2022 - Feb 2023</strong><br>
-            • Provided technical support to students, troubleshooting code issues and improving lab efficiency by 15%.<br>
-            • Streamlined lab operations by updating software and ensuring all tools and equipment were ready.<br>
-            • Fostered team collaboration through engaging activities like coding puzzles and quizzes.
+            Currently, I serve as a Culinary Operational Assistant at Kent State University, where I optimize staff schedules using SQL queries. Previously, I worked as a Technical Lab Support Assistant at Aristo Public School, providing tech support and assisting in the development of lab projects.
         </p>
     </div>
 
@@ -224,16 +226,14 @@
     <div class="content" id="activitiesContent">
         <h2>Activities</h2>
         <p class="typing">
-            <strong>ALD Honor Society Member | Kent State University | Dec 2023 - Present</strong><br>
-            • Led bi-monthly mentoring initiatives, boosting student retention and GPA.<br>
-            • Spearheaded faculty-student engagement programs, enhancing collaborative learning and increasing participation by 30%.
+            As a member of the ALD Honor Society, I lead initiatives to mentor fellow students and organize events that foster collaboration. I am passionate about academic community-building and creating opportunities for students to excel.
         </p>
     </div>
 
     <script>
-        // Techie Loader
-        window.addEventListener('load', function() {
-            setTimeout(function() {
+        // Hide Loader After Page Load
+        window.addEventListener('load', function () {
+            setTimeout(() => {
                 document.getElementById('loader').style.visibility = 'hidden';
             }, 3000); // Hide loader after 3 seconds
         });
@@ -268,7 +268,7 @@
 
         setInterval(draw, 35);
 
-        // Handle clicks on the menu
+        // Handle Menu Clicks
         const aboutBtn = document.getElementById("aboutBtn");
         const skillsBtn = document.getElementById("skillsBtn");
         const workBtn = document.getElementById("workBtn");
@@ -279,29 +279,26 @@
         const workContent = document.getElementById("workContent");
         const activitiesContent = document.getElementById("activitiesContent");
 
-        // Clear all content and show the clicked one
         function showContent(content) {
             const contents = [aboutContent, skillsContent, workContent, activitiesContent];
             contents.forEach(sec => sec.style.display = "none"); // Hide all sections
             content.style.display = "block"; // Show clicked section
+            content.classList.add('fadeIn'); // Add fade-in animation
         }
 
-        // Event listeners
         aboutBtn.addEventListener("click", () => {
             showContent(aboutContent);
         });
-
         skillsBtn.addEventListener("click", () => {
             showContent(skillsContent);
         });
-
         workBtn.addEventListener("click", () => {
             showContent(workContent);
         });
-
         activitiesBtn.addEventListener("click", () => {
             showContent(activitiesContent);
         });
     </script>
 </body>
+
 </html>
