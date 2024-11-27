@@ -107,18 +107,6 @@
             transform: scale(1.05);
         }
 
-         /* Matrix Rain Effect */
-         #matrix-rain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            z-index: -1;
-            pointer-events: none;
-        }
-
         /* Main Content Styles */
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -324,9 +312,6 @@
         </div>
     </div>
 
-    <!-- Matrix Rain Canvas -->
-    <canvas id="matrix-rain"></canvas>
-
     <!-- Main Content -->
     <div id="main-content" style="display:none;">
         <header>
@@ -434,55 +419,4 @@
 
             <!-- Projects Tab -->
             <div id="projects" class="tab-content">
-            </div>
-
-            <script>
-                // Matrix Rain Effect
-                const canvas = document.getElementById("matrix-rain");
-                const ctx = canvas.getContext("2d");
-                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@$%&*#^!';
-                const fontSize = 16;
-                
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-        
-                const cols = Math.floor(canvas.width / 20) + 1;
-                const ypos = Array(cols).fill(0);
-                
-                function draw() {
-                    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    ctx.fillStyle = "#0f0";
-                    ctx.font = "20px monospace";
-                    
-                    for (let i = 0; i < cols; i++) {
-                        const text = String.fromCharCode(Math.random() * 128);
-                        ctx.fillText(text, i * 20, ypos[i] * 20);
-                        if (ypos[i] * 20 > canvas.height && Math.random() > 0.975) {
-                            ypos[i] = 0;
-                        }
-                        ypos[i]++;
-                    }
-                }
-        
-                setInterval(draw, 35);
-        
-                // Loader animation & transition to resume content
-                const techieLoader = document.getElementById("techie-loader");
-                const enterBtn = document.getElementById("enter-btn");
-                const mainContent = document.getElementById("main-content");
-        
-                // Wait for loader animation to finish before transitioning
-                setTimeout(() => {
-                    enterBtn.style.display = "block"; // Show the "Enter" button
-                }, 7500);
-        
-                enterBtn.addEventListener("click", () => {
-                    techieLoader.style.display = "none"; // Hide loader
-                    mainContent.style.display = "block"; // Show resume content
-                    AOS.init(); // Reinitialize animations
-                });
-            </script>
-        </body>
-        </html>
-        
+                <div class="
