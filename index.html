@@ -771,47 +771,22 @@ for (let i = 0; i < columns; i++) {
 }
 
 function drawMatrix() {
-    // Create a gradient fade effect
-    ctx.fillStyle = 'rgba(10, 25, 47, 0.05)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(10, 25, 47, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    for (let i = 0; i < drops.length; i++) {
-        // Randomly change colors
-        if (Math.random() > 0.99) {
-            charProperties[i].color = Math.random() > 0.5 ? 
-                'rgba(100, 255, 218, 0.8)' : 
-                'rgba(64, 255, 180, 0.8)';
-        }
+            ctx.fillStyle = '#64ffda';
+            ctx.font = fontSize + 'px monospace';
 
-        // Leading character effect (brighter)
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-        ctx.font = `${charProperties[i].size}px monospace`;
-        const text = letters[Math.floor(Math.random() * letters.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-        // Trailing characters
-        ctx.fillStyle = charProperties[i].color;
-        for (let j = 1; j < 5; j++) {
-            const trailY = drops[i] * fontSize - j * fontSize;
-            if (trailY > 0) {
-                const trailText = letters[Math.floor(Math.random() * letters.length)];
-                ctx.fillText(trailText, i * fontSize, trailY);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
             }
         }
-
-        // Update drop positions with variable speed
-        drops[i] += charProperties[i].speed;
-
-        // Reset drops when they reach bottom
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.95) {
-            drops[i] = 0;
-            // Randomize properties on reset
-            charProperties[i].speed = 0.5 + Math.random() * 1.5;
-            charProperties[i].size = fontSize * (0.8 + Math.random() * 0.4);
-        }
-    }
-}
-
 
 
         // Loader Animation
