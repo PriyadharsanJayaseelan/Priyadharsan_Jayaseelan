@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Priyadharsan Jayaseelan - Portfolio</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
         :root {
@@ -92,17 +93,40 @@
             transform: scale(1.05);
         }
 
-        /* Matrix Rain Canvas */
-        #matrix-rain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
+        /* Main Styles */
+
+        #particles-js {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+        }
+        .section-container {
+        background: rgba(10, 25, 47, 0.85);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2),
+        0 0 30px rgba(100, 255, 218, 0.1);
+        border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .work-item {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(100, 255, 218, 0.1);
         }
 
-        /* Main Styles */
+        .work-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
+        }
+
+
+
+
         body {
             background-color: var(--bg);
             color: var(--text);
@@ -467,11 +491,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* Enhance matrix rain visibility */
-        #matrix-rain {
-        opacity: 0.15;  /* Reduce opacity for better readability */
-        }
-
+    
         /* Navigation enhancement */
         .main-nav {
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
@@ -508,10 +528,8 @@
             <button class="enter-btn" id="enter-btn">ENTER MY DIGITAL WORLD</button>
         </div>
     </div>
-
-    <!-- Matrix Rain Canvas -->
-    <canvas id="matrix-rain"></canvas>
-
+    
+    <div id="particles-js"></div>
     <!-- Main Content -->
     <div id="main-content" style="display:none;">
         <nav class="main-nav">
@@ -745,104 +763,84 @@
     </div>
 
     <script>
-        // Matrix Rain Effect
-        const canvas = document.getElementById('matrix-rain');
-const ctx = canvas.getContext('2d');
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-const fontSize = 14;
-const columns = canvas.width / fontSize;
-const drops = [];
-
-// Initialize arrays for character properties
-const charProperties = [];
-
-// Initialize drops and character properties
-for (let i = 0; i < columns; i++) {
-    drops[i] = 1;
-    charProperties[i] = {
-        color: Math.random() > 0.5 ? 'rgba(100, 255, 218, 0.8)' : 'rgba(64, 255, 180, 0.8)',
-        speed: 0.5 + Math.random() * 1.5,
-        size: fontSize * (0.8 + Math.random() * 0.4)
-    };
-}
-
-function drawMatrix() {
-            ctx.fillStyle = 'rgba(10, 25, 47, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#64ffda';
-            ctx.font = fontSize + 'px monospace';
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = letters[Math.floor(Math.random() * letters.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-        }
+       
 
 
         // Loader Animation
         window.onload = function() {
-            setTimeout(() => {
-                document.getElementById('enter-btn').style.display = 'inline-block';
-            }, 8500);
+    setTimeout(() => {
+        document.getElementById('enter-btn').style.display = 'inline-block';
+    }, 8500);
 
-            setInterval(drawMatrix, 33);
-        };
-
-        document.getElementById('enter-btn').addEventListener('click', function() {
-            document.getElementById('techie-loader').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-            AOS.init({
-                duration: 1000,
-                once: true,
-                mirror: false
-            });
-        });
-
-        // Navigation
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('.content-section');
-
-            function showSection(sectionId) {
-    sections.forEach(section => {
-        section.classList.remove('active');
+    // Initialize particles
+    particlesJS('particles-js', {
+        particles: {
+            number: {
+                value: 80,
+                density: {
+                    enable: true,
+                    value_area: 800
+                }
+            },
+            color: {
+                value: '#64ffda'
+            },
+            shape: {
+                type: 'circle'
+            },
+            opacity: {
+                value: 0.5,
+                random: false,
+                anim: {
+                    enable: false
+                }
+            },
+            size: {
+                value: 3,
+                random: true
+            },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: '#64ffda',
+                opacity: 0.2,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 2,
+                direction: 'none',
+                random: false,
+                straight: false,
+                out_mode: 'out',
+                bounce: false
+            }
+        },
+        interactivity: {
+            detect_on: 'canvas',
+            events: {
+                onhover: {
+                    enable: true,
+                    mode: 'grab'
+                },
+                onclick: {
+                    enable: true,
+                    mode: 'push'
+                },
+                resize: true
+            },
+            modes: {
+                grab: {
+                    distance: 140,
+                    line_linked: {
+                        opacity: 1
+                    }
+                },
+                push: {
+                    particles_nb: 4
+                }
+            }
+        },
+        retina_detect: true
     });
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if(link.getAttribute('href') === sectionId) {
-            link.classList.add('active');
-        }
-    });
-    document.querySelector(sectionId).classList.add('active');
-}
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const sectionId = link.getAttribute('href');
-                    showSection(sectionId);
-                });
-            });
-        });
-
-        // Responsive Canvas
-window.addEventListener('resize', function() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-});
-
-// Initialize matrix rain
-setInterval(drawMatrix, 33);
-    </script>
-</body>
-</html>
+};
