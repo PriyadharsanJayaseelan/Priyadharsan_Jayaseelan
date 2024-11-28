@@ -122,17 +122,17 @@
 
         /* Sections */
         .content-section {
-            min-height: 100vh;
-            padding: 100px 20px;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
+        min-height: 100vh;
+        padding: 100px 20px;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
 
         .content-section.active {
-            display: block;
-            opacity: 1;
-        }
+        display: block;
+        opacity: 1;
+    }
 
         .section-container {
             max-width: 1200px;
@@ -688,82 +688,120 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-        // Initialize particles.js
-        particlesJS('particles-js', {
-            particles: {
-                number: {
-                    value: 80,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: '#64ffda'
-                },
-                shape: {
-                    type: 'circle'
-                },
-                opacity: {
-                    value: 0.5,
-                    random: false,
-                    anim: {
-                        enable: false
-                    }
-                },
-                size: {
-                    value: 3,
-                    random: true
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: '#64ffda',
-                    opacity: 0.2,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: 'none',
-                    random: false,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false
-                }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: 'grab'
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: 'push'
-                    },
-                    resize: true
-                },
-                modes: {
-                    grab: {
-                        distance: 140,
-                        line_linked: {
-                            opacity: 1
+            // Initialize particles.js
+            particlesJS('particles-js', {
+                particles: {
+                    number: {
+                        value: 80,
+                        density: {
+                            enable: true,
+                            value_area: 800
                         }
                     },
-                    push: {
-                        particles_nb: 4
+                    color: {
+                        value: '#64ffda'
+                    },
+                    shape: {
+                        type: 'circle'
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: false,
+                        anim: {
+                            enable: false
+                        }
+                    },
+                    size: {
+                        value: 3,
+                        random: true
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: '#64ffda',
+                        opacity: 0.2,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: 'none',
+                        random: false,
+                        straight: false,
+                        out_mode: 'out',
+                        bounce: false
                     }
-                }
-            },
-            retina_detect: true
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: 'grab'
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: 'push'
+                        },
+                        resize: true
+                    },
+                    modes: {
+                        grab: {
+                            distance: 140,
+                            line_linked: {
+                                opacity: 1
+                            }
+                        },
+                        push: {
+                            particles_nb: 4
+                        }
+                    }
+                },
+                retina_detect: true
+            });
+    
+            // Initialize AOS
+            AOS.init({
+                duration: 1000,
+                once: true
+            });
+    
+            // NEW NAVIGATION CODE - Add this part
+            // Get all nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            // Get all sections
+            const sections = document.querySelectorAll('.content-section');
+            
+            // Add click event listener to each nav link
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Get the target section id from href
+                    const targetId = link.getAttribute('href').substring(1);
+                    
+                    // Remove active class from all sections
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Remove active class from all nav links
+                    navLinks.forEach(navLink => {
+                        navLink.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked nav link
+                    link.classList.add('active');
+                    
+                    // Add active class to target section
+                    document.getElementById(targetId).classList.add('active');
+                    
+                    // Smooth scroll to section
+                    document.getElementById(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
         });
-
-        // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
-    });
-</script>
+    </script>
