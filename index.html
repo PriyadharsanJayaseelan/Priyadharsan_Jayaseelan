@@ -181,6 +181,40 @@
                 transform: translateY(0);
             }
         }
+
+        .profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: relative;
+    border: 5px solid var(--secondary);
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
+    margin-bottom: 20px;
+}
+
+.profile-picture::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
+    border-radius: 50%;
+    border: 2px solid var(--secondary);
+    box-shadow: 0 0 30px var(--secondary), 0 0 60px var(--secondary), 0 0 90px var(--secondary);
+    animation: electricAnimation 2s infinite ease-in-out;
+    z-index: -1;
+}
+
+@keyframes electricAnimation {
+    0%, 100% {
+        box-shadow: 0 0 30px rgba(100, 255, 218, 0.5), 0 0 60px rgba(100, 255, 218, 0.3), 0 0 90px rgba(100, 255, 218, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 50px rgba(100, 255, 218, 0.7), 0 0 80px rgba(100, 255, 218, 0.5), 0 0 100px rgba(100, 255, 218, 0.3);
+    }
+}
+ 
         /* Education Section Styles */
         .education-section {
             padding: 40px 0;
@@ -467,21 +501,23 @@
             </div>
         </nav>
 
-        <!-- Home Section -->
-        <section id="home" class="content-section active">
-            <div class="section-container">
-                <div class="home-content">
-                    <h1 class="home-title">Priyadharsan Jayaseelan</h1>
-                    <h2 class="home-subtitle">Computer Science Student</h2>
-                    <p class="home-description">
-                        A passionate computer science student at Kent State University with a strong foundation in C++, 
-                        Python, and SQL. Dedicated to creating innovative solutions and constantly learning new technologies. 
-                        Currently maintaining a GPA of 3.77 while actively participating in various technical projects and 
-                        honor society activities.
-                    </p>
-                </div>
-            </div>
-        </section>
+       <!-- Home Section -->
+<section id="home" class="content-section active">
+    <div class="section-container">
+        <div class="home-content">
+            <img src="https://github.com/PriyadharsanJayaseelan/Priyadharsan_Jayaseelan/blob/597be34559b33387170cc537b8ed259f5322c0d8/8425a11c-cc13-4418-a3c0-ceac63b3c53d.jpg" alt="Priyadharsan Jayaseelan" class="profile-picture">
+            <h1 class="home-title">Priyadharsan Jayaseelan</h1>
+            <h2 class="home-subtitle">Computer Science Student</h2>
+            <p class="home-description">
+                A passionate computer science student at Kent State University with a strong foundation in C++, 
+                Python, and SQL. Dedicated to creating innovative solutions and constantly learning new technologies. 
+                Currently maintaining a GPA of 3.77 while actively participating in various technical projects and 
+                honor society activities.
+            </p>
+        </div>
+    </div>
+</section>
+
 
 
         <section id="education" class="content-section">
