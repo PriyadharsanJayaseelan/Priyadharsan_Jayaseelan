@@ -413,94 +413,6 @@
             transform: translateY(-3px);
         }
 
-        /* Contact Grid Layout */
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-top: 40px;
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Contact Info Styles */
-.contact-info h3, .contact-form h3 {
-    color: var(--secondary);
-    margin-bottom: 30px;
-    font-size: 24px;
-}
-
-.contact-item {
-    margin-bottom: 30px;
-    transition: transform 0.3s ease;
-}
-
-.contact-item:hover {
-    transform: translateX(10px);
-}
-
-.contact-item h4 {
-    color: var(--text);
-    margin-bottom: 10px;
-}
-
-.contact-item p {
-    color: var(--text-secondary);
-}
-
-/* Form Styles */
-.contact-form form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--text-secondary);
-    border-radius: 5px;
-    color: var(--text);
-    transition: all 0.3s ease;
-}
-
-.contact-form textarea {
-    height: 150px;
-    resize: vertical;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-    border-color: var(--secondary);
-    box-shadow: 0 0 10px rgba(242, 145, 0, 0.1);
-    outline: none;
-}
-
-.contact-button {
-    width: 100%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.contact-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(242, 145, 0, 0.2);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .contact-info, .contact-form {
-        padding: 20px;
-    }
-}
-
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-container {
@@ -787,34 +699,13 @@
         <!-- Contact Section -->
         <section id="contact" class="content-section">
             <div class="section-container">
-                <div class="contact-content" data-aos="fade-up">
-                    <h2 class="contact-title">Contact Me</h2>
-                    <div class="contact-grid">
-                        <!-- Contact Information -->
-                        <div class="contact-info" data-aos="fade-right" data-aos-delay="200">
-                            <h3>Get In Touch</h3>
-                            <div class="contact-item">
-                                <h4>Email</h4>
-                                <p>priyadharsanjayaseelan@gmail.com</p>
-                            </div>
-                            <div class="contact-item">
-                                <h4>Phone</h4>
-                                <p>+1 (234)-296-3672</p>
-                            </div>
-                        </div>
-        
-                        <!-- Contact Form -->
-                        <div class="contact-form" data-aos="fade-left" data-aos-delay="400">
-                            <h3>Send Message</h3>
-                            <form onsubmit="sendEmail(event)">
-                                <input type="text" id="name" placeholder="Your Name" required>
-                                <input type="email" id="email" placeholder="Your Email" required>
-                                <input type="text" id="subject" placeholder="Subject" required>
-                                <textarea id="message" placeholder="Your Message" required></textarea>
-                                <button type="submit" class="contact-button">Send Message</button>
-                            </form>
-                        </div>
-                    </div>
+                <div class="contact-content">
+                    <h2 class="contact-title">Get In Touch</h2>
+                    <p class="contact-description">
+                        I'm currently looking for new opportunities and would love to hear about your projects.
+                        Whether you have a question or just want to say hi, feel free to reach out!
+                    </p>
+                    <a href="mailto:priyadharsanjayaseelan@gmail.com" class="contact-button">Say Hello</a>
                 </div>
             </div>
         </section>
@@ -822,22 +713,11 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-        function sendEmail(event) {
-    event.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value;
-    
-    const mailtoLink = `mailto:priyadharsanjayaseelan@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
-    
-    window.location.href = mailtoLink;
-}
             // Initialize particles.js
             particlesJS('particles-js', {
                 particles: {
                     number: {
-                        value: 80,
+                        value: 90,
                         density: {
                             enable: true,
                             value_area: 800
@@ -949,6 +829,4 @@
                 });
             });
         });
-
-        
     </script>
