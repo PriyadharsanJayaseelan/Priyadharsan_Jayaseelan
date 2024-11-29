@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Priyadharsan Jayaseelan - Portfolio</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
@@ -40,6 +40,8 @@
         height: 100%;
         z-index: -1;
         background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+        will-change: transform;  /* Optimize particle animations */
+
         }
         .section-container {
         background: rgba(10, 25, 47, 0.85);
@@ -69,6 +71,7 @@
             color: var(--text);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            overflow-x: hidden;  /* Prevent horizontal scroll */
         }
 
         /* Navigation */
@@ -97,7 +100,7 @@
             text-decoration: none;
             font-size: 18px;
             position: relative;
-            padding: 5px 0;
+            padding: 10px; 
             transition: color 0.3s ease;
         }
 
@@ -127,6 +130,8 @@
         display: none;
         opacity: 0;
         transition: opacity 0.5s ease;
+        overflow-x: hidden;
+        width: 100%;
     }
 
         .content-section.active {
@@ -414,25 +419,66 @@
         }
 
         /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
+      
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 10px;
+    }
 
-            .home-title {
-                font-size: 48px;
-            }
+    .home-title {
+        font-size: 36px;  /* Smaller for mobile */
+    }
 
-            .home-subtitle {
-                font-size: 32px;
-            }
+    .home-subtitle {
+        font-size: 24px;  /* Smaller for mobile */
+    }
 
-            .work-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+    .work-grid {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    .section-container {
+        padding: 20px;  /* Less padding on mobile */
+        margin: 10px;
+    }
+
+    .skills-container {
+        grid-template-columns: 1fr;  /* Single column on mobile */
+    }
+
+    .profile-picture {
+        width: 120px;  /* Slightly smaller on mobile */
+        height: 120px;
+    }
+
+    .home-description {
+        font-size: 0.9em;
+    }
+
+    .education-item, .experience-item {
+        padding: 20px;
+    }
+}
+
+/* Add iPad/tablet specific styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .section-container {
+        padding: 30px;
+        margin: 15px;
+    }
+
+    .work-grid {
+        grid-template-columns: repeat(2, 1fr);  /* 2 columns for tablets */
+    }
+
+    .skills-container {
+        grid-template-columns: repeat(2, 1fr);  /* 2 columns for tablets */
+    }
+}
         /* Enhance content readability */
         .content-section {
             position: relative;
@@ -717,7 +763,7 @@
             particlesJS('particles-js', {
                 particles: {
                     number: {
-                        value: 80,
+                        value: 60,
                         density: {
                             enable: true,
                             value_area: 800
@@ -749,7 +795,7 @@
                     },
                     move: {
                         enable: true,
-                        speed: 2,
+                        speed: 3,
                         direction: 'none',
                         random: false,
                         straight: false,
