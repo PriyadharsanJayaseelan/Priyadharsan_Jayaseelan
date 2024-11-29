@@ -7,6 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0a192f;
@@ -14,6 +15,8 @@
             --text: #ccd6f6;
             --text-secondary: #8892b0;
             --bg: #0a192f;
+            --font-main: 'Space Grotesk', sans-serif;
+            --font-secondary: 'Poppins', sans-serif;
         }
 
         * {
@@ -67,7 +70,7 @@
         body {
             background-color: var(--bg);
             color: var(--text);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: var(--font-secondary);
             line-height: 1.6;
         }
 
@@ -153,6 +156,7 @@
             color: var(--secondary);
             margin-bottom: 20px;
             animation: fadeInUp 1s ease;
+            font-family: var(--font-main);
         }
 
         .home-subtitle {
@@ -222,6 +226,7 @@
             color: var(--secondary);
             font-size: 1.4em;
             margin-bottom: 10px;
+            font-family: var(--font-main);
         }
 
         .education-school {
@@ -298,6 +303,7 @@
         .work-title {
             color: var(--secondary);
             margin-bottom: 10px;
+            font-family: var(--font-main);
         }
 
         .work-description {
@@ -318,6 +324,7 @@
         .experience-title {
             color: var(--secondary);
             margin-bottom: 10px;
+            font-family: var(--font-main);
         }
 
         .experience-company {
@@ -374,10 +381,22 @@
 
         .skill-progress {
             height: 100%;
-            background: var(--secondary);
-            border-radius: 3px;
-            transition: width 1s ease;
+    background: var(--secondary);
+    border-radius: 3px;
+    position: relative;
+    width: 0; /* Start at 0 */
+    transition: width 1.5s ease-in-out;
         }
+
+
+        /* Animation for skill bars */
+.skill-item.animate .skill-progress {
+    animation: fillBar 1.5s ease forwards;
+}
+@keyframes fillBar {
+    from { width: 0; }
+    to { width: var(--progress); }
+}
 
         /* Contact Section */
         .contact-content {
@@ -712,12 +731,32 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        // Add this to your existing script
+const observeSkills = () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const progressBar = entry.target.querySelector('.skill-progress');
+                const width = progressBar.style.width;
+                progressBar.style.setProperty('--progress', width);
+                entry.target.classList.add('animate');
+            }
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.skill-item').forEach(item => observer.observe(item));
+};
+
+// Call this function after AOS initialization
+observeSkills();
+
+
+document.addEventListener('DOMContentLoaded', function() {
             // Initialize particles.js
             particlesJS('particles-js', {
                 particles: {
                     number: {
-                        value: 80,
+                        value: 50,
                         density: {
                             enable: true,
                             value_area: 800
@@ -730,14 +769,14 @@
                         type: 'circle'
                     },
                     opacity: {
-                        value: 0.5,
+                        value: 0.3,
                         random: false,
                         anim: {
                             enable: false
                         }
                     },
                     size: {
-                        value: 2,
+                        value: 3,
                         random: true
                     },
                     line_linked: {
@@ -749,7 +788,7 @@
                     },
                     move: {
                         enable: true,
-                        speed: 3,
+                        speed: 2,
                         direction: 'none',
                         random: false,
                         straight: false,
