@@ -125,15 +125,14 @@
 
         /* Sections */
         .content-section {
-        min-height: 100vh;
-        padding: 100px 20px;
-        display: none;
-        opacity: 0;
-        transition: opacity 0.5s ease;
-        overflow-x: hidden;
-        width: 100%;
-    }
-
+    min-height: 100vh;
+    padding: 100px 20px;
+    display: block;  /* Changed from none to block */
+    opacity: 1;      /* Changed from 0 to 1 */
+    transition: opacity 0.5s ease;
+    overflow-y: auto; /* Added to ensure content is scrollable */
+    padding-top: 120px; /* Added to prevent content hiding under nav */
+}
         .content-section.active {
         display: block;
         opacity: 1;
@@ -426,7 +425,17 @@
         align-items: center;
         gap: 20px;
         padding: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
+
+    .main-nav {
+        padding: 10px 0;
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+    }
+
 
     .home-title {
         font-size: 36px;  /* Smaller for mobile */
@@ -438,16 +447,29 @@
 
     .work-grid {
         grid-template-columns: 1fr;
-        padding: 10px;
+        gap: 20px;
+        padding: 10px 0;
     }
+
+    .work-item {
+        margin-bottom: 20px;
+    }
+
 
     .section-container {
         padding: 20px;  /* Less padding on mobile */
-        margin: 10px;
+        width: 95%;
+        margin: 0 auto;
     }
 
     .skills-container {
-        grid-template-columns: 1fr;  /* Single column on mobile */
+        grid-template-columns: 1fr;
+        padding: 10px 0;
+        gap: 20px;  /* Single column on mobile */
+    }
+
+    .skill-category {
+        margin-bottom: 20px;
     }
 
     .profile-picture {
@@ -461,6 +483,11 @@
 
     .education-item, .experience-item {
         padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .contact-content {
+        padding: 20px 10px;
     }
 }
 
@@ -483,6 +510,9 @@
         .content-section {
             position: relative;
             z-index: 1;
+            padding-top: 150px;
+            min-height: auto;
+            margin-bottom: 20px;
         }
         .section-container {
 
@@ -491,6 +521,8 @@
             border-radius: 15px;
             padding: 40px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 95%;
+            margin: 0 auto;
         }
 
     
@@ -763,7 +795,7 @@
             particlesJS('particles-js', {
                 particles: {
                     number: {
-                        value: 60,
+                        value: 80,
                         density: {
                             enable: true,
                             value_area: 800
@@ -836,6 +868,25 @@
                 duration: 1000,
                 once: true
             });
+
+            // Add the new mobile initialization code here
+    if (window.innerWidth <= 768) {
+        // Show all sections on mobile
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.style.display = 'block';
+            section.style.opacity = '1';
+        });
+    }
+
+    // Add the resize listener here
+    window.addEventListener('resize', () => {
+        if (window.innerWidth <= 768) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.display = 'block';
+                section.style.opacity = '1';
+            });
+        }
+    });
     
             // NEW NAVIGATION CODE - Add this part
             // Get all nav links
@@ -846,33 +897,30 @@
             
             // Add click event listener to each nav link
             navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
-                    // Get the target section id from href
-                    const targetId = link.getAttribute('href').substring(1);
-                    
-                    // Remove active class from all sections
-                    sections.forEach(section => {
-                        section.classList.remove('active');
-                    });
-                    
-                    // Remove active class from all nav links
-                    navLinks.forEach(navLink => {
-                        navLink.classList.remove('active');
-                    });
-                    
-                    // Add active class to clicked nav link
-                    link.classList.add('active');
-                    
-                    // Add active class to target section
-                    document.getElementById(targetId).classList.add('active');
-                    
-                    // Smooth scroll to section
-                    document.getElementById(targetId).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        const targetId = link.getAttribute('href').substring(1);
+        
+        if (window.innerWidth > 768) {
+            // Desktop behavior - hide/show sections
+            sections.forEach(section => {
+                section.classList.remove('active');
             });
+            
+            navLinks.forEach(navLink => {
+                navLink.classList.remove('active');
+            });
+            
+            link.classList.add('active');
+            document.getElementById(targetId).classList.add('active');
+        }
+        
+        // Smooth scroll for both mobile and desktop
+        document.getElementById(targetId).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
         });
     </script>
