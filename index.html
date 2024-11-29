@@ -1,832 +1,309 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Priyadharsan Jayaseelan - Portfolio</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <style>
-        :root {
-            --primary: #0a192f;
-            --secondary: #f29100;
-            --text: #ccd6f6;
-            --text-secondary: #8892b0;
-            --bg: #0a192f;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-
-
-        /* Main Styles */
-
-        #main-content {
-        position: relative;
-        z-index: 2;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiruthikeswaran Rajaram - Aerospace Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
+    body {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f5f5f5;
+    }
 
-        #particles-js {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
-        }
-        .section-container {
-        background: rgba(10, 25, 47, 0.85);
-        backdrop-filter: blur(10px);
-        border-radius: 15px;
-        padding: 40px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2),
-        0 0 30px rgba(100, 255, 218, 0.1);
-        border: 1px solid rgba(100, 255, 218, 0.1);
-        }
-        
-        .work-item {
-        transition: all 0.3s ease;
-        border: 1px solid rgba(100, 255, 218, 0.1);
-        }
+    header {
+      background: transparent; /* No blue background */
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-        .work-item:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
-        }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #007bff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
 
+    .logo:hover {
+      color: #333;
+    }
 
+    .nav-menu {
+      display: flex;
+      gap: 20px;
+    }
 
+    .nav-menu a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
 
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-        }
+    .nav-menu a:hover {
+      color: #333;
+    }
 
-        /* Navigation */
-        .main-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(10, 25, 47, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            padding: 20px 0;
-        }
+    .hero {
+      background: url('https://via.placeholder.com/1600x600') no-repeat center center/cover;
+      padding: 100px 20px;
+      text-align: center;
+      color: white;
+      position: relative;
+      z-index: 1;
+    }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            padding: 0 20px;
-        }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
 
-        .nav-link {
-            color: var(--text);
-            text-decoration: none;
-            font-size: 18px;
-            position: relative;
-            padding: 5px 0;
-            transition: color 0.3s ease;
-        }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: textSlideIn 1s ease-out forwards;
+    }
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--secondary);
-            transition: width 0.3s ease;
-        }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeInText 1.5s ease 0.5s forwards;
+    }
 
-        .nav-link:hover {
-            color: var(--secondary);
-        }
+    .btn {
+      display: inline-block;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
 
-        .nav-link:hover::after {
-            width: 100%;
-        }
+    .btn:hover {
+      background-color: #0056b3;
+    }
 
-        /* Sections */
-        .content-section {
-        min-height: 100vh;
-        padding: 100px 20px;
-        display: none;
+    .section {
+      padding: 60px 20px;
+    }
+
+    .section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      text-align: center;
+      animation: textSlideIn 1s ease-out forwards;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .project-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+      background-color: #f1f1f1; /* Light background on hover */
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .project-card h3 {
+      font-size: 1.4rem;
+      margin: 15px;
+      color: #007bff;
+    }
+
+    .project-card p {
+      font-size: 1rem;
+      margin: 0 15px 15px;
+      color: #555;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes textSlideIn {
+      from {
+        transform: translateY(-20px);
         opacity: 0;
-        transition: opacity 0.5s ease;
-    }
-
-        .content-section.active {
-        display: block;
+      }
+      to {
+        transform: translateY(0);
         opacity: 1;
+      }
     }
 
-        .section-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Home Section */
-        .home-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: calc(100vh - 200px);
-            padding: 0 20px;
-        }
-
-        .home-title {
-            font-size: 72px;
-            color: var(--secondary);
-            margin-bottom: 20px;
-            animation: fadeInUp 1s ease;
-        }
-
-        .home-subtitle {
-            font-size: 48px;
-            color: var(--text-secondary);
-            margin-bottom: 30px;
-            animation: fadeInUp 1s ease 0.2s forwards;
-            opacity: 0;
-        }
-
-        .home-description {
-            max-width: 600px;
-            line-height: 1.6;
-            color: var(--text-secondary);
-            animation: fadeInUp 1s ease 0.4s forwards;
-            opacity: 0;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Profile Picture */
-
-        .profile-picture {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        position: relative;
-        border: 5px solid var(--secondary);
-        margin-bottom: 20px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    @keyframes fadeInText {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
-        .profile-picture:hover {
-         transform: scale(1.1); /* Slight zoom */
-         box-shadow: 0 0 20px rgba(100, 255, 218, 0.5);
-        }
-
-
-        /* Education Section Styles */
-        .education-section {
-            padding: 40px 0;
-        }
-        
-        .education-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            border-left: 4px solid var(--secondary);
-            transition: transform 0.3s ease;
-        }
-        
-        .education-item:hover {
-            transform: translateX(10px);
-        }
-        
-        .education-degree {
-            color: var(--secondary);
-            font-size: 1.4em;
-            margin-bottom: 10px;
-        }
-
-        .education-school {
-        color: var(--text);
-        font-size: 1.2em;
-        margin-bottom: 10px;
-        }
-
-        .education-date {
-        color: var(--text-secondary);
-        font-size: 0.9em;
-        margin-bottom: 15px;
-        }
-
-        .education-details {
-        color: var(--text-secondary);
-        }
-
-       .achievement-list {
-        margin-top: 15px;
-        padding-left: 20px;
-        }
-
-        .achievement-list li {
-        color: var(--text-secondary);
-        margin-bottom: 8px;
-        position: relative;
-        padding-left: 15px;
-        }
-
-        .achievement-list li::before {
-        content: '▹';
-        position: absolute;
-        left: -15px;
-        color: var(--secondary);
-        }
-
-        
-
-
-
-        /* Work Section */
-        .work-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 20px;
-        }
-
-        .work-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .work-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .work-image {
-            width: 100%;
-            height: 200px;
-            background-color: rgba(100, 255, 218, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .work-info {
-            padding: 20px;
-        }
-
-        .work-title {
-            color: var(--secondary);
-            margin-bottom: 10px;
-        }
-
-        .work-description {
-            color: var(--text-secondary);
-            font-size: 0.9em;
-        }
-
-        /* Experience Section */
-        .experience-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            position: relative;
-            border-left: 4px solid var(--secondary);
-        }
-
-        .experience-title {
-            color: var(--secondary);
-            margin-bottom: 10px;
-        }
-
-        .experience-company {
-            color: var(--text);
-            font-size: 1.2em;
-            margin-bottom: 15px;
-        }
-
-        .experience-date {
-            color: var(--text-secondary);
-            font-size: 0.9em;
-            margin-bottom: 15px;
-        }
-
-        .experience-description {
-            color: var(--text-secondary);
-        }
-
-        /* Skills Section */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            padding: 20px;
-        }
-
-        .skill-category {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 25px;
-            border-radius: 10px;
-        }
-
-        .skill-category h3 {
-            color: var(--secondary);
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--secondary);
-            padding-bottom: 10px;
-        }
-
-        .skill-item {
-            margin-bottom: 15px;
-        }
-
-        .skill-name {
-            color: var(--text);
-            margin-bottom: 5px;
-        }
-
-        .skill-bar {
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: var(--secondary);
-            border-radius: 3px;
-            transition: width 1s ease;
-        }
-
-        /* Contact Section */
-        .contact-content {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .contact-title {
-            color: var(--secondary);
-            margin-bottom: 30px;
-        }
-
-        .contact-description {
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-        }
-
-        .contact-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background: transparent;
-            border: 2px solid var(--secondary);
-            color: var(--secondary);
-            text-decoration: none;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .contact-button:hover {
-            background: rgba(100, 255, 218, 0.1);
-            transform: translateY(-3px);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
-
-            .home-title {
-                font-size: 48px;
-            }
-
-            .home-subtitle {
-                font-size: 32px;
-            }
-
-            .work-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        /* Enhance content readability */
-        .content-section {
-            position: relative;
-            z-index: 1;
-        }
-        .section-container {
-
-            background: rgba(10, 25, 47, 0.85);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-
-    
-        /* Navigation enhancement */
-        .main-nav {
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-       .nav-link.active {
-       color: var(--secondary);
-       }
-
-       .nav-link.active::after {
-       width: 100%;
-       }
-        
-        </style>
-    
-
-
-
-
-
+    /* Add Active Section Styles */
+    .section:not(.active) {
+      display: none;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <a href="#" class="logo">Kiruthikeswaran Rajaram</a>
+    <nav class="nav-menu">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#education-skills" class="nav-link">Education & Skills</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#resume" class="nav-link">Resume</a>
+    </nav>
+  </header>
 
-    
-    <div id="particles-js"></div>
-    <!-- Main Content -->
-    <div id="main-content">
-        <nav class="main-nav">
-            <div class="nav-container">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#education" class="nav-link">Education</a>
-                <a href="#work" class="nav-link">Work</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-        </nav>
+  <div class="hero">
+    <h1>Welcome to My Portfolio</h1>
+    <p>Discover my work, innovations, and projects in aerospace engineering and beyond.</p>
+    <a href="#projects" class="btn">View Projects</a>
+  </div>
 
+  <div class="section" id="about">
+    <h2>About Me</h2>
+    <p>I am a highly motivated aerospace engineer with a passion for designing innovative solutions that push the boundaries of what's possible. My experience spans aerodynamics, structural analysis, and advanced 3D modeling techniques. I am constantly evolving and seeking ways to contribute to the aerospace industry.</p>
+  </div>
 
-       <!-- Home Section -->
-<section id="home" class="content-section active">
-    <div class="section-container">
-        <div class="home-content">
-            <!-- Profile Picture -->
-            <img src="https://raw.githubusercontent.com/PriyadharsanJayaseelan/Priyadharsan_Jayaseelan/597be34559b33387170cc537b8ed259f5322c0d8/8425a11c-cc13-4418-a3c0-ceac63b3c53d.jpg" alt="Priyadharsan Jayaseelan" class="profile-picture">
-            
-            <!-- Title and Description -->
-            <h1 class="home-title">Priyadharsan Jayaseelan</h1>
-            <h2 class="home-subtitle">Computer Science Student</h2>
-            <p class="home-description">
-                A passionate computer science student at Kent State University with a strong foundation in C++, 
-                Python, and SQL. Dedicated to creating innovative solutions and constantly learning new technologies. 
-                Currently maintaining a GPA of 3.77 while actively participating in various technical projects and 
-                honor society activities.
-            </p>
-        </div>
+  <div class="section" id="education-skills">
+    <h2>Education & Skills</h2>
+    <p>I hold a Master's degree in Aerospace Engineering from a renowned institution. My skills include ANSYS, CAD software, and Python for analysis and simulation. I specialize in advanced aerodynamics, structural design, and computational fluid dynamics (CFD).</p>
+  </div>
+
+  <div class="section" id="projects">
+    <h2>My Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <img src="https://via.placeholder.com/400x200" alt="C-17 Globemaster III">
+        <h3>C-17 Globemaster III</h3>
+        <p>Optimized wing capacity and solved flight control issues using advanced ANSYS simulations.</p>
+      </div>
+      <div class="project-card">
+        <img src="https://via.placeholder.com/400x200" alt="Winglet Efficiency Design">
+        <h3>Winglet Efficiency Design</h3>
+        <p>Enhanced aerodynamic efficiency by redesigning winglets for modern aircraft.</p>
+      </div>
+      <div class="project-card">
+        <img src="https://via.placeholder.com/400x200" alt="3D Aerospace Prototypes">
+        <h3>3D Aerospace Prototypes</h3>
+        <p>Created precise 3D models for aerospace components, ensuring reliability and accuracy.</p>
+      </div>
+      <div class="project-card">
+        <img src="https://via.placeholder.com/400x200" alt="Structural Analysis">
+        <h3>Structural Analysis</h3>
+        <p>Performed structural analysis to enhance safety and performance in aerospace systems.</p>
+      </div>
     </div>
-</section>
+  </div>
 
+  <div class="section" id="contact">
+    <h2>Contact Me</h2>
+    <p>If you'd like to discuss a project or collaborate, feel free to reach out. I'm always excited to explore new opportunities!</p>
+    <a href="mailto:kiruthikeswaran@example.com" class="btn">Email Me</a>
+  </div>
 
+  <div class="section" id="resume">
+    <h2>My Resume</h2>
+    <p>Download my resume to learn more about my qualifications and experience.</p>
+    <a href="resume.pdf" class="btn">Download Resume</a>
+  </div>
 
-        <section id="education" class="content-section">
-            <div class="section-container">
-                <div class="education-section">
-                    <div class="education-item" data-aos="fade-up">
-                        <h3 class="education-degree">Bachelor of Science in Computer Science</h3>
-                        <div class="education-school">Kent State University</div>
-                        <div class="education-date">Expected Graduation: May 2024</div>
-                        <div class="education-details">
-                            <p>Current GPA: 3.77/4.0</p>
-                            <ul class="achievement-list">
-                                <li>Dean's List: Fall 2021 - Present</li>
-                                <li>Member of Computer Science Honor Society</li>
-                                <li>Received Academic Excellence Scholarship</li>
-                                <li>Relevant Coursework: Data Structures, Algorithms, Database Systems, Machine Learning</li>
-                            </ul>
-                        </div>
-                    </div>
+  <footer>
+    <p>&copy; 2024 Kiruthikeswaran Rajaram. Built with dedication and creativity. <a href="mailto:kiruthikeswaran@example.com">Contact Me</a></p>
+  </footer>
+
+  <script>
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.section');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
         
-                    <div class="education-item" data-aos="fade-up">
-                        <h3 class="education-degree">High School Diploma</h3>
-                        <div class="education-school">Your High School Name</div>
-                        <div class="education-date">Graduated: May 2020</div>
-                        <div class="education-details">
-                            <ul class="achievement-list">
-                                <li>Valedictorian</li>
-                                <li>President of Computer Science Club</li>
-                                <li>First Place in State Programming Competition</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        // Get the target section id from href
+        const targetId = link.getAttribute('href').substring(1);
         
-
-        <!-- Work Section -->
-        <section id="work" class="content-section">
-            <div class="section-container">
-                <div class="work-grid">
-                    <div class="work-item">
-                        <div class="work-image">
-                            <img src="/api/placeholder/300/200" alt="Database Management System">
-                        </div>
-                        <div class="work-info">
-                            <h3 class="work-title">Database Management System</h3>
-                            <p class="work-description">
-                                Developed a comprehensive database system for university dining services using SQL 
-                                and Python, optimizing staff scheduling and inventory management.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <div class="work-image">
-                            <img src="/api/placeholder/300/200" alt="Inventory Tracking System">
-                        </div>
-                        <div class="work-info">
-                            <h3 class="work-title">Inventory Tracking System</h3>
-                            <p class="work-description">
-                                Created a C++ based inventory tracking system with custom data structures, 
-                                improving operational efficiency by 20%.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="work-item">
-                        <div class="work-image">
-                            <img src="/api/placeholder/300/200" alt="Machine Learning Project">
-                        </div>
-                        <div class="work-info">
-                            <h3 class="work-title">Machine Learning Analysis</h3>
-                            <p class="work-description">
-                                Implemented machine learning algorithms in Python to analyze student performance data,
-                                achieving 85% prediction accuracy in identifying at-risk students.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience" class="content-section">
-            <div class="section-container">
-                <div class="experience-item" data-aos="fade-up">
-                    <h3 class="experience-title">Research Assistant</h3>
-                    <div class="experience-company">Kent State University</div>
-                    <div class="experience-date">January 2023 - Present</div>
-                    <p class="experience-description">
-                        Assisting in database optimization research, implementing efficient algorithms for large-scale
-                        data processing, and contributing to academic publications in the field of computer science.
-                    </p>
-                </div>
-
-                <div class="experience-item" data-aos="fade-up">
-                    <h3 class="experience-title">Teaching Assistant</h3>
-                    <div class="experience-company">Computer Science Department</div>
-                    <div class="experience-date">August 2022 - December 2022</div>
-                    <p class="experience-description">
-                        Led programming lab sessions for introductory C++ courses, mentored students,
-                        and provided one-on-one assistance with coding assignments and projects.
-                    </p>
-                </div>
-
-                <div class="experience-item" data-aos="fade-up">
-                    <h3 class="experience-title">Software Development Intern</h3>
-                    <div class="experience-company">Tech Solutions Inc.</div>
-                    <div class="experience-date">May 2022 - August 2022</div>
-                    <p class="experience-description">
-                        Developed and maintained database applications, created automated testing scripts,
-                        and collaborated with senior developers on various client projects.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="content-section">
-            <div class="section-container">
-                <div class="skills-container">
-                    <div class="skill-category" data-aos="fade-up">
-                        <h3>Programming Languages</h3>
-                        <div class="skill-item">
-                            <div class="skill-name">C++</div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">Python</div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">SQL</div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="skill-category" data-aos="fade-up">
-                        <h3>Tools & Technologies</h3>
-                        <div class="skill-item">
-                            <div class="skill-name">Git</div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 75%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">MySQL</div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">Linux</div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 70%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="skill-category" data-aos="fade-up">
-                        <h3>Soft Skills</h3>
-                        <div class="skill-item">
-                            <div class="skill-name">Problem Solving</div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">Team Collaboration</div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">Technical Writing</div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="content-section">
-            <div class="section-container">
-                <div class="contact-content">
-                    <h2 class="contact-title">Get In Touch</h2>
-                    <p class="contact-description">
-                        I'm currently looking for new opportunities and would love to hear about your projects.
-                        Whether you have a question or just want to say hi, feel free to reach out!
-                    </p>
-                    <a href="mailto:pjayasee@kent.edu" class="contact-button">Say Hello</a>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize particles.js
-            particlesJS('particles-js', {
-                particles: {
-                    number: {
-                        value: 80,
-                        density: {
-                            enable: true,
-                            value_area: 800
-                        }
-                    },
-                    color: {
-                        value: '#64ffda'
-                    },
-                    shape: {
-                        type: 'circle'
-                    },
-                    opacity: {
-                        value: 0.5,
-                        random: false,
-                        anim: {
-                            enable: false
-                        }
-                    },
-                    size: {
-                        value: 3,
-                        random: true
-                    },
-                    line_linked: {
-                        enable: true,
-                        distance: 150,
-                        color: '#64ffda',
-                        opacity: 0.2,
-                        width: 1
-                    },
-                    move: {
-                        enable: true,
-                        speed: 2,
-                        direction: 'none',
-                        random: false,
-                        straight: false,
-                        out_mode: 'out',
-                        bounce: false
-                    }
-                },
-                interactivity: {
-                    detect_on: 'canvas',
-                    events: {
-                        onhover: {
-                            enable: true,
-                            mode: 'grab'
-                        },
-                        onclick: {
-                            enable: true,
-                            mode: 'push'
-                        },
-                        resize: true
-                    },
-                    modes: {
-                        grab: {
-                            distance: 140,
-                            line_linked: {
-                                opacity: 1
-                            }
-                        },
-                        push: {
-                            particles_nb: 4
-                        }
-                    }
-                },
-                retina_detect: true
-            });
-    
-            // Initialize AOS
-            AOS.init({
-                duration: 1000,
-                once: true
-            });
-    
-            // NEW NAVIGATION CODE - Add this part
-            // Get all nav links
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            // Get all sections
-            const sections = document.querySelectorAll('.content-section');
-            
-            // Add click event listener to each nav link
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
-                    // Get the target section id from href
-                    const targetId = link.getAttribute('href').substring(1);
-                    
-                    // Remove active class from all sections
-                    sections.forEach(section => {
-                        section.classList.remove('active');
-                    });
-                    
-                    // Remove active class from all nav links
-                    navLinks.forEach(navLink => {
-                        navLink.classList.remove('active');
-                    });
-                    
-                    // Add active class to clicked nav link
-                    link.classList.add('active');
-                    
-                    // Add active class to target section
-                    document.getElementById(targetId).classList.add('active');
-                    
-                    // Smooth scroll to section
-                    document.getElementById(targetId).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
+        // Remove active class from all sections
+        sections.forEach(section => {
+          section.classList.remove('active');
         });
-    </script>
+        
+        // Remove active class from all nav links
+        navLinks.forEach(navLink => {
+          navLink.classList.remove('active');
+        });
+        
+        // Add active class to clicked nav link
+        link.classList.add('active');
+        
+        // Add active class to target section
+        document.getElementById(targetId).classList.add('active');
+        
+        // Smooth scroll to section
+        document.getElementById(targetId).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
