@@ -183,63 +183,23 @@
         }
 
         /* Profile Picture */
-.profile-picture {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%; /* Circle the image */
-    position: relative;
-    border: 5px solid var(--secondary); /* Border around the image */
-    margin-bottom: 20px;
-    animation: glitchEffect 1s infinite linear;
-}
 
-/* Glitch Effect for Profile Picture */
-@keyframes glitchEffect {
-    0% {
-        transform: translateX(0);
-        clip-path: inset(0 0 0 0);
+        .profile-picture {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        position: relative;
+        border: 5px solid var(--secondary);
+        margin-bottom: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    25% {
-        transform: translateX(-5px);
-        clip-path: inset(10px 0 10px 0);
-    }
-    50% {
-        transform: translateX(5px);
-        clip-path: inset(0 10px 0 10px);
-    }
-    75% {
-        transform: translateX(-5px);
-        clip-path: inset(10px 0 10px 0);
-    }
-    100% {
-        transform: translateX(0);
-        clip-path: inset(0 0 0 0);
-    }
-}
 
-/* Pseudo-element for Glowing Effect */
-.profile-picture::before {
-    content: '';
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    right: -15px;
-    bottom: -15px;
-    border-radius: 50%; /* Circle effect */
-    border: 2px solid var(--secondary); /* Border for glowing effect */
-    box-shadow: 0 0 30px var(--secondary), 0 0 60px var(--secondary), 0 0 90px var(--secondary); /* Glowing shadow */
-    z-index: -1; /* Ensure it is behind the image */
-    animation: electricAnimation 2s infinite ease-in-out;
-}
+        .profile-picture:hover {
+         transform: scale(1.1); /* Slight zoom */
+         box-shadow: 0 0 20px rgba(100, 255, 218, 0.5);
+        }
 
-@keyframes electricAnimation {
-    0%, 100% {
-        box-shadow: 0 0 30px rgba(100, 255, 218, 0.5), 0 0 60px rgba(100, 255, 218, 0.3), 0 0 90px rgba(100, 255, 218, 0.1);
-    }
-    50% {
-        box-shadow: 0 0 50px rgba(100, 255, 218, 0.7), 0 0 80px rgba(100, 255, 218, 0.5), 0 0 100px rgba(100, 255, 218, 0.3);
-    }
-}
+
         /* Education Section Styles */
         .education-section {
             padding: 40px 0;
