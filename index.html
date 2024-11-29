@@ -17,7 +17,6 @@
       background-color: #f5f5f5;
       color: #333;
       line-height: 1.6;
-      transition: all 0.3s ease-in-out;
     }
 
     header {
@@ -30,11 +29,6 @@
       top: 0;
       z-index: 100;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      transition: background 0.3s ease-in-out;
-    }
-
-    header:hover {
-      background: linear-gradient(to right, #0056b3, #007bff);
     }
 
     .logo {
@@ -44,17 +38,11 @@
       text-decoration: none;
       letter-spacing: 2px;
       text-transform: uppercase;
-      transition: color 0.3s ease-in-out;
-    }
-
-    .logo:hover {
-      color: #f5f5f5;
     }
 
     .nav-menu {
       display: flex;
       gap: 20px;
-      align-items: center;
     }
 
     .nav-menu a {
@@ -62,7 +50,6 @@
       text-decoration: none;
       font-weight: 500;
       font-size: 1.1rem;
-      transition: color 0.3s ease;
       position: relative;
     }
 
@@ -86,43 +73,71 @@
       transform: scaleX(1);
     }
 
-    /* Hero Section */
-    .hero {
-      background: url('https://via.placeholder.com/1600x600') no-repeat center center/cover;
-      padding: 120px 20px;
-      text-align: center;
-      color: white;
-      position: relative;
-      z-index: 1;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
+    /* Space & Earth Animation */
+    .space {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.4);
+      background: url('https://via.placeholder.com/1500x1000/000000/ffffff?text=Space+Background') no-repeat center center/cover;
       z-index: -1;
+      overflow: hidden;
     }
 
-    .hero h1 {
-      font-size: 4rem;
-      margin-bottom: 20px;
-      animation: slideIn 1s ease-out forwards;
-      color: #f5f5f5;
-      text-transform: uppercase;
+    .earth {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      width: 300px;
+      height: 300px;
+      background: url('https://via.placeholder.com/300x300/00ccff/000000?text=Earth') no-repeat center center/cover;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      animation: rotateEarth 60s infinite linear;
     }
 
-    .hero p {
-      font-size: 1.3rem;
-      margin-bottom: 40px;
-      animation: fadeInText 1.5s ease 0.5s forwards;
-      color: #d9d9d9;
+    .plane {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      width: 80px;
+      height: 40px;
+      background: url('https://via.placeholder.com/80x40/ffcc00/000000?text=Plane') no-repeat center center/cover;
+      animation: flyPlane 20s infinite linear;
     }
 
+    @keyframes rotateEarth {
+      0% { transform: translateX(-50%) rotate(0deg); }
+      100% { transform: translateX(-50%) rotate(360deg); }
+    }
+
+    @keyframes flyPlane {
+      0% { left: -10%; top: 15%; }
+      50% { left: 100%; top: 10%; }
+      100% { left: -10%; top: 15%; }
+    }
+
+    /* Section Navigation */
+    .section {
+      display: none;
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      text-align: center;
+      color: #007bff;
+    }
+
+    /* Button Hover Effects */
     .btn {
       display: inline-block;
       background-color: #007bff;
@@ -132,7 +147,6 @@
       border-radius: 30px;
       font-size: 1.2rem;
       font-weight: 600;
-      letter-spacing: 2px;
       text-transform: uppercase;
       transition: background-color 0.3s ease, transform 0.3s ease;
     }
@@ -142,160 +156,44 @@
       transform: scale(1.05);
     }
 
-    .section {
-      padding: 80px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section h2 {
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-      text-align: center;
-      animation: textSlideIn 1s ease-out forwards;
-      color: #007bff;
-    }
-
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-    }
-
-    .project-card {
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-    }
-
-    .project-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
-      background-color: #f9f9f9;
-    }
-
-    .project-card img {
-      width: 100%;
-      height: 230px;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .project-card:hover img {
-      transform: scale(1.05);
-    }
-
-    .project-card h3 {
-      font-size: 1.5rem;
-      margin: 20px;
-      color: #007bff;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .project-card p {
-      font-size: 1rem;
-      margin: 0 20px 20px;
-      color: #555;
-    }
-
     footer {
       background-color: #333;
       color: white;
       padding: 40px 20px;
       text-align: center;
-      letter-spacing: 1px;
     }
 
     footer a {
       color: #007bff;
       text-decoration: none;
-      font-weight: 500;
     }
 
     footer a:hover {
       text-decoration: underline;
     }
-
-    @keyframes textSlideIn {
-      from {
-        transform: translateY(-20px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadeInText {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes slideIn {
-      from {
-        transform: translateY(-50px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    @media screen and (max-width: 768px) {
-      .hero h1 {
-        font-size: 3rem;
-      }
-
-      .hero p {
-        font-size: 1.1rem;
-      }
-
-      .section h2 {
-        font-size: 2rem;
-      }
-
-      .project-card h3 {
-        font-size: 1.2rem;
-      }
-
-      .project-card p {
-        font-size: 0.9rem;
-      }
-    }
   </style>
 </head>
 <body>
+  <!-- Space Animation -->
+  <div class="space"></div>
+  <div class="earth"></div>
+  <div class="plane"></div>
+
   <header>
     <a href="#" class="logo">Kiruthikeswaran Rajaram</a>
     <nav class="nav-menu">
-      <a href="#about" class="nav-link">About</a>
-      <a href="#education-skills" class="nav-link">Education & Skills</a>
-      <a href="#projects" class="nav-link">Projects</a>
-      <a href="#contact" class="nav-link">Contact</a>
-      <a href="#resume" class="nav-link">Resume</a>
+      <a href="#" class="nav-link" data-target="about">About</a>
+      <a href="#" class="nav-link" data-target="education-skills">Education & Skills</a>
+      <a href="#" class="nav-link" data-target="projects">Projects</a>
+      <a href="#" class="nav-link" data-target="contact">Contact</a>
+      <a href="#" class="nav-link" data-target="resume">Resume</a>
     </nav>
   </header>
-
-  <!-- Hero Section (Only Here) -->
-  <div class="hero">
-    <h1>Welcome to My Portfolio</h1>
-    <p>Discover my work, innovations, and projects in aerospace engineering and beyond.</p>
-    <a href="#projects" class="btn">View Projects</a>
-  </div>
 
   <!-- About Section -->
   <div class="section" id="about">
     <h2>About Me</h2>
-    <p>I am Kiruthikeswaran Rajaram, a passionate Aerospace Engineer with a strong foundation in aerodynamics, structural analysis, and computational methods. I hold a Master's degree in Aerospace Engineering from Stanford University, where I gained extensive knowledge in flight dynamics, propulsion systems, and avionics. I strive to design innovative solutions to push the boundaries of modern aviation.</p>
+    <p>I am Kiruthikeswaran Rajaram, a passionate Aerospace Engineer with a strong foundation in aerodynamics, structural analysis, and computational methods. I hold a Master's degree in Aerospace Engineering from Stanford University, where I gained extensive knowledge in flight dynamics, propulsion systems, and avionics.</p>
   </div>
 
   <!-- Education & Skills Section -->
@@ -315,27 +213,13 @@
   <!-- Projects Section -->
   <div class="section" id="projects">
     <h2>My Projects</h2>
-    <div class="project-grid">
-      <div class="project-card">
-        <img src="https://via.placeholder.com/400x230" alt="Project 1">
-        <h3>Hypersonic Airliner Design</h3>
-        <p>Designed an efficient hypersonic airliner using advanced propulsion systems and structural optimization techniques. The project aimed at reducing carbon emissions in high-speed aviation.</p>
-      </div>
-      <div class="project-card">
-        <img src="https://via.placeholder.com/400x230" alt="Project 2">
-        <h3>Drone Navigation System</h3>
-        <p>Developed an autonomous navigation system for drones using GPS and sensors to enhance real-time decision-making capabilities. It included AI for obstacle detection and avoidance.</p>
-      </div>
-      <div class="project-card">
-        <img src="https://via.placeholder.com/400x230" alt="Project 3">
-        <h3>Airfoil Optimization</h3>
-        <p>Used CFD simulations to optimize airfoil shapes for improved lift-to-drag ratio. The optimized design was validated through wind tunnel testing.</p>
-      </div>
-      <div class="project-card">
-        <img src="https://via.placeholder.com/400x230" alt="Project 4">
-        <h3>Aircraft Structural Integrity Testing</h3>
-        <p>Performed structural analysis and testing of various aerospace components to ensure maximum safety and performance under extreme conditions.</p>
-      </div>
+    <div>
+      <h3>Hypersonic Airliner Design</h3>
+      <p>Designed an efficient hypersonic airliner using advanced propulsion systems and structural optimization techniques. The project aimed at reducing carbon emissions in high-speed aviation.</p>
+    </div>
+    <div>
+      <h3>Drone Navigation System</h3>
+      <p>Developed an autonomous navigation system for drones using GPS and sensors to enhance real-time decision-making capabilities. It included AI for obstacle detection and avoidance.</p>
     </div>
   </div>
 
@@ -356,5 +240,23 @@
   <footer>
     <p>&copy; 2024 Kiruthikeswaran Rajaram | Built with passion and creativity. <a href="mailto:kiruthikeswaran@example.com">Contact Me</a></p>
   </footer>
+
+  <script>
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const targetSection = document.getElementById(this.getAttribute('data-target'));
+
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(section => {
+          section.classList.remove('active');
+        });
+
+        // Show the target section
+        targetSection.classList.add('active');
+      });
+    });
+  </script>
 </body>
 </html>
