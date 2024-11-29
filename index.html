@@ -15,8 +15,7 @@
             --text: #ccd6f6;
             --text-secondary: #8892b0;
             --bg: #0a192f;
-            --font-main: 'Space Grotesk', sans-serif;
-            --font-secondary: 'Poppins', sans-serif;
+            --font-main: 'EB Garamond', serif;
         }
 
         * {
@@ -70,7 +69,7 @@
         body {
             background-color: var(--bg);
             color: var(--text);
-            font-family: var(--font-secondary);
+            font-family: var(--font-main);
             line-height: 1.6;
         }
 
@@ -96,9 +95,12 @@
         }
 
         .nav-link {
+            font-family: var(--font-main);
+    font-weight: 500;
             color: var(--text);
             text-decoration: none;
-            font-size: 18px;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
             position: relative;
             padding: 5px 0;
             transition: color 0.3s ease;
@@ -157,19 +159,29 @@
             margin-bottom: 20px;
             animation: fadeInUp 1s ease;
             font-family: var(--font-main);
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .home-subtitle {
+            font-family: var(--font-main);
             font-size: 48px;
             color: var(--text-secondary);
             margin-bottom: 30px;
             animation: fadeInUp 1s ease 0.2s forwards;
             opacity: 0;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+
+
         }
 
         .home-description {
+            font-family: var(--font-main);
+            font-weight: 400;
+            font-size: 1.2rem;
             max-width: 600px;
-            line-height: 1.6;
+            line-height: 1.8;
             color: var(--text-secondary);
             animation: fadeInUp 1s ease 0.4s forwards;
             opacity: 0;
@@ -342,6 +354,44 @@
         .experience-description {
             color: var(--text-secondary);
         }
+        .section-title, .work-title, .experience-title, .education-degree {
+    font-family: var(--font-main);
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.work-description, .experience-description, .education-details {
+    font-family: var(--font-main);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.skill-name {
+    font-family: var(--font-main);
+    font-weight: 500;
+    font-size: 1.1rem;
+    letter-spacing: 0.2px;
+}
+
+.contact-title {
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 2.5rem;
+    letter-spacing: -0.3px;
+}
+
+.contact-description {
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+.contact-button {
+    font-family: var(--font-main);
+    font-weight: 500;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
 
         /* Skills Section */
         .skills-container {
@@ -756,7 +806,7 @@ document.addEventListener('DOMContentLoaded', function() {
             particlesJS('particles-js', {
                 particles: {
                     number: {
-                        value: 50,
+                        value: 80,
                         density: {
                             enable: true,
                             value_area: 800
@@ -769,7 +819,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         type: 'circle'
                     },
                     opacity: {
-                        value: 0.3,
+                        value: 1.0,
                         random: false,
                         anim: {
                             enable: false
