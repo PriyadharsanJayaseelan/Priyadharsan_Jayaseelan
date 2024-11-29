@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Priyadharsan Jayaseelan - Portfolio</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
@@ -40,8 +40,6 @@
         height: 100%;
         z-index: -1;
         background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
-        will-change: transform;  /* Optimize particle animations */
-
         }
         .section-container {
         background: rgba(10, 25, 47, 0.85);
@@ -71,7 +69,6 @@
             color: var(--text);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            overflow-x: hidden;  /* Prevent horizontal scroll */
         }
 
         /* Navigation */
@@ -100,7 +97,7 @@
             text-decoration: none;
             font-size: 18px;
             position: relative;
-            padding: 10px; 
+            padding: 5px 0;
             transition: color 0.3s ease;
         }
 
@@ -125,14 +122,13 @@
 
         /* Sections */
         .content-section {
-    min-height: 100vh;
-    padding: 100px 20px;
-    display: block;  /* Changed from none to block */
-    opacity: 1;      /* Changed from 0 to 1 */
-    transition: opacity 0.5s ease;
-    overflow-y: auto; /* Added to ensure content is scrollable */
-    padding-top: 120px; /* Added to prevent content hiding under nav */
-}
+        min-height: 100vh;
+        padding: 100px 20px;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
         .content-section.active {
         display: block;
         opacity: 1;
@@ -417,102 +413,118 @@
             transform: translateY(-3px);
         }
 
-        /* Responsive Design */
-      
+        /* Contact Grid Layout */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Contact Info Styles */
+.contact-info h3, .contact-form h3 {
+    color: var(--secondary);
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+.contact-item {
+    margin-bottom: 30px;
+    transition: transform 0.3s ease;
+}
+
+.contact-item:hover {
+    transform: translateX(10px);
+}
+
+.contact-item h4 {
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.contact-item p {
+    color: var(--text-secondary);
+}
+
+/* Form Styles */
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--text-secondary);
+    border-radius: 5px;
+    color: var(--text);
+    transition: all 0.3s ease;
+}
+
+.contact-form textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 10px rgba(242, 145, 0, 0.1);
+    outline: none;
+}
+
+.contact-button {
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(242, 145, 0, 0.2);
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-    .nav-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        padding: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .main-nav {
-        padding: 10px 0;
-        position: fixed;
-        width: 100%;
-        z-index: 1000;
-    }
-
-
-    .home-title {
-        font-size: 36px;  /* Smaller for mobile */
-    }
-
-    .home-subtitle {
-        font-size: 24px;  /* Smaller for mobile */
-    }
-
-    .work-grid {
+    .contact-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 10px 0;
     }
-
-    .work-item {
-        margin-bottom: 20px;
-    }
-
-
-    .section-container {
-        padding: 20px;  /* Less padding on mobile */
-        width: 95%;
-        margin: 0 auto;
-    }
-
-    .skills-container {
-        grid-template-columns: 1fr;
-        padding: 10px 0;
-        gap: 20px;  /* Single column on mobile */
-    }
-
-    .skill-category {
-        margin-bottom: 20px;
-    }
-
-    .profile-picture {
-        width: 120px;  /* Slightly smaller on mobile */
-        height: 120px;
-    }
-
-    .home-description {
-        font-size: 0.9em;
-    }
-
-    .education-item, .experience-item {
+    
+    .contact-info, .contact-form {
         padding: 20px;
-        margin-bottom: 20px;
-    }
-
-    .contact-content {
-        padding: 20px 10px;
     }
 }
 
-/* Add iPad/tablet specific styles */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .section-container {
-        padding: 30px;
-        margin: 15px;
-    }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
 
-    .work-grid {
-        grid-template-columns: repeat(2, 1fr);  /* 2 columns for tablets */
-    }
+            .home-title {
+                font-size: 48px;
+            }
 
-    .skills-container {
-        grid-template-columns: repeat(2, 1fr);  /* 2 columns for tablets */
-    }
-}
+            .home-subtitle {
+                font-size: 32px;
+            }
+
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+        }
         /* Enhance content readability */
         .content-section {
             position: relative;
             z-index: 1;
-            padding-top: 150px;
-            min-height: auto;
-            margin-bottom: 20px;
         }
         .section-container {
 
@@ -521,8 +533,6 @@
             border-radius: 15px;
             padding: 40px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            width: 95%;
-            margin: 0 auto;
         }
 
     
@@ -777,13 +787,34 @@
         <!-- Contact Section -->
         <section id="contact" class="content-section">
             <div class="section-container">
-                <div class="contact-content">
-                    <h2 class="contact-title">Get In Touch</h2>
-                    <p class="contact-description">
-                        I'm currently looking for new opportunities and would love to hear about your projects.
-                        Whether you have a question or just want to say hi, feel free to reach out!
-                    </p>
-                    <a href="mailto:pjayasee@kent.edu" class="contact-button">Say Hello</a>
+                <div class="contact-content" data-aos="fade-up">
+                    <h2 class="contact-title">Contact Me</h2>
+                    <div class="contact-grid">
+                        <!-- Contact Information -->
+                        <div class="contact-info" data-aos="fade-right" data-aos-delay="200">
+                            <h3>Get In Touch</h3>
+                            <div class="contact-item">
+                                <h4>Email</h4>
+                                <p>priyadharsanjayaseelan@gmail.com</p>
+                            </div>
+                            <div class="contact-item">
+                                <h4>Phone</h4>
+                                <p>+1 (234)-296-3672</p>
+                            </div>
+                        </div>
+        
+                        <!-- Contact Form -->
+                        <div class="contact-form" data-aos="fade-left" data-aos-delay="400">
+                            <h3>Send Message</h3>
+                            <form onsubmit="sendEmail(event)">
+                                <input type="text" id="name" placeholder="Your Name" required>
+                                <input type="email" id="email" placeholder="Your Email" required>
+                                <input type="text" id="subject" placeholder="Subject" required>
+                                <textarea id="message" placeholder="Your Message" required></textarea>
+                                <button type="submit" class="contact-button">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -791,6 +822,17 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+        function sendEmail(event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value;
+    
+    const mailtoLink = `mailto:priyadharsanjayaseelan@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
+    
+    window.location.href = mailtoLink;
+}
             // Initialize particles.js
             particlesJS('particles-js', {
                 particles: {
@@ -868,25 +910,6 @@
                 duration: 1000,
                 once: true
             });
-
-            // Add the new mobile initialization code here
-    if (window.innerWidth <= 768) {
-        // Show all sections on mobile
-        document.querySelectorAll('.content-section').forEach(section => {
-            section.style.display = 'block';
-            section.style.opacity = '1';
-        });
-    }
-
-    // Add the resize listener here
-    window.addEventListener('resize', () => {
-        if (window.innerWidth <= 768) {
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.style.display = 'block';
-                section.style.opacity = '1';
-            });
-        }
-    });
     
             // NEW NAVIGATION CODE - Add this part
             // Get all nav links
@@ -897,30 +920,35 @@
             
             // Add click event listener to each nav link
             navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        const targetId = link.getAttribute('href').substring(1);
-        
-        if (window.innerWidth > 768) {
-            // Desktop behavior - hide/show sections
-            sections.forEach(section => {
-                section.classList.remove('active');
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Get the target section id from href
+                    const targetId = link.getAttribute('href').substring(1);
+                    
+                    // Remove active class from all sections
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Remove active class from all nav links
+                    navLinks.forEach(navLink => {
+                        navLink.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked nav link
+                    link.classList.add('active');
+                    
+                    // Add active class to target section
+                    document.getElementById(targetId).classList.add('active');
+                    
+                    // Smooth scroll to section
+                    document.getElementById(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
             });
-            
-            navLinks.forEach(navLink => {
-                navLink.classList.remove('active');
-            });
-            
-            link.classList.add('active');
-            document.getElementById(targetId).classList.add('active');
-        }
+        });
+
         
-        // Smooth scroll for both mobile and desktop
-        document.getElementById(targetId).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
-        });
     </script>
