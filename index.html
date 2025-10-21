@@ -221,22 +221,24 @@
             padding: 40px 0;
         }
         
-        .education-item {
+       .education-item {
     transition: all 0.28s ease;
-    border: 1px solid rgba(242,145,0,0.08); /* subtle default border */
-    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(100, 255, 218, 0.1); /* teal border */
+    background: rgba(255, 255, 255, 0.03);
     padding: 30px;
     border-radius: 10px;
     margin-bottom: 30px;
     position: relative;
-    border-left: 4px solid var(--secondary); /* keeps existing left stripe */
-        }
-        
-       .education-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 40px rgba(242,145,0,0.18), 0 4px 12px rgba(0,0,0,0.35);
-    border: 1px solid rgba(242,145,0,0.28);
+    border-left: 4px solid rgba(100, 255, 218, 0.8); /* teal left stripe */
 }
+
+.education-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 18px 55px rgba(100, 255, 218, 0.28), 0 6px 20px rgba(0,0,0,0.35); /* stronger teal glow */
+    border: 1px solid rgba(100, 255, 218, 0.35); /* stronger border on hover */
+}
+
+
 
         
         .education-degree {
