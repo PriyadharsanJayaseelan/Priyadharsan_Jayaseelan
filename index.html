@@ -500,16 +500,37 @@
             transform: translateY(-3px);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
+       /* Responsive Design */
+@media (max-width: 768px) {
     .nav-container {
-        flex-direction: row; /* keep horizontal like desktop */
+        flex-direction: row; /* stay horizontal */
         justify-content: center;
-        gap: 25px; /* adjust spacing */
-        flex-wrap: wrap; /* allow wrapping if needed */
+        gap: 20px;
+        flex-wrap: wrap; /* allow wrapping if screen is too small */
     }
 
+    .nav-link {
+        font-size: 3vw; /* scales with screen width */
+    }
+
+    body {
+        font-size: 4vw; /* scale body text slightly for readability */
+    }
+
+    h1, h2, h3 {
+        font-size: 5vw; /* headings adjust for small screens */
+    }
+
+    p {
+        font-size: 3.5vw; /* paragraph text resizes smoothly */
+    }
+
+    section {
+        padding: 20px; /* reduce padding on small screens */
+    }
 }
+
+
 
 
             .home-title {
