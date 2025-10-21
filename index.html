@@ -222,17 +222,22 @@
         }
         
         .education-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            border-left: 4px solid var(--secondary);
-            transition: transform 0.3s ease;
+    transition: all 0.28s ease;
+    border: 1px solid rgba(242,145,0,0.08); /* subtle default border */
+    background: rgba(255,255,255,0.03);
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    position: relative;
+    border-left: 4px solid var(--secondary); /* keeps existing left stripe */
         }
         
-        .education-item:hover {
-            transform: translateX(10px);
-        }
+       .education-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 40px rgba(242,145,0,0.18), 0 4px 12px rgba(0,0,0,0.35);
+    border: 1px solid rgba(242,145,0,0.28);
+}
+
         
         .education-degree {
             color: var(--secondary);
@@ -579,9 +584,9 @@
             <h2 class="home-subtitle">Computer Science Student</h2>
             <p class="home-description">
                 A passionate computer science student at Kent State University with a strong foundation in C++, 
-                Python, and SQL. Dedicated to creating innovative solutions and constantly learning new technologies. 
-                Currently maintaining a GPA of 3.77 while actively participating in various technical projects and 
-                honor society activities.
+                Python, and SQL. Pursuing a Bachelor of Science in Computer Science (Minor: Data Analytics) with a current GPA of 3.7. 
+                Dedicated to creating innovative solutions and constantly learning new technologies. 
+                Actively participating in technical projects, research, and honor society activities.
             </p>
         </div>
     </div>
@@ -590,38 +595,38 @@
 
 
         <section id="education" class="content-section">
-            <div class="section-container">
-                <div class="education-section">
-                    <div class="education-item" data-aos="fade-up">
-                        <h3 class="education-degree">Bachelor of Science in Computer Science</h3>
-                        <div class="education-school">Kent State University</div>
-                        <div class="education-date">Expected Graduation: May 2024</div>
-                        <div class="education-details">
-                            <p>Current GPA: 3.77/4.0</p>
-                            <ul class="achievement-list">
-                                <li>Dean's List: Fall 2021 - Present</li>
-                                <li>Member of Computer Science Honor Society</li>
-                                <li>Received Academic Excellence Scholarship</li>
-                                <li>Relevant Coursework: Data Structures, Algorithms, Database Systems, Machine Learning</li>
-                            </ul>
-                        </div>
-                    </div>
-        
-                    <div class="education-item" data-aos="fade-up">
-                        <h3 class="education-degree">High School Diploma</h3>
-                        <div class="education-school">Your High School Name</div>
-                        <div class="education-date">Graduated: May 2020</div>
-                        <div class="education-details">
-                            <ul class="achievement-list">
-                                <li>Valedictorian</li>
-                                <li>President of Computer Science Club</li>
-                                <li>First Place in State Programming Competition</li>
-                            </ul>
-                        </div>
-                    </div>
+    <div class="section-container">
+        <div class="education-section">
+            <div class="education-item" data-aos="fade-up">
+                <h3 class="education-degree">Bachelor of Science in Computer Science</h3>
+                <div class="education-school">Kent State University &nbsp; • &nbsp; Minor: Data Analytics</div>
+                <div class="education-date">Expected Graduation: May 2027</div>
+                <div class="education-details">
+                    <p>Current GPA: 3.7/4.0</p>
+                    <ul class="achievement-list">
+                        <li>Member of Alpha Lambda Delta Honor Society</li>
+                        <li>Received International Global Academic Excellence Scholarship</li>
+                        <li>Relevant Coursework: Data Structures, Algorithms, Database Systems, Machine Learning, Data Analytics</li>
+                    </ul>
                 </div>
             </div>
-        </section>
+
+            <div class="education-item" data-aos="fade-up">
+                <h3 class="education-degree">High School Diploma</h3>
+                <div class="education-school">Aristo Public School, India</div>
+                <div class="education-date">Graduated: May 2023</div>
+                <div class="education-details">
+                    <p>CGPA: 3.8</p>
+                    <ul class="achievement-list">
+                        <li>President of Computer Science Club</li>
+                        <li>First Place in State Programming Competition</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
         
 
         <!-- Work Section -->
