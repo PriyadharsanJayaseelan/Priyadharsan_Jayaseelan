@@ -502,11 +502,15 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
+    .nav-container {
+        flex-direction: row; /* keep horizontal like desktop */
+        justify-content: center;
+        gap: 25px; /* adjust spacing */
+        flex-wrap: wrap; /* allow wrapping if needed */
+    }
+
+}
+
 
             .home-title {
                 font-size: 48px;
