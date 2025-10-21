@@ -547,6 +547,86 @@
        .nav-link.active::after {
        width: 100%;
        }
+
+
+
+
+/* ===== MOBILE OPTIMIZATION ===== */
+@media (max-width: 768px) {
+    /* Sections */
+    .content-section {
+        min-height: auto;   /* let section height adjust naturally */
+        padding: 80px 15px; /* smaller padding for mobile */
+    }
+
+    /* Home Section */
+    .home-content {
+        min-height: auto;   /* remove desktop height calc */
+        padding: 40px 15px;
+        text-align: center; /* center content on mobile */
+    }
+
+    .home-title {
+        font-size: 36px; /* scale down titles */
+    }
+
+    .home-subtitle {
+        font-size: 24px;
+    }
+
+    .home-description {
+        font-size: 1rem;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    /* Profile picture */
+    .profile-picture {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 20px;
+    }
+
+    /* Section container */
+    .section-container {
+        padding: 25px 15px;
+    }
+
+    /* Work grid */
+    .work-grid {
+        grid-template-columns: 1fr; /* single column on mobile */
+        gap: 20px;
+    }
+
+    /* Skills grid */
+    .skills-container {
+        grid-template-columns: 1fr; /* single column on mobile */
+        gap: 20px;
+    }
+
+    /* Reduce font sizes inside experience/education */
+    .experience-title,
+    .education-degree {
+        font-size: 1.2rem;
+    }
+
+    .experience-company,
+    .education-school {
+        font-size: 1rem;
+    }
+
+    .experience-description,
+    .education-details,
+    .work-description {
+        font-size: 0.95rem;
+    }
+}
+
+/* Fix scrolling for fixed nav on mobile */
+html {
+    scroll-padding-top: 80px; /* match nav height */
+}
+
         
         </style>
     
