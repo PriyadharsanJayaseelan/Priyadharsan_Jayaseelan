@@ -600,16 +600,154 @@
       89% { transform: translate(3px, 1px); opacity: 0.8; }
     }
 
-    /* MOBILE */
-    @media (max-width: 768px) {
-      nav { padding: 1.2rem 1.5rem; }
-      .nav-links { display: none; }
-      #home, section { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .skills-grid { grid-template-columns: 1fr; }
+    /* HAMBURGER MENU */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--cyan);
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(4,8,16,0.98);
+      z-index: 99;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--mono);
+      font-size: 1.4rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--cyan); }
+    .mobile-menu-close {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      font-family: var(--mono);
+      font-size: 1.2rem;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* TABLET — 768px to 1024px */
+    @media (max-width: 1024px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
       .projects-grid { grid-template-columns: 1fr; }
+      .stats-strip { flex-wrap: wrap; }
+      .stat-item {
+        flex: 1 1 45%;
+        border-right: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+    }
+
+    /* MOBILE — up to 768px */
+    @media (max-width: 768px) {
+      /* Nav */
+      nav { padding: 1.1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      /* Hide custom cursor on touch devices */
+      #cursor, #cursor-ring { display: none; }
+      body { cursor: auto; }
+
+      /* Hero */
+      #home {
+        padding: 7rem 1.5rem 4rem;
+        min-height: 100svh;
+      }
+      .hero-name { font-size: clamp(2.8rem, 12vw, 5rem); }
+      .hero-sub { font-size: 0.82rem; }
+      .hero-cta { flex-direction: column; gap: 0.8rem; }
+      .btn-primary, .btn-secondary {
+        text-align: center;
+        width: 100%;
+        padding: 1rem;
+      }
+      .hero-scroll-hint { display: none; }
+
+      /* Sections */
+      section { padding: 4rem 1.5rem; }
+
+      /* Stats */
       .stats-strip { flex-direction: column; }
-      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-item {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 1.5rem;
+      }
+      .stat-num { font-size: 2rem; }
+
+      /* Section titles */
+      .section-title { font-size: clamp(1.8rem, 8vw, 2.5rem); }
+
+      /* About */
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .about-text p { font-size: 0.82rem; }
+      .edu-card { padding: 1.3rem; }
+
+      /* Skills */
+      .skills-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .skill-group { padding: 1.5rem; }
+
+      /* Projects */
+      .projects-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .project-card { padding: 1.8rem; }
+      .project-title { font-size: 1.2rem; }
+      .project-desc { font-size: 0.76rem; }
+
+      /* Experience */
+      .exp-title { font-size: 1rem; }
+      .exp-org { font-size: 0.72rem; }
+      .exp-points li { font-size: 0.74rem; }
+      .exp-item { padding-left: 1.8rem; }
+
+      /* Contact */
+      .contact-tagline { font-size: 0.78rem; }
+      .contact-email { font-size: 0.78rem; word-break: break-all; }
+      .social-links { flex-wrap: wrap; justify-content: center; gap: 0.8rem; }
+
+      /* Footer */
+      footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+        padding: 1.5rem;
+      }
+    }
+
+    /* SMALL PHONES — up to 380px */
+    @media (max-width: 380px) {
+      .hero-name { font-size: clamp(2.2rem, 10vw, 3rem); }
+      .nav-logo { font-size: 0.75rem; }
+      .stat-num { font-size: 1.8rem; }
+      .project-card, .skill-group, .edu-card { padding: 1.2rem; }
     }
   </style>
 </head>
@@ -627,7 +765,20 @@
       <li><a href="#experience">_experience</a></li>
       <li><a href="#contact">_contact</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- MOBILE MENU OVERLAY -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="menuClose">✕ close</button>
+    <a href="#home" class="menu-link">_home</a>
+    <a href="#about" class="menu-link">_about</a>
+    <a href="#work" class="menu-link">_work</a>
+    <a href="#experience" class="menu-link">_experience</a>
+    <a href="#contact" class="menu-link">_contact</a>
+  </div>
 
   <main>
     <!-- HERO -->
@@ -832,8 +983,8 @@
           I'm actively looking for new opportunities — internships,<br/>
           research roles, or cool projects. My inbox is always open.
         </p>
-        <a href="mailto:priyadharsanjayaseelan@gmail.com" class="contact-email reveal">
-          priyadharsanjayaseelan@gmail.com
+        <a href="/cdn-cgi/l/email-protection#0272706b7b63666a637071636c68637b637167676e636c42656f636b6e2c616d6f" class="contact-email reveal">
+          <span class="__cf_email__" data-cfemail="97e7e5feeef6f3fff6e5e4f6f9fdf6eef6e4f2f2fbf6f9d7f0faf6fefbb9f4f8fa">[email&#160;protected]</span>
         </a>
         <ul class="social-links reveal">
           <li><a href="https://github.com/PriyadharsanJayaseelan" target="_blank">GITHUB</a></li>
@@ -848,7 +999,7 @@
     <p style="color:var(--blue)">AVAILABLE FOR HIRE</p>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     /* CUSTOM CURSOR */
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursor-ring');
@@ -974,6 +1125,25 @@
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
 
+    /* HAMBURGER MENU */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuClose = document.getElementById('menuClose');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    menuClose.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+    document.querySelectorAll('.menu-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
     /* COUNTER ANIMATION */
     function animateCounters() {
       document.querySelectorAll('.stat-num').forEach(el => {
@@ -990,12 +1160,3 @@
           if (progress < 1) requestAnimationFrame(update);
         }
         requestAnimationFrame(update);
-      });
-    }
-    const statsOb = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) { animateCounters(); statsOb.disconnect(); }
-    }, { threshold: 0.5 });
-    statsOb.observe(document.querySelector('.stats-strip'));
-  </script>
-</body>
-</html>
