@@ -28,16 +28,16 @@
       color: var(--text);
       font-family: var(--sans);
       overflow-x: hidden;
-      cursor: none;
     }
 
-    /* CUSTOM CURSOR */
+    /* CUSTOM CURSOR — desktop only */
     #cursor {
       position: fixed; width: 10px; height: 10px;
       background: var(--cyan); border-radius: 50%;
       pointer-events: none; z-index: 9999;
       transition: transform 0.1s;
       mix-blend-mode: screen;
+      display: none;
     }
     #cursor-ring {
       position: fixed; width: 36px; height: 36px;
@@ -45,6 +45,12 @@
       pointer-events: none; z-index: 9998;
       transition: all 0.18s ease;
       transform: translate(-50%, -50%);
+      display: none;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      #cursor { display: block; }
+      #cursor-ring { display: block; }
+      body { cursor: none; }
     }
 
     /* CANVAS */
@@ -557,7 +563,7 @@
       100% { left: 100%; }
     }
 
-    /* SCROLL REVEAL */
+    /* SCROLL REVEAL — bulletproof with fallback */
     .reveal {
       opacity: 0;
       transform: translateY(32px);
@@ -983,9 +989,7 @@
           I'm actively looking for new opportunities — internships,<br/>
           research roles, or cool projects. My inbox is always open.
         </p>
-        <a href="/cdn-cgi/l/email-protection#0272706b7b63666a637071636c68637b637167676e636c42656f636b6e2c616d6f" class="contact-email reveal">
-          <span class="__cf_email__" data-cfemail="97e7e5feeef6f3fff6e5e4f6f9fdf6eef6e4f2f2fbf6f9d7f0faf6fefbb9f4f8fa">[email&#160;protected]</span>
-        </a>
+        <a href="mailto:priyadharsanjayaseelan@gmail.com" class="contact-email reveal">priyadharsanjayaseelan@gmail.com</a>
         <ul class="social-links reveal">
           <li><a href="https://github.com/PriyadharsanJayaseelan" target="_blank">GITHUB</a></li>
           <li><a href="https://linkedin.com/" target="_blank">LINKEDIN</a></li>
@@ -1113,17 +1117,32 @@
     window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
     init(); loop();
 
-    /* SCROLL REVEAL */
+    /* SCROLL REVEAL — bulletproof */
     const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          entry.target.style.transitionDelay = (i % 3) * 0.1 + 's';
-          entry.target.classList.add('visible');
-        }
+    // Enable animations only after JS confirms it's running
+    document.body.classList.add('js-animate');
+
+    function revealAll() {
+      reveals.forEach(el => {
+        el.style.transitionDelay = '0s';
+        el.classList.add('visible');
       });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
+    }
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+      reveals.forEach(el => observer.observe(el));
+      // Hard fallback: show everything after 2 seconds no matter what
+      setTimeout(revealAll, 2000);
+    } else {
+      revealAll();
+    }
 
     /* HAMBURGER MENU */
     const hamburger = document.getElementById('hamburger');
