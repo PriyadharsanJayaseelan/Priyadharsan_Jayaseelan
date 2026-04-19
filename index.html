@@ -29,6 +29,7 @@
       <a href="#apart"     class="nav-links-item">About</a>
       <a href="#projects"  class="nav-links-item">Work</a>
       <a href="#manifesto" class="nav-links-item">Experience</a>
+      <a href="#certifications" class="nav-links-item">Certs</a>
       <a href="#contact"   class="nav-links-item">Contact</a>
       <a href="story.html" class="nav-links-item nav-story">✦ My Story</a>
     </div>
@@ -344,6 +345,80 @@
 
     </div>
   </section>
+
+
+  <!-- ══════ CERTIFICATIONS ══════ -->
+  <section id="certifications" data-bg="#0a0a0a">
+    <div class="section-header reveal">
+      <p class="section-sub">Certifications</p>
+      <h2 class="section-title">Verified<br/><em>Credentials.</em></h2>
+    </div>
+
+    <div class="cert-grid">
+
+      <!-- PCI Certificate Card -->
+      <div class="cert-card reveal" id="certCard">
+        <div class="cert-card-inner" id="certCardInner">
+
+          <!-- FRONT — credential info -->
+          <div class="cert-front">
+            <div class="cert-badge">🏆</div>
+            <div class="cert-issuer">KENT STATE UNIVERSITY</div>
+            <div class="cert-name">PCI Essentials for<br/>Account Data Handlers</div>
+            <div class="cert-sub">PCI DSS 4.0 · PCI-101-CS-02</div>
+            <div class="cert-meta">
+              <span class="cert-date">📅 Oct 28, 2025</span>
+              <span class="cert-status"><span class="cert-dot"></span>ACTIVE</span>
+            </div>
+            <div class="cert-id">ID: PJ6597539281020250<br/>84536KP</div>
+            <button class="cert-view-btn" onclick="document.getElementById('certModal').style.display='flex'">
+              View Certificate ↗
+            </button>
+          </div>
+
+          <!-- Decorative corner accents -->
+          <div class="cert-corner tl"></div>
+          <div class="cert-corner tr"></div>
+          <div class="cert-corner bl"></div>
+          <div class="cert-corner br"></div>
+
+        </div>
+      </div>
+
+      <!-- Right side — description -->
+      <div class="cert-info reveal">
+        <div class="cert-info-label">WHAT THIS MEANS</div>
+        <p class="cert-info-text">
+          Certified in Payment Card Industry Data Security Standards — 
+          the global standard for protecting cardholder data and 
+          managing secure payment systems.
+        </p>
+        <div class="cert-skills">
+          <span>Data Security</span>
+          <span>PCI DSS 4.0</span>
+          <span>Compliance</span>
+          <span>Account Data Handling</span>
+          <span>Risk Management</span>
+        </div>
+        <div class="cert-issuer-block">
+          <div class="cib-logo">KSU</div>
+          <div class="cib-text">
+            <div class="cib-name">Kent State University</div>
+            <div class="cib-sub">Information Services · 2025</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CERTIFICATE MODAL -->
+  <div id="certModal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;padding:2rem;" onclick="this.style.display='none'">
+    <div style="position:relative;max-width:900px;width:100%;" onclick="event.stopPropagation()">
+      <button onclick="document.getElementById('certModal').style.display='none'" style="position:absolute;top:-2.5rem;right:0;background:none;border:none;color:#888;font-size:1rem;cursor:pointer;font-family:'Unbounded',sans-serif;font-size:.7rem;letter-spacing:.1em;">✕ CLOSE</button>
+      <img src="assets/PCI_cert.jpg" alt="PCI Certificate" style="width:100%;border-radius:8px;box-shadow:0 40px 80px rgba(0,0,0,.8);"/>
+    </div>
+  </div>
 
   <!-- ══════ CONTACT ══════ -->
   <section id="contact" data-bg="#080808">
