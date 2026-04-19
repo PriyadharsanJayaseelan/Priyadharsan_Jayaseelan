@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Story of PJ — Priyadharsan Jayaseelan</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;overflow:hidden;background:#080808;}
+body{font-family:'DM Sans',sans-serif;color:#f0ece4;cursor:none;}
+canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;}
+#cur{position:fixed;width:8px;height:8px;background:#c8ff00;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cur-ring{position:fixed;width:26px;height:26px;border:1px solid rgba(200,255,0,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .15s;}
+@media(hover:none){#cur,#cur-ring{display:none;}body{cursor:auto;}}
+#prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#c8ff00,#3b82f6);z-index:999;transition:width .3s;pointer-events:none;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 2.5rem;background:rgba(8,8,8,.6);backdrop-filter:blur(12px);}
+.nl{font-family:'Unbounded',sans-serif;font-size:.8rem;font-weight:700;}
+.nl span{color:#c8ff00;}
+.nc{font-family:'Unbounded',sans-serif;font-size:.55rem;letter-spacing:.25em;color:#555;transition:all .5s;}
+.nb{font-family:'Unbounded',sans-serif;font-size:.62rem;letter-spacing:.1em;border:1px solid rgba(255,255,255,.1);padding:.45rem 1.1rem;border-radius:100px;color:#888;text-decoration:none;transition:all .25s;}
+.nb:hover{color:#c8ff00;border-color:#c8ff00;}
+#dots{position:fixed;right:1.8rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.7rem;z-index:100;}
+.dot{width:5px;height:5px;border-radius:50%;background:#333;transition:all .4s;cursor:pointer;}
+.dot.on{background:#c8ff00;transform:scale(1.6);}
+#overlay{position:fixed;inset:0;z-index:50;pointer-events:none;}
+.ch{position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:5rem 5vw 4rem 6vw;opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;pointer-events:none;overflow-y:auto;}
+.ch.show{opacity:1;transform:translateY(0);pointer-events:all;}
+.ch-num{font-family:'Unbounded',sans-serif;font-size:.55rem;letter-spacing:.3em;color:#c8ff00;margin-bottom:1.2rem;}
+.ch-title{font-family:'Unbounded',sans-serif;font-size:clamp(2.8rem,6.5vw,7rem);font-weight:900;letter-spacing:-.03em;line-height:.92;color:#f0ece4;max-width:600px;}
+.ch-title em{font-style:italic;color:#c8ff00;font-weight:300;}
+.ch-body{font-size:clamp(.82rem,1.3vw,.95rem);color:#888;line-height:1.9;margin-top:1.2rem;max-width:360px;}
+.ch-stat-row{display:flex;gap:2.5rem;margin-top:2rem;}
+.csr-item{display:flex;flex-direction:column;}
+.csr-n{font-family:'Unbounded',sans-serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:900;color:#f0ece4;line-height:1;}
+.csr-l{font-family:'Unbounded',sans-serif;font-size:.52rem;letter-spacing:.18em;color:#555;margin-top:.2rem;}
+.ch-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem;}
+.ch-tag{font-family:'Unbounded',sans-serif;font-size:.5rem;letter-spacing:.1em;padding:.25rem .7rem;border:1px solid rgba(200,255,0,.25);border-radius:100px;color:#c8ff00;}
+.ch-cta{display:flex;gap:1rem;margin-top:2rem;pointer-events:all;}
+.btn-a{font-family:'Unbounded',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.08em;background:#c8ff00;color:#000;padding:.8rem 1.8rem;border-radius:100px;text-decoration:none;transition:all .3s;}
+.btn-a:hover{transform:scale(1.05);}
+.btn-b{font-family:'Unbounded',sans-serif;font-size:.68rem;letter-spacing:.08em;border:1px solid rgba(255,255,255,.15);color:#888;padding:.8rem 1.8rem;border-radius:100px;text-decoration:none;transition:all .3s;}
+.btn-b:hover{border-color:#c8ff00;color:#c8ff00;}
+.look-grid{display:flex;gap:1rem;margin-top:1.8rem;flex-wrap:wrap;}
+.look-card{background:rgba(200,255,0,.05);border:1px solid rgba(200,255,0,.15);border-radius:10px;padding:1rem 1.3rem;min-width:120px;}
+.look-icon{font-size:1.4rem;display:block;margin-bottom:.4rem;}
+.look-title{font-family:'Unbounded',sans-serif;font-size:.58rem;font-weight:700;color:#c8ff00;margin-bottom:.25rem;}
+.look-desc{font-size:.7rem;color:#666;line-height:1.5;}
+#hint{position:fixed;bottom:3.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.6rem;z-index:100;transition:opacity .5s;pointer-events:none;}
+.hint-txt{font-family:'Unbounded',sans-serif;font-size:.52rem;letter-spacing:.25em;color:#444;}
+.hint-line{width:1px;height:36px;background:linear-gradient(180deg,transparent,#c8ff00);animation:hp 1.6s ease-in-out infinite;}
+@keyframes hp{0%,100%{opacity:.3}50%{opacity:1}}
+/* NAV arrows */
+.nav-arrow{position:fixed;z-index:100;background:rgba(8,8,8,.7);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#555;font-size:1rem;transition:all .3s;}
+.nav-arrow:hover{border-color:#c8ff00;color:#c8ff00;}
+#nav-prev{bottom:6rem;right:2rem;}
+#nav-next{bottom:1.5rem;right:2rem;}
+@media(max-width:768px){#nav-prev{bottom:6rem;right:1rem;}#nav-next{bottom:1.2rem;right:1rem;}}
+@media(max-width:1024px){
+  .ch-stat-row{gap:1.5rem;}
+}
+@media(max-width:768px){
+  nav{padding:1rem 1.2rem;}
+  .ch{padding:5rem 1.5rem 6rem 1.5rem;justify-content:center;overflow-y:auto;}
+  #dots{display:none;}
+  #nav-prev,#nav-next{display:flex;}
+  .ch-title{font-size:clamp(1.8rem,9vw,3rem);}
+  .ch-num{font-size:.48rem;margin-bottom:.8rem;}
+  .ch-body{font-size:.8rem;margin-top:.8rem;}
+  .ch-stat-row{gap:1.2rem;margin-top:1.2rem;}
+  .csr-n{font-size:clamp(1.4rem,6vw,2rem);}
+  .ch-tags{margin-top:1rem;}
+  .look-grid{gap:.7rem;margin-top:1.2rem;}
+  .look-card{min-width:100px;padding:.8rem 1rem;}
+  .ch-cta{flex-direction:column;gap:.7rem;margin-top:1.5rem;}
+  .btn-a,.btn-b{text-align:center;padding:.75rem 1.4rem;font-size:.62rem;}
+  #hint{bottom:5.5rem;}
+}
+@media(max-width:480px){
+  .ch-title{font-size:clamp(1.5rem,8vw,2.5rem);}
+  .ch-stat-row{flex-wrap:wrap;gap:1rem;}
+  .look-grid{flex-direction:column;}
+  .look-card{min-width:unset;width:100%;}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur-ring"></div>
+<div id="prog"></div>
+<canvas id="c"></canvas>
+<nav>
+  <div class="nl">PJ<span>.story()</span></div>
+  <div class="nc" id="nc">PROLOGUE</div>
+  <a href="index.html" class="nb">← Portfolio</a>
+</nav>
+<div id="dots"></div>
+<button class="nav-arrow" id="nav-prev">↑</button>
+<button class="nav-arrow" id="nav-next">↓</button>
+<div id="overlay">
+  <div class="ch" id="c0">
+    <div class="ch-num">PROLOGUE</div>
+    <div class="ch-title">A story of<br/><em>code</em><br/>&amp; crossing<br/>continents.</div>
+    <div class="ch-body">Scroll or use arrow keys to follow the journey.</div>
+  </div>
+  <div class="ch" id="c1">
+    <div class="ch-num">CHAPTER 01 — ORIGIN</div>
+    <div class="ch-title">Aristo<br/>Public<br/><em>School.</em></div>
+    <div class="ch-body">India. Where it started. Code before coffee.</div>
+    <div class="ch-tags">
+      <span class="ch-tag">🏆 1ST — STATE PROGRAMMING</span>
+      <span class="ch-tag">CS CLUB PRESIDENT</span>
+      <span class="ch-tag">CGPA 3.8</span>
+    </div>
+  </div>
+  <div class="ch" id="c2">
+    <div class="ch-num">CHAPTER 02 — THE LEAP</div>
+    <div class="ch-title">India<br/>→<br/><em>Ohio.</em></div>
+    <div class="ch-body">A scholarship. A one-way ticket.<br/>8,000 miles. Everything left behind.</div>
+    <div class="ch-tags">
+      <span class="ch-tag">✈️ 8,000 MILES</span>
+      <span class="ch-tag">SCHOLARSHIP RECIPIENT</span>
+    </div>
+  </div>
+  <div class="ch" id="c3">
+    <div class="ch-num">CHAPTER 03 — LANDING</div>
+    <div class="ch-title">Kent<br/>State<br/><em>University.</em></div>
+    <div class="ch-body">B.S. Computer Science · Minor: Data Analytics<br/>Alpha Lambda Delta Honor Society</div>
+    <div class="ch-stat-row">
+      <div class="csr-item"><div class="csr-n">3.5</div><div class="csr-l">GPA</div></div>
+      <div class="csr-item"><div class="csr-n">2027</div><div class="csr-l">GRADUATING</div></div>
+    </div>
+  </div>
+  <div class="ch" id="c4">
+    <div class="ch-num">CHAPTER 04 — THE OPERATOR</div>
+    <div class="ch-title">Leading<br/><em>250+</em><br/>people.</div>
+    <div class="ch-body">Not just a student — running real operations at Kent State.</div>
+    <div class="ch-stat-row">
+      <div class="csr-item"><div class="csr-n" style="color:#f59e0b">−30%</div><div class="csr-l">NO-SHOWS</div></div>
+      <div class="csr-item"><div class="csr-n" style="color:#f59e0b">95%</div><div class="csr-l">TRAINING PASS</div></div>
+      <div class="csr-item"><div class="csr-n" style="color:#f59e0b">−25%</div><div class="csr-l">STOCKOUTS</div></div>
+    </div>
+  </div>
+  <div class="ch" id="c5">
+    <div class="ch-num">CHAPTER 05 — THE RESEARCHER</div>
+    <div class="ch-title">VR<br/>meets<br/><em>medicine.</em></div>
+    <div class="ch-body">Flask + SQL · 50 participants · 5,000 trials<br/>NASA-TLX · SUS usability metrics</div>
+    <div class="ch-tags">
+      <span class="ch-tag">VR SIMULATION</span>
+      <span class="ch-tag">FLASK + SQL</span>
+      <span class="ch-tag">NASA-TLX</span>
+    </div>
+  </div>
+  <div class="ch" id="c6">
+    <div class="ch-num">CHAPTER 06 — THE BUILDER</div>
+    <div class="ch-title">Code<br/>that<br/><em>ships.</em></div>
+    <div class="ch-body">Software Developer Intern · Street Stashed<br/>Next.js · React · TypeScript · Tailwind<br/>Pixel-perfect. Production-ready. Week one.</div>
+    <div class="ch-tags">
+      <span class="ch-tag">NEXT.JS</span><span class="ch-tag">REACT</span>
+      <span class="ch-tag">TYPESCRIPT</span><span class="ch-tag">C++</span>
+      <span class="ch-tag">PYTHON</span><span class="ch-tag">SQL</span>
+    </div>
+  </div>
+  <div class="ch" id="c7">
+    <div class="ch-num">CHAPTER 07 — WHAT'S NEXT</div>
+    <div class="ch-title">Ready to<br/>build things<br/><em>that matter.</em></div>
+    <div class="ch-body">Open to internships, research roles,<br/>and anything worth building.</div>
+    <div class="ch-cta">
+      <a href="mailto:priyadharsanjayaseelan@gmail.com" class="btn-a">Let's Talk →</a>
+      <a href="index.html" class="btn-b">Portfolio</a>
+    </div>
+  </div>
+</div>
+<div id="hint"><div class="hint-txt">SCROLL TO BEGIN</div><div class="hint-line"></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const W=()=>window.innerWidth,H=()=>window.innerHeight;
+const canvas=document.getElementById('c');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(W(),H());
+renderer.setClearColor(0x080808,1);
+const scene=new THREE.Scene();
+scene.fog=new THREE.FogExp2(0x080808,.028);
+const cam=new THREE.PerspectiveCamera(60,W()/H(),.1,500);
+cam.position.set(0,0,8);
+window.addEventListener('resize',()=>{cam.aspect=W()/H();cam.updateProjectionMatrix();renderer.setSize(W(),H());});
+
+// LIGHTS
+const aL=new THREE.AmbientLight(0xffffff,.2); scene.add(aL);
+const lL=new THREE.PointLight(0xc8ff00,3,30); lL.position.set(4,4,6); scene.add(lL);
+const bL=new THREE.PointLight(0x3b82f6,2,25); bL.position.set(-4,-3,4); scene.add(bL);
+const pL=new THREE.PointLight(0x8b5cf6,0,20); scene.add(pL);
+
+function mkPts(n,spread,col,sz=.025){
+  const g=new THREE.BufferGeometry(),p=new Float32Array(n*3);
+  for(let i=0;i<n*3;i++)p[i]=(Math.random()-.5)*spread;
+  g.setAttribute('position',new THREE.BufferAttribute(p,3));
+  return new THREE.Points(g,new THREE.PointsMaterial({color:col,size:sz,transparent:true,opacity:.7,depthWrite:false}));
+}
+function mkSph(r,col,wire=false,op=1){
+  return new THREE.Mesh(new THREE.SphereGeometry(r,wire?18:28,wire?18:28),new THREE.MeshPhongMaterial({color:col,wireframe:wire,transparent:op<1,opacity:op}));
+}
+function mkLine(pts,col,op=.7){
+  return new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:col,transparent:op<1,opacity:op}));
+}
+
+// CH0 — DNA helix nebula
+function ch0(){
+  const g=new THREE.Group();
+  g.add(mkPts(3000,20,0xc8ff00,.02));
+  g.add(mkPts(1500,14,0x3b82f6,.014));
+  const h1=[],h2=[];
+  for(let i=0;i<100;i++){
+    const t=i/100*Math.PI*8,y=i/100*8-4;
+    h1.push(new THREE.Vector3(Math.cos(t)*1.2,y,Math.sin(t)*1.2));
+    h2.push(new THREE.Vector3(Math.cos(t+Math.PI)*1.2,y,Math.sin(t+Math.PI)*1.2));
+  }
+  g.add(mkLine(h1,0xc8ff00,.5)); g.add(mkLine(h2,0x3b82f6,.5));
+  for(let i=0;i<25;i++){const t=(i/25)*Math.PI*8,y=(i/25)*8-4;g.add(mkLine([new THREE.Vector3(Math.cos(t)*1.2,y,Math.sin(t)*1.2),new THREE.Vector3(Math.cos(t+Math.PI)*1.2,y,Math.sin(t+Math.PI)*1.2)],0xffffff,.1));}
+  return g;
+}
+
+// CH1 — Globe with India glowing
+function ch1(){
+  const g=new THREE.Group();
+  const earth=mkSph(2.5,0x0a1628); g.add(earth);
+  g.add(mkSph(2.52,0x1e3a5f,true,.18));
+  g.add(mkPts(1200,38,0xffffff,.01));
+  // continents rough
+  for(let i=0;i<50;i++){
+    const phi=Math.random()*Math.PI,theta=Math.random()*Math.PI*2,r=2.52;
+    const p=mkSph(.05+Math.random()*.1,0x1a3a1a);
+    p.position.set(r*Math.sin(phi)*Math.cos(theta),r*Math.cos(phi),r*Math.sin(phi)*Math.sin(theta));
+    g.add(p);
+  }
+  // India lat 20N lon 78E
+  const lat=20*Math.PI/180,lon=78*Math.PI/180,r=2.62;
+  const ip=new THREE.Vector3(r*Math.cos(lat)*Math.cos(lon),r*Math.sin(lat),r*Math.cos(lat)*Math.sin(lon));
+  const iDot=mkSph(.13,0xc8ff00); iDot.position.copy(ip); g.add(iDot);
+  for(let i=0;i<3;i++){
+    const ring=new THREE.Mesh(new THREE.RingGeometry(.16+i*.13,.19+i*.13,32),new THREE.MeshBasicMaterial({color:0xc8ff00,transparent:true,opacity:.5-i*.15,side:THREE.DoubleSide}));
+    ring.position.copy(ip); ring.lookAt(0,0,10); ring.userData.po=i*.7; g.add(ring);
+  }
+  g.rotation.y=.6; return g;
+}
+
+// CH2 — Cinematic flight: takeoff India → cruise → land Ohio
+function ch2(){
+  const g=new THREE.Group();
+  // Globe
+  g.add(mkSph(2,0x060d1a));
+  g.add(mkSph(2.02,0x1e3a5f,true,.12));
+  g.add(mkPts(1200,35,0xffffff,.009));
+
+  // Lat/Lon to 3D
+  function latLonTo3D(lat,lon,r){
+    const phi=(90-lat)*Math.PI/180, theta=(lon+180)*Math.PI/180;
+    return new THREE.Vector3(-r*Math.sin(phi)*Math.cos(theta),r*Math.cos(phi),r*Math.sin(phi)*Math.sin(theta));
+  }
+  const r=2.06;
+  const iP=latLonTo3D(20,78,r);   // India
+  const oP=latLonTo3D(41,-81.5,r); // Ohio
+
+  // ── LOCATION PINS (India + Ohio) ──
+  function makePin(pos, col){
+    const pinG=new THREE.Group();
+    // Stem
+    const stem=new THREE.Mesh(new THREE.CylinderGeometry(.012,.012,.28,8),new THREE.MeshPhongMaterial({color:col}));
+    stem.position.copy(pos);
+    const dir=pos.clone().normalize();
+    stem.position.addScaledVector(dir,.14);
+    stem.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir);
+    pinG.add(stem);
+    // Head (teardrop = sphere)
+    const head=mkSph(.1,col);
+    head.position.copy(pos);
+    head.position.addScaledVector(dir,.3);
+    pinG.add(head);
+    // Glow ring
+    for(let i=0;i<3;i++){
+      const ring=new THREE.Mesh(new THREE.RingGeometry(.12+i*.1,.14+i*.1,32),new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:.4-i*.12,side:THREE.DoubleSide}));
+      ring.position.copy(head.position);
+      ring.lookAt(0,0,10);
+      ring.userData.pr=i*.8;
+      pinG.add(ring);
+    }
+    // Vertical beam of light
+    const beamGeo=new THREE.CylinderGeometry(.004,.015,.6,8,1,true);
+    const beam=new THREE.Mesh(beamGeo,new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:.3,side:THREE.DoubleSide}));
+    beam.position.copy(pos); beam.position.addScaledVector(dir,.6);
+    beam.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir);
+    pinG.add(beam);
+    return pinG;
+  }
+
+  const indiaPin=makePin(iP,0xc8ff00); g.add(indiaPin);
+  const ohioPin=makePin(oP,0x3b82f6); g.add(ohioPin);
+
+  // ── GREAT CIRCLE ARC (full route dashed) ──
+  const arcPts=[];
+  for(let i=0;i<=100;i++){
+    const t=i/100;
+    const v=new THREE.Vector3().lerpVectors(iP,oP,t);
+    v.normalize().multiplyScalar(r+Math.sin(t*Math.PI)*1.1);
+    arcPts.push(v);
+  }
+  // Dashed arc — draw every other segment
+  for(let i=0;i<arcPts.length-1;i+=3){
+    const seg=[arcPts[i],arcPts[Math.min(i+2,arcPts.length-1)]];
+    g.add(mkLine(seg,0xc8ff00,.25));
+  }
+
+  // ── PLANE with takeoff/cruise/landing phases ──
+  const plane=new THREE.Group();
+  // Body
+  const body=new THREE.Mesh(new THREE.CylinderGeometry(.025,.018,.18,8),new THREE.MeshPhongMaterial({color:0xffffff}));
+  body.rotation.z=Math.PI/2;
+  plane.add(body);
+  // Wings
+  const wingL=new THREE.Mesh(new THREE.BoxGeometry(.14,.012,.06),new THREE.MeshPhongMaterial({color:0xeeeeee}));
+  wingL.position.set(0,0,.04); plane.add(wingL);
+  const wingR=wingL.clone(); wingR.position.set(0,0,-.04); plane.add(wingR);
+  // Tail
+  const tail=new THREE.Mesh(new THREE.BoxGeometry(.06,.04,.025),new THREE.MeshPhongMaterial({color:0xc8ff00}));
+  tail.position.set(-.08,.03,0); plane.add(tail);
+  // Engine glow
+  const eng=new THREE.Mesh(new THREE.SphereGeometry(.02,8,8),new THREE.MeshBasicMaterial({color:0xc8ff00,transparent:true,opacity:.8}));
+  eng.position.set(.08,0,0); plane.add(eng);
+  plane.position.copy(iP);
+  plane.userData.arcPts=arcPts;
+  plane.userData.isPlane=true;
+  plane.userData.t=0;
+  g.add(plane);
+
+  // ── ENGINE TRAIL ──
+  const trailCount=30;
+  const trailGeo=new THREE.BufferGeometry();
+  const trailPos=new Float32Array(trailCount*3);
+  trailGeo.setAttribute('position',new THREE.BufferAttribute(trailPos,3));
+  const trailSizes=new Float32Array(trailCount);
+  for(let i=0;i<trailCount;i++) trailSizes[i]=.05*(1-i/trailCount);
+  trailGeo.setAttribute('size',new THREE.BufferAttribute(trailSizes,1));
+  const trail=new THREE.Points(trailGeo,new THREE.PointsMaterial({color:0xc8ff00,size:.035,transparent:true,opacity:.6,depthWrite:false}));
+  trail.userData.isTrail=true;
+  trail.userData.hist=[];
+  g.add(trail);
+
+  // Landing marker at Ohio — target ring
+  const landing=new THREE.Mesh(new THREE.RingGeometry(.18,.22,32),new THREE.MeshBasicMaterial({color:0x3b82f6,transparent:true,opacity:0,side:THREE.DoubleSide}));
+  landing.position.copy(oP);
+  landing.lookAt(0,0,10);
+  landing.userData.isLanding=true;
+  g.add(landing);
+
+  g.rotation.y=-.3;
+  g.userData.planeT=0;
+  return g;
+}
+
+// CH3 — City skyline rising
+function ch3(){
+  const g=new THREE.Group();
+  g.add(mkPts(600,18,0x22d3ee,.016));
+  const ground=new THREE.Mesh(new THREE.PlaneGeometry(28,28),new THREE.MeshPhongMaterial({color:0x0a1628,transparent:true,opacity:.5}));
+  ground.rotation.x=-Math.PI/2; ground.position.y=-2.8; g.add(ground);
+  g.add(new THREE.GridHelper(22,22,0x1e3a5f,0x0d1f3a)); g.children[g.children.length-1].position.y=-2.8;
+  const bdata=[{w:.8,h:3.5,x:-4,c:0x1e3a5f},{w:1.1,h:5,x:-2.2,c:0x0f2744},{w:1.4,h:7,x:-.4,c:0xc8ff00},{w:1.2,h:5.5,x:1.4,c:0x1e3a5f},{w:.9,h:3.8,x:3,c:0x0f2744},{w:.6,h:2.5,x:4.2,c:0x22d3ee}];
+  bdata.forEach(b=>{
+    const geo=new THREE.BoxGeometry(b.w,b.h,.8);
+    const mesh=new THREE.Mesh(geo,new THREE.MeshPhongMaterial({color:b.c,transparent:true,opacity:.9}));
+    mesh.userData.targetY=b.h/2-2.8; mesh.position.set(b.x,-5,.0);
+    g.add(mesh);
+    const wm=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:b.c===0xc8ff00?0xc8ff00:0x3b82f6,wireframe:true,transparent:true,opacity:.15}));
+    wm.position.copy(mesh.position); wm.userData.targetY=mesh.userData.targetY; g.add(wm);
+    // windows
+    for(let wy=0;wy<Math.floor(b.h/.4);wy++){
+      for(let wx=0;wx<2;wx++){
+        if(Math.random()>.4){
+          const win=new THREE.Mesh(new THREE.PlaneGeometry(.12,.12),new THREE.MeshBasicMaterial({color:0xffff99,transparent:true,opacity:.5+Math.random()*.4}));
+          win.position.set(b.x+(wx-.5)*.35,b.h/2-2.8-b.h+wy*.4+.2,.42);
+          win.userData.targetY=win.position.y; win.position.y=-5;
+          g.add(win);
+        }
+      }
+    }
+  });
+  return g;
+}
+
+// CH4 — Leadership network
+function ch4(){
+  const g=new THREE.Group();
+  g.add(mkPts(500,16,0xf59e0b,.014));
+  const center=mkSph(.3,0xf59e0b);
+  center.userData.pulse=true; g.add(center);
+  const nodePositions=[new THREE.Vector3(0,0,0)];
+  for(let i=0;i<8;i++){
+    const a=i/8*Math.PI*2,r=2+Math.random()*.4;
+    const p=new THREE.Vector3(Math.cos(a)*r,Math.sin(a)*.7,Math.sin(a)*.4);
+    const n=mkSph(.13,0xc8ff00); n.position.copy(p); g.add(n);
+    g.add(mkLine([new THREE.Vector3(0,0,0),p],0xf59e0b,.25));
+    nodePositions.push(p);
+    for(let j=0;j<3;j++){
+      const aa=a+(Math.random()-.5)*.8,rr=3.2+Math.random()*.8;
+      const pp=new THREE.Vector3(Math.cos(aa)*rr,(Math.random()-.5)*1.5,Math.sin(aa)*rr*.4);
+      const nn=mkSph(.07,0x3b82f6); nn.position.copy(pp); g.add(nn);
+      g.add(mkLine([p,pp],0x3b82f6,.12));
+    }
+  }
+  return g;
+}
+
+// CH5 — VR rings sci-fi
+function ch5(){
+  const g=new THREE.Group();
+  g.add(mkPts(900,15,0x8b5cf6,.016));
+  [[2.8,.025,0x8b5cf6],[2.1,.02,0x22d3ee],[1.4,.018,0xc8ff00],[.7,.015,0xffffff]].forEach(([r,t,c],i)=>{
+    const tor=new THREE.Mesh(new THREE.TorusGeometry(r,t,16,120),new THREE.MeshPhongMaterial({color:c,transparent:true,opacity:.75}));
+    tor.rotation.x=Math.PI/2+i*.35; tor.rotation.z=i*.4;
+    tor.userData.rs={x:.003+i*.001,y:.002,z:.001}; g.add(tor);
+  });
+  for(let i=0;i<12;i++){
+    const a=i/12*Math.PI*2;
+    g.add(mkLine([new THREE.Vector3(Math.cos(a)*3.5,-3.5,Math.sin(a)*3.5),new THREE.Vector3(Math.cos(a)*3.5,3.5,Math.sin(a)*3.5)],0x8b5cf6,.08));
+  }
+  // Data particles flowing up
+  const flowGeo=new THREE.BufferGeometry();
+  const fp=new Float32Array(200*3);
+  for(let i=0;i<200;i++){const a=Math.random()*Math.PI*2,r=.5+Math.random()*2.5;fp[i*3]=Math.cos(a)*r;fp[i*3+1]=(Math.random()-.5)*7;fp[i*3+2]=Math.sin(a)*r;}
+  flowGeo.setAttribute('position',new THREE.BufferAttribute(fp,3));
+  const flow=new THREE.Points(flowGeo,new THREE.PointsMaterial({color:0x22d3ee,size:.04,transparent:true,opacity:.6}));
+  flow.userData.isFlow=true; g.add(flow);
+  return g;
+}
+
+// CH6 — Matrix code rain + tech orbs
+function ch6(){
+  const g=new THREE.Group();
+  g.add(mkPts(700,13,0xc8ff00,.018));
+  for(let i=0;i<28;i++){
+    const w=.2+Math.random()*2;
+    const p=new THREE.Mesh(new THREE.PlaneGeometry(w,.04),new THREE.MeshBasicMaterial({color:[0xc8ff00,0x3b82f6,0x22d3ee,0xffffff,0x8b5cf6][Math.floor(Math.random()*5)],transparent:true,opacity:.12+Math.random()*.28,side:THREE.DoubleSide}));
+    p.position.set((Math.random()-.5)*11,(Math.random()-.5)*8,(Math.random()-.5)*5);
+    p.userData.fs=.007+Math.random()*.018; g.add(p);
+  }
+  const techs=[0xc8ff00,0x3b82f6,0x22d3ee,0xf59e0b,0x8b5cf6,0xef4444];
+  techs.forEach((c,i)=>{
+    const s=mkSph(.14,c);
+    s.userData.oa=(i/techs.length)*Math.PI*2;
+    s.userData.os=.012+Math.random()*.008;
+    s.userData.isOrb=true; g.add(s);
+  });
+  return g;
+}
+
+// CH7 — Particles converge to core
+function ch7(){
+  const g=new THREE.Group();
+  const n=2500,pos=new Float32Array(n*3),tgt=new Float32Array(n*3);
+  for(let i=0;i<n;i++){
+    pos[i*3]=(Math.random()-.5)*18; pos[i*3+1]=(Math.random()-.5)*14; pos[i*3+2]=(Math.random()-.5)*10;
+    const a=Math.random()*Math.PI*2,b=Math.random()*Math.PI,r=.3+Math.random()*.25;
+    tgt[i*3]=r*Math.sin(b)*Math.cos(a); tgt[i*3+1]=r*Math.cos(b); tgt[i*3+2]=r*Math.sin(b)*Math.sin(a);
+  }
+  const geo=new THREE.BufferGeometry(); geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  geo.userData.tgt=tgt; geo.userData.prog=0;
+  const pts=new THREE.Points(geo,new THREE.PointsMaterial({color:0xc8ff00,size:.024,transparent:true,opacity:.8,depthWrite:false}));
+  pts.userData.conv=true; g.add(pts);
+  g.add(mkSph(.5,0xc8ff00,true,.3));
+  g.add(mkSph(.8,0xc8ff00,false,.07));
+  return g;
+}
+
+const CHS=[ch0(),ch1(),ch2(),ch3(),ch4(),ch5(),ch6(),ch7()];
+const LABELS=['PROLOGUE','01 · ORIGIN · INDIA 🇮🇳','02 · THE LEAP · ✈️','03 · LANDING · KENT STATE','04 · THE OPERATOR','05 · VR RESEARCH','06 · THE BUILDER','07 · WHAT\'S NEXT'];
+const LIGHTS=[
+  {l:3,b:2,p:0},{l:2,b:3,p:0},{l:3,b:1,p:0},
+  {l:1,b:3,p:0},{l:2,b:1,p:0},{l:1,b:2,p:3},
+  {l:3,b:2,p:1},{l:3,b:2,p:0}
+];
+const N=CHS.length;
+let cur=0,trans=false,planeT=0,planeTrailHist=[];
+
+// Dots
+const dotsEl=document.getElementById('dots');
+CHS.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' on':'');d.addEventListener('click',()=>goTo(i));dotsEl.appendChild(d);});
+
+scene.add(CHS[0]);
+
+function goTo(idx){
+  if(idx===cur||trans||idx<0||idx>=N)return;
+  trans=true;
+  document.getElementById('c'+cur).classList.remove('show');
+  const old=CHS[cur],next=CHS[idx];
+  let p=0;
+  const fo=setInterval(()=>{
+    p+=.08;
+    old.traverse(o=>{if(o.material&&o.material.transparent)o.material.opacity=Math.max(0,(o.material.opacity||.5)-.08);});
+    if(p>=1){
+      clearInterval(fo);
+      scene.remove(old); scene.add(next);
+      cur=idx; planeT=0; planeTrailHist=[];
+      document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===idx));
+      document.getElementById('nc').textContent=LABELS[idx];
+      document.getElementById('prog').style.width=((idx/(N-1))*100)+'%';
+      const li=LIGHTS[idx];
+      lL.intensity=li.l; bL.intensity=li.b; pL.intensity=li.p;
+      let p2=0;
+      next.traverse(o=>{if(o.material&&o.material.transparent)o.material.opacity=0;});
+      const fi=setInterval(()=>{
+        p2+=.06;
+        next.traverse(o=>{if(o.material&&o.material.transparent)o.material.opacity=Math.min((o.material.opacity||0)+.06,.9);});
+        if(p2>=1){clearInterval(fi);trans=false;document.getElementById('c'+cur).classList.add('show');}
+      },16);
+    }
+  },16);
+}
+
+// Input
+window.addEventListener('wheel',e=>{if(e.deltaY>0&&cur<N-1&&!trans)goTo(cur+1);else if(e.deltaY<0&&cur>0&&!trans)goTo(cur-1);},{passive:true});
+let tsy=0;
+window.addEventListener('touchstart',e=>{tsy=e.touches[0].clientY;},{passive:true});
+window.addEventListener('touchend',e=>{const dy=tsy-e.changedTouches[0].clientY;if(Math.abs(dy)>45){if(dy>0&&!trans)goTo(cur+1);else if(dy<0&&!trans)goTo(cur-1);}},{passive:true});
+window.addEventListener('keydown',e=>{if(e.key==='ArrowDown'&&!trans)goTo(cur+1);if(e.key==='ArrowUp'&&!trans)goTo(cur-1);});
+document.getElementById('nav-next').addEventListener('click',()=>goTo(cur+1));
+document.getElementById('nav-prev').addEventListener('click',()=>goTo(cur-1));
+window.addEventListener('scroll',()=>{if(window.scrollY>50)document.getElementById('hint').style.opacity='0';},{passive:true});
+
+// Show first
+setTimeout(()=>{document.getElementById('c0').classList.add('show');document.getElementById('hint').style.opacity='1';},400);
+
+// Mouse
+let mx=0,my=0,rx=0,ry=0,cmx=0,cmy=0;
+const ce=document.getElementById('cur'),re=document.getElementById('cur-ring');
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;ce.style.left=mx+'px';ce.style.top=my+'px';cmx=(e.clientX/W()-.5)*2;cmy=(e.clientY/H()-.5)*2;});
+(function cr(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;re.style.left=rx+'px';re.style.top=ry+'px';requestAnimationFrame(cr);})();
+
+// ANIM
+let frame=0;
+function anim(){
+  requestAnimationFrame(anim);
+  frame++;
+  const t=frame*.01;
+  const cs=CHS[cur];
+  if(!cs){renderer.render(scene,cam);return;}
+  cs.rotation.y+=.0025+cmx*.0012;
+  cs.rotation.x+=cmy*.0004;
+
+  switch(cur){
+    case 0: cs.rotation.y+=.006; break;
+    case 1:
+      cs.children.forEach(c=>{if(c.userData.po!==undefined){const s=1+Math.sin(t*2+c.userData.po)*.15;c.scale.set(s,s,s);}});
+      break;
+    case 2:
+      // Plane flies: 0-.05=takeoff, .05-.95=cruise, .95-1=landing
+      cs.children.forEach(c=>{
+        if(c.userData.isPlane&&c.userData.arcPts){
+          c.userData.t=(c.userData.t||0)+.003;
+          if(c.userData.t>1)c.userData.t=0; // loop
+          const pT=c.userData.t;
+          const ap=c.userData.arcPts;
+          const idx=Math.min(Math.floor(pT*ap.length),ap.length-1);
+          const nIdx=Math.min(idx+1,ap.length-1);
+          c.position.copy(ap[idx]);
+          // Orient plane toward next point
+          if(idx<ap.length-1){
+            const dir=ap[nIdx].clone().sub(ap[idx]).normalize();
+            c.quaternion.setFromUnitVectors(new THREE.Vector3(1,0,0),dir);
+          }
+          // Scale for takeoff/landing
+          const sc=pT<.05?(pT/.05):(pT>.92?Math.max(0,(1-pT)/.08):1);
+          c.scale.setScalar(Math.max(.1,sc)*1.4);
+          // trail
+          planeTrailHist.push(c.position.clone());
+          if(planeTrailHist.length>30)planeTrailHist.shift();
+        }
+        if(c.userData.isTrail&&planeTrailHist.length>1){
+          const pa=c.geometry.attributes.position.array;
+          for(let i=0;i<Math.min(planeTrailHist.length,30);i++){
+            pa[i*3]=planeTrailHist[i].x;pa[i*3+1]=planeTrailHist[i].y;pa[i*3+2]=planeTrailHist[i].z;
+          }
+          c.geometry.attributes.position.needsUpdate=true;
+        }
+        // Pulse pin rings
+        if(c.userData.pr!==undefined){const s=1+Math.sin(t*2.5+c.userData.pr)*.18;c.scale.set(s,s,1);}
+        // Landing ring pulse when plane near Ohio
+        if(c.userData.isLanding){
+          const planeNearOhio=cs.children.find(x=>x.userData.isPlane&&x.userData.t>.8);
+          c.material.opacity=planeNearOhio?(.3+Math.sin(t*8)*.3):0;
+          if(planeNearOhio){const s=1+Math.sin(t*6)*.12;c.scale.set(s,s,1);}
+        }
+      });
+      break;
+    case 3:
+      cs.children.forEach(c=>{if(c.userData.targetY!==undefined&&c.position.y<c.userData.targetY)c.position.y=Math.min(c.position.y+.05,c.userData.targetY);});
+      break;
+    case 4:
+      cs.children.forEach(c=>{if(c.userData.pulse){const s=1+Math.sin(t*3)*.12;c.scale.set(s,s,s);}});
+      break;
+    case 5:
+      cs.children.forEach(c=>{
+        if(c.userData.rs){c.rotation.x+=c.userData.rs.x;c.rotation.y+=c.userData.rs.y;c.rotation.z+=c.userData.rs.z;}
+        if(c.userData.isFlow){const p=c.geometry.attributes.position.array;for(let i=0;i<p.length;i+=3){p[i+1]+=.02;if(p[i+1]>3.5)p[i+1]=-3.5;}c.geometry.attributes.position.needsUpdate=true;}
+      });
+      break;
+    case 6:
+      cs.children.forEach(c=>{
+        if(c.userData.fs){c.position.y-=c.userData.fs;if(c.position.y<-4.5)c.position.y=4.5;}
+        if(c.userData.isOrb){c.userData.oa+=c.userData.os;c.position.x=Math.cos(c.userData.oa)*2.8;c.position.y=Math.sin(c.userData.oa)*1.2;c.position.z=Math.sin(c.userData.oa)*1.5;}
+      });
+      break;
+    case 7:
+      cs.children.forEach(c=>{
+        if(c.userData.conv&&c.geometry.userData.tgt){
+          const gd=c.geometry.userData;
+          gd.prog=Math.min(gd.prog+.003,1);
+          const pos=c.geometry.attributes.position.array,tgt=gd.tgt,ease=1-Math.pow(1-gd.prog,3);
+          for(let i=0;i<pos.length;i+=3){pos[i]+=(tgt[i]-pos[i])*ease*.04;pos[i+1]+=(tgt[i+1]-pos[i+1])*ease*.04;pos[i+2]+=(tgt[i+2]-pos[i+2])*ease*.04;}
+          c.geometry.attributes.position.needsUpdate=true;
+        }
+      });
+      break;
+  }
+
+  lL.intensity=(LIGHTS[cur].l||2)+Math.sin(t)*.35;
+  bL.intensity=(LIGHTS[cur].b||1.5)+Math.cos(t*.7)*.25;
+  pL.intensity=(LIGHTS[cur].p||0)+Math.sin(t*.5)*.15;
+  cam.position.y=Math.sin(t*.25)*.12;
+  cam.lookAt(0,0,0);
+  renderer.render(scene,cam);
+}
+anim();
+</script>
+</body>
+</html>

@@ -1,277 +1,375 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Priyadharsan Jayaseelan</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
-
-  <!-- Styles -->
+  <title>Priyadharsan Jayaseelan — CS Student & Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 
-  <!-- Custom cursor (desktop only) -->
-  <div id="cursor"></div>
-  <div id="cursor-ring"></div>
+  <!-- SCROLL PROGRESS -->
+  <div id="scroll-progress"></div>
 
-  <!-- Particle background canvas -->
+  <!-- CURSOR -->
+  <div id="cursor"></div>
+  <div id="cursor-follower"></div>
+
+  <!-- PARTICLE CANVAS -->
   <canvas id="bg-canvas"></canvas>
 
-  <!-- ======= NAVIGATION ======= -->
-  <nav>
+  <!-- NAV -->
+  <nav id="nav">
     <div class="nav-logo">PJ<span>.init()</span></div>
-    <ul class="nav-links">
-      <li><a href="#home">_home</a></li>
-      <li><a href="#about">_about</a></li>
-      <li><a href="#skills">_skills</a></li>
-      <li><a href="#work">_work</a></li>
-      <li><a href="#experience">_experience</a></li>
-      <li><a href="#contact">_contact</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-center">
+      <a href="#hero"      class="nav-links-item">Home</a>
+      <a href="#apart"     class="nav-links-item">About</a>
+      <a href="#projects"  class="nav-links-item">Work</a>
+      <a href="#manifesto" class="nav-links-item">Experience</a>
+      <a href="#contact"   class="nav-links-item">Contact</a>
+      <a href="story.html" class="nav-links-item nav-story">✦ My Story</a>
+    </div>
+    <div class="nav-right-group">
+      <div class="nav-status"><span class="status-dot"></span>Available</div>
+      <a href="#contact" class="nav-cta">Hire Me</a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </nav>
 
-  <!-- Mobile menu overlay -->
+  <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-menu-close" id="menuClose">✕ close</button>
-    <a href="#home"       class="menu-link">_home</a>
-    <a href="#about"      class="menu-link">_about</a>
-    <a href="#skills"     class="menu-link">_skills</a>
-    <a href="#work"       class="menu-link">_work</a>
-    <a href="#experience" class="menu-link">_experience</a>
-    <a href="#contact"    class="menu-link">_contact</a>
+    <button class="menu-close" id="menuClose">✕</button>
+    <a href="#hero"      class="ml">Home</a>
+    <a href="#apart"     class="ml">About</a>
+    <a href="#projects"  class="ml">Work</a>
+    <a href="#manifesto" class="ml">Experience</a>
+    <a href="#contact"   class="ml">Contact</a>
   </div>
 
-  <main>
+  <!-- ══════ HERO ══════ -->
+  <section id="hero" data-bg="#080808">
 
-    <!-- ======= HERO ======= -->
-    <section id="home">
-      <div class="hero-tag">AVAILABLE FOR OPPORTUNITIES · 2025</div>
-      <h1 class="hero-name">
-        <span class="line1">Priyadharsan</span>
-        <span class="line2 glitch" data-text="Jayaseelan">Jayaseelan</span>
-      </h1>
-      <p class="hero-sub">
-        Computer Science Student &amp; Builder.<br/>
-        Turning data into decisions and ideas into systems.<br/>
-        <span style="color:var(--blue)">3.7 GPA · Kent State University · CS + Data Analytics</span>
-      </p>
-      <div class="hero-cta">
-        <a href="#work" class="btn-primary"><span>VIEW MY WORK →</span></a>
-        <a href="#contact" class="btn-secondary">GET IN TOUCH</a>
-      </div>
-      <div class="hero-scroll-hint">
-        <div class="scroll-line"></div>
-        SCROLL TO EXPLORE
-      </div>
-    </section>
+    <!-- GIANT BG TEXT -->
+    <!-- GIANT WORD BEHIND IMAGE — exactly like Mustafa's "WEBOP" -->
+    <div class="hero-giant-word" aria-hidden="true">DEVELOPER</div>
 
-    <!-- ======= STATS STRIP ======= -->
-    <div class="stats-strip reveal">
-      <div class="stat-item">
-        <span class="stat-num">3.7</span>
-        <span class="stat-label">CURRENT GPA</span>
+    <!-- Decorative circle top-left like Mustafa -->
+    <div class="hero-deco-circle"></div>
+    <div class="hero-deco-dot"></div>
+
+    <div class="hero-content">
+
+      <!-- LEFT -->
+      <div class="hero-left">
+        <div class="hero-tag reveal">
+          <span class="tag-dot"></span>
+          CS STUDENT &nbsp;/&nbsp; DATA BUILDER
+        </div>
+
+        <h1 class="hero-name reveal">
+          <span class="hn-small">👋 Hi, my name is</span>
+          <span class="hn-first">Priyadharsan</span>
+          <span class="hn-last">Jayaseelan</span>
+        </h1>
+
+        <!-- TYPEWRITER -->
+        <div class="typewriter-wrap reveal">
+          <span class="tw-prefix">I am a </span>
+          <span id="typewriter" class="tw-text"></span>
+          <span class="tw-cursor">|</span>
+        </div>
+
+        <p class="hero-desc reveal">
+          Building systems that solve real problems — from ML pipelines<br/>
+          to databases. Kent State University · GPA 3.7
+        </p>
+
+        <div class="hero-actions reveal">
+          <a href="mailto:priyadharsanjayaseelan@gmail.com" class="btn-primary">
+            Get In Touch <span>Let's talk →</span>
+          </a>
+          <div class="social-row">
+            <a href="https://github.com/PriyadharsanJayaseelan" target="_blank">GitHub ↗</a>
+            <a href="https://linkedin.com/" target="_blank">LinkedIn ↗</a>
+            <a href="story.html" style="color:var(--accent);border-bottom:1px solid var(--accent);padding-bottom:2px;font-family:var(--display);font-size:.65rem;letter-spacing:.1em;">My Story ✦</a>
+          </div>
+        </div>
+
+        <!-- Status bottom-left like Mustafa -->
+        <div class="hero-status reveal">
+          <span class="status-label">CURRENT STATUS</span>
+          <div class="status-row">
+            <span class="status-dot"></span>
+            <span>Available for <strong>Projects</strong></span>
+          </div>
+        </div>
       </div>
-      <div class="stat-item">
-        <span class="stat-num">3+</span>
-        <span class="stat-label">PROJECTS SHIPPED</span>
+
+      <!-- CENTER — Photo floating over big text, NO card/box -->
+      <div class="hero-center">
+        <div class="profile-wrap" id="profileTilt">
+          <img src="assets/PJ_bw.png"    class="profile-img img-bw"    alt="Priyadharsan Jayaseelan"/>
+          <img src="assets/PJ_color.png" class="profile-img img-color" alt="Priyadharsan Jayaseelan"/>
+          <div class="deco-ring r1"></div>
+          <div class="deco-ring r2"></div>
+          <div class="deco-dot d1"></div>
+          <div class="deco-dot d2"></div>
+        </div>
       </div>
-      <div class="stat-item">
-        <span class="stat-num">150+</span>
-        <span class="stat-label">STAFF MANAGED</span>
+
+      <!-- RIGHT — roles + unique quote -->
+      <div class="hero-right reveal">
+        <div class="hero-roles-topright">
+          <div class="hrt-item"><span class="hrt-num">01</span><span class="hrt-label">DEVELOPER</span></div>
+          <div class="hrt-item"><span class="hrt-num">02</span><span class="hrt-label">&amp; RESEARCHER</span></div>
+        </div>
+        <div class="hero-quote">
+          <div class="hq-mark">"</div>
+          <p class="hq-text">Building things<br/>that actually<br/><em>matter.</em></p>
+          <div class="hq-line"></div>
+          <span class="hq-attr">— Priyadharsan Jayaseelan</span>
+        </div>
       </div>
-      <div class="stat-item">
-        <span class="stat-num">85%</span>
-        <span class="stat-label">ML ACCURACY</span>
+
+    </div>
+
+    <!-- MARQUEE -->
+    <div class="marquee-wrap reveal">
+      <div class="marquee-track">
+        <span>Design ● Build ● Deploy ● C++ ● Python ● SQL ● Machine Learning ● Data Analytics ● Kent State University ● Computer Science ● Research ● VR ● </span>
+        <span>Design ● Build ● Deploy ● C++ ● Python ● SQL ● Machine Learning ● Data Analytics ● Kent State University ● Computer Science ● Research ● VR ● </span>
       </div>
     </div>
 
-    <!-- ======= ABOUT ======= -->
-    <section id="about">
-      <div class="section-label">ABOUT ME</div>
-      <h2 class="section-title reveal">Building things<br/>that matter.</h2>
-      <div class="about-grid">
-        <div class="about-text reveal">
-          <p>I'm a <strong>Computer Science student</strong> at Kent State University, minoring in Data Analytics — obsessed with systems that actually work at scale.</p>
-          <p>From building <strong>ML models that predict student outcomes</strong> to managing operations for 150+ staff, I operate at the intersection of code and real-world impact.</p>
-          <p>I'm a recipient of the <strong>International Global Academic Excellence Scholarship</strong> and a member of the <strong>Alpha Lambda Delta Honor Society</strong>.</p>
-        </div>
-        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;">
-          <div class="edu-card">
-            <div class="edu-school">KENT STATE UNIVERSITY</div>
-            <div class="edu-degree">B.S. Computer Science</div>
-            <div class="edu-meta">Minor: Data Analytics · Expected May 2027</div>
-            <div class="gpa-badge">GPA 3.7 / 4.0</div>
+  </section>
+
+  <!-- ══════ STATS ══════ -->
+  <section id="apart" data-bg="#0a0a0a">
+    <div class="section-header reveal">
+      <p class="section-sub">What Sets Me Apart</p>
+      <h2 class="section-title">Numbers that<br/><em>speak.</em></h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card reveal" data-val="3.7" data-suffix="" data-float="1">
+        <div class="sc-accent">GPA</div>
+        <div class="sc-num">3.7</div>
+        <div class="sc-lbl">Kent State University</div>
+        <div class="sc-desc">Alpha Lambda Delta Honor Society · International Scholarship</div>
+      </div>
+      <div class="stat-card reveal" data-val="150" data-suffix="+">
+        <div class="sc-accent">TEAM</div>
+        <div class="sc-num">0+</div>
+        <div class="sc-lbl">Employees Managed</div>
+        <div class="sc-desc">Lead Operational Coordinator · Reduced no-shows by 30%</div>
+      </div>
+      <div class="stat-card reveal" data-val="85" data-suffix="%">
+        <div class="sc-accent">ML</div>
+        <div class="sc-num">0%</div>
+        <div class="sc-lbl">Model Accuracy</div>
+        <div class="sc-desc">Student performance prediction pipeline · Python · Scikit-learn</div>
+      </div>
+      <div class="stat-card reveal" data-val="50" data-suffix="+">
+        <div class="sc-accent">VR</div>
+        <div class="sc-num">0+</div>
+        <div class="sc-lbl">Research Participants</div>
+        <div class="sc-desc">IV Needle Simulation · NASA-TLX · SUS metrics analysis</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ PROJECTS ══════ -->
+  <section id="projects" data-bg="#080808">
+    <div class="section-header split reveal">
+      <div>
+        <p class="section-sub">Selected Work</p>
+        <h2 class="section-title">The Work.</h2>
+      </div>
+      <p class="section-desc">Projects at the intersection of<br/>data, systems, and real-world impact.</p>
+    </div>
+
+    <div class="projects-list">
+      <div class="proj-row reveal">
+        <div class="proj-row-inner">
+          <span class="proj-n">01</span>
+          <div class="proj-text">
+            <h3>University Dining Database</h3>
+            <p>Comprehensive SQL + Python database system. Optimized staff scheduling and inventory — cutting operational overhead significantly.</p>
           </div>
-          <div class="edu-card">
-            <div class="edu-school">ARISTO PUBLIC SCHOOL, INDIA</div>
-            <div class="edu-degree">High School Diploma</div>
-            <div class="edu-meta">Graduated May 2023</div>
-            <div class="gpa-badge">CGPA 3.8 · 1st Place State Programming</div>
+          <div class="proj-tags"><span>SQL</span><span>Python</span><span>Database Design</span></div>
+        </div>
+        <div class="proj-hover-img"><div class="phi-inner" style="background:linear-gradient(135deg,#0f3460,#16213e)"><span>DATABASE</span></div></div>
+      </div>
+
+      <div class="proj-row reveal">
+        <div class="proj-row-inner">
+          <span class="proj-n">02</span>
+          <div class="proj-text">
+            <h3>Inventory Tracking System</h3>
+            <p>C++ system with custom data structures from scratch. Improved operational efficiency by 20% through clean algorithmic design.</p>
+          </div>
+          <div class="proj-tags"><span>C++</span><span>Data Structures</span><span>Algorithms</span></div>
+        </div>
+        <div class="proj-hover-img"><div class="phi-inner" style="background:linear-gradient(135deg,#0d1b2a,#1b263b)"><span>C++ SYSTEM</span></div></div>
+      </div>
+
+      <div class="proj-row reveal">
+        <div class="proj-row-inner">
+          <span class="proj-n">03</span>
+          <div class="proj-text">
+            <h3>Student Performance ML Model</h3>
+            <p>End-to-end ML pipeline predicting at-risk students with 85% accuracy. Data cleaning, feature engineering, model evaluation.</p>
+          </div>
+          <div class="proj-tags"><span>Python</span><span>Machine Learning</span><span>Data Analysis</span></div>
+        </div>
+        <div class="proj-hover-img"><div class="phi-inner" style="background:linear-gradient(135deg,#0f3460,#533483)"><span>ML MODEL</span></div></div>
+      </div>
+
+      <div class="proj-row reveal">
+        <div class="proj-row-inner">
+          <span class="proj-n">04</span>
+          <div class="proj-text">
+            <h3>VR IV Needle Simulation</h3>
+            <p>Research on VR-based medical simulation. Analyzed mesh deformation and haptic feedback across 50+ participants using NASA-TLX and SUS.</p>
+          </div>
+          <div class="proj-tags"><span>VR</span><span>Research</span><span>NASA-TLX</span></div>
+        </div>
+        <div class="proj-hover-img"><div class="phi-inner" style="background:linear-gradient(135deg,#1a0533,#2d1b69)"><span>VR RESEARCH</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ MANIFESTO ══════ -->
+  <section id="manifesto" data-bg="#0a0a0a">
+    <div class="section-header reveal">
+      <p class="section-sub">The Manifesto</p>
+      <h2 class="section-title">Experience &amp;<br/><em>Education.</em></h2>
+    </div>
+
+    <div class="manifesto-list">
+
+      <div class="mf-item reveal">
+        <div class="mf-top">
+          <div class="mf-left">
+            <span class="mf-num">01 / EDUCATION</span>
+            <h3 class="mf-title">KENT STATE UNIVERSITY</h3>
+          </div>
+          <div class="mf-img" style="background:linear-gradient(135deg,#0f3460,#16213e)"><span>B.S CS</span></div>
+        </div>
+        <div class="mf-body">
+          <div class="mf-grid">
+            <div class="mf-detail-block"><div class="mdb-label">DEGREE</div><div class="mdb-value">B.S. Computer Science</div><div class="mdb-sub">Minor: Data Analytics</div></div>
+            <div class="mf-detail-block"><div class="mdb-label">GPA</div><div class="mdb-value">3.7 / 4.0</div><div class="mdb-sub">Expected May 2027</div></div>
+            <div class="mf-detail-block"><div class="mdb-label">HONOUR</div><div class="mdb-value">Alpha Lambda Delta</div><div class="mdb-sub">Honor Society</div></div>
+            <div class="mf-detail-block"><div class="mdb-label">AWARD</div><div class="mdb-value">Intl. Excellence</div><div class="mdb-sub">Global Scholarship</div></div>
+          </div>
+          <div class="mf-courses">
+            <span class="mf-course-label">Coursework:</span>
+            <div class="mf-course-tags"><span>Data Structures</span><span>Algorithms</span><span>Database Systems</span><span>Machine Learning</span><span>Data Analytics</span></div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- ======= SKILLS ======= -->
-    <section id="skills">
-      <div class="section-label">TECH STACK</div>
-      <h2 class="section-title reveal">Tools I think<br/>in fluently.</h2>
-      <div class="skills-grid">
-        <div class="skill-group reveal">
-          <div class="skill-group-title">// LANGUAGES</div>
-          <div class="skill-tags">
-            <span class="skill-tag">C++</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">SQL</span>
+      <div class="mf-item reveal">
+        <div class="mf-top">
+          <div class="mf-left">
+            <span class="mf-num">02 / EXPERIENCE</span>
+            <h3 class="mf-title">LEAD OPS COORDINATOR</h3>
           </div>
+          <div class="mf-img" style="background:linear-gradient(135deg,#1a0533,#0d0d0d)"><span>KSU</span></div>
         </div>
-        <div class="skill-group reveal">
-          <div class="skill-group-title">// TOOLS &amp; TECH</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">MySQL</span>
-            <span class="skill-tag">Linux</span>
-            <span class="skill-tag">CBORD</span>
+        <div class="mf-body">
+          <div class="mf-grid">
+            <div class="mf-detail-block"><div class="mdb-label">EMPLOYER</div><div class="mdb-value">Kent State Univ.</div><div class="mdb-sub">Dining Services</div></div>
+            <div class="mf-detail-block"><div class="mdb-label">PERIOD</div><div class="mdb-value">Aug 2024 — Now</div><div class="mdb-sub">Full-time</div></div>
+            <div class="mf-detail-block"><div class="mdb-label">TEAM</div><div class="mdb-value">150+ Employees</div><div class="mdb-sub">Scheduling</div></div>
+            <div class="mf-detail-block"><div class="mdb-label">IMPACT</div><div class="mdb-value">−30% no-shows</div><div class="mdb-sub">−25% stockouts</div></div>
           </div>
-        </div>
-        <div class="skill-group reveal">
-          <div class="skill-group-title">// DOMAINS</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Machine Learning</span>
-            <span class="skill-tag">Data Analytics</span>
-            <span class="skill-tag">Database Design</span>
-            <span class="skill-tag">VR Research</span>
+          <div class="mf-bullets">
+            <div class="mf-bullet">→ Managed 150+ student employees using When To Work scheduling platform</div>
+            <div class="mf-bullet">→ Integrated QR Feedback systems across 3 dining locations</div>
+            <div class="mf-bullet">→ Built automated stock alerts — cut waste by 15%</div>
+            <div class="mf-bullet">→ Designed and delivered food safety training for new hires</div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- ======= PROJECTS ======= -->
-    <section id="work">
-      <div class="section-label">SELECTED WORK</div>
-      <h2 class="section-title reveal">What I've built.</h2>
-      <div class="projects-grid">
-        <div class="project-card reveal">
-          <div class="project-num">01 / DATABASE</div>
-          <h3 class="project-title">University Dining DB</h3>
-          <p class="project-desc">Comprehensive database system for university dining services. Optimized staff scheduling and inventory management, cutting operational overhead significantly.</p>
-          <div class="project-tags">
-            <span class="project-tag">SQL</span>
-            <span class="project-tag">Python</span>
-            <span class="project-tag">Database Design</span>
+      <div class="mf-item reveal">
+        <div class="mf-top">
+          <div class="mf-left">
+            <span class="mf-num">03 / RESEARCH</span>
+            <h3 class="mf-title">VR RESEARCH ASSISTANT</h3>
           </div>
+          <div class="mf-img" style="background:linear-gradient(135deg,#0d2818,#1a3a2a)"><span>VR</span></div>
         </div>
-        <div class="project-card reveal">
-          <div class="project-num">02 / SYSTEMS</div>
-          <h3 class="project-title">Inventory Tracker</h3>
-          <p class="project-desc">C++ based inventory tracking system with custom data structures built from scratch. Improved operational efficiency by 20% with a clean, fast core engine.</p>
-          <div class="project-tags">
-            <span class="project-tag">C++</span>
-            <span class="project-tag">Data Structures</span>
-            <span class="project-tag">Algorithms</span>
+        <div class="mf-body">
+          <div class="mf-grid">
+            <div class="mf-detail-block"><div class="mdb-label">INSTITUTION</div><div class="mdb-value">Kent State Univ.</div><div class="mdb-sub">Research Lab</div></div>
+            <div class="mf-detail-block"><div class="mdb-label">PERIOD</div><div class="mdb-value">Feb — May 2025</div><div class="mdb-sub">Research role</div></div>
+            <div class="mf-detail-block"><div class="mdb-label">PARTICIPANTS</div><div class="mdb-value">50+ Users</div><div class="mdb-sub">Usability study</div></div>
+            <div class="mf-detail-block"><div class="mdb-label">METRICS</div><div class="mdb-value">NASA-TLX · SUS</div><div class="mdb-sub">Haptic analysis</div></div>
           </div>
-        </div>
-        <div class="project-card reveal">
-          <div class="project-num">03 / ML</div>
-          <h3 class="project-title">Student Performance ML</h3>
-          <p class="project-desc">Machine learning pipeline to analyze student performance and identify at-risk individuals. Achieved 85% prediction accuracy — directly impacting academic outcomes.</p>
-          <div class="project-tags">
-            <span class="project-tag">Python</span>
-            <span class="project-tag">Machine Learning</span>
-            <span class="project-tag">Data Analysis</span>
-          </div>
-        </div>
-        <div class="project-card reveal">
-          <div class="project-num">04 / RESEARCH</div>
-          <h3 class="project-title">VR IV Needle Simulation</h3>
-          <p class="project-desc">Research assistant on a VR-based IV needle insertion usability study. Analyzed mesh deformation, haptic feedback and usability metrics from 50+ participants.</p>
-          <div class="project-tags">
-            <span class="project-tag">VR</span>
-            <span class="project-tag">Usability Research</span>
-            <span class="project-tag">NASA-TLX</span>
+          <div class="mf-bullets">
+            <div class="mf-bullet">→ Tested and analyzed VR simulation for IV needle insertion</div>
+            <div class="mf-bullet">→ Focused on mesh deformation accuracy and haptic feedback</div>
+            <div class="mf-bullet">→ Documented usability data and contributed to research reports</div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- ======= EXPERIENCE ======= -->
-    <section id="experience">
-      <div class="section-label">EXPERIENCE</div>
-      <h2 class="section-title reveal">How I've operated<br/>in the real world.</h2>
-      <div class="timeline">
-        <div class="exp-item reveal">
-          <div class="exp-dot"></div>
-          <div class="exp-date">AUG 2024 — PRESENT</div>
-          <div class="exp-title">Lead Operational Coordinator</div>
-          <div class="exp-org">Kent State University</div>
-          <ul class="exp-points">
-            <li>Managed scheduling for 150+ student employees, reducing no-shows by 30%</li>
-            <li>Integrated QR Feedback systems and updated menus across three dining services</li>
-            <li>Implemented automated stock alerts, cutting stockouts by 25% and waste by 15%</li>
-            <li>Designed and delivered food safety training programs for new hires</li>
-          </ul>
+      <div class="mf-item reveal">
+        <div class="mf-top">
+          <div class="mf-left">
+            <span class="mf-num">04 / EARLY CAREER</span>
+            <h3 class="mf-title">TECH LAB ASSISTANT</h3>
+          </div>
+          <div class="mf-img" style="background:linear-gradient(135deg,#2d1500,#1a0d00)"><span>LAB</span></div>
         </div>
-        <div class="exp-item reveal">
-          <div class="exp-dot"></div>
-          <div class="exp-date">FEB 2025 — MAY 2025</div>
-          <div class="exp-title">VR Research Assistant</div>
-          <div class="exp-org">Kent State University · IV Needle Insertion Usability Study</div>
-          <ul class="exp-points">
-            <li>Tested and analyzed a VR simulation focusing on mesh deformation and haptic feedback</li>
-            <li>Supported 50+ participants during trials and documented usability data</li>
-            <li>Analyzed performance using NASA-TLX and SUS metrics for research reports</li>
-          </ul>
-        </div>
-        <div class="exp-item reveal">
-          <div class="exp-dot"></div>
-          <div class="exp-date">AUG 2022 — FEB 2023</div>
-          <div class="exp-title">Technical Lab Support Assistant</div>
-          <div class="exp-org">Aristo Public School, India</div>
-          <ul class="exp-points">
-            <li>Assisted students with troubleshooting across Windows and Mac systems</li>
-            <li>Created technical guides and FAQs improving lab efficiency</li>
-            <li>Ran coding challenges and workshops encouraging peer collaboration</li>
-          </ul>
+        <div class="mf-body">
+          <div class="mf-grid">
+            <div class="mf-detail-block"><div class="mdb-label">EMPLOYER</div><div class="mdb-value">Aristo Public School</div><div class="mdb-sub">India</div></div>
+            <div class="mf-detail-block"><div class="mdb-label">PERIOD</div><div class="mdb-value">Aug 2022 — Feb 2023</div><div class="mdb-sub">Part-time</div></div>
+            <div class="mf-detail-block"><div class="mdb-label">AWARD</div><div class="mdb-value">1st Place</div><div class="mdb-sub">State Programming</div></div>
+            <div class="mf-detail-block"><div class="mdb-label">ROLE</div><div class="mdb-value">CS Club President</div><div class="mdb-sub">Student leader</div></div>
+          </div>
+          <div class="mf-bullets">
+            <div class="mf-bullet">→ Assisted students with troubleshooting across Windows and Mac systems</div>
+            <div class="mf-bullet">→ Created technical guides and FAQs improving lab efficiency</div>
+            <div class="mf-bullet">→ Ran coding challenges and workshops for peer learning</div>
+          </div>
         </div>
       </div>
-    </section>
 
-    <!-- ======= CONTACT ======= -->
-    <section id="contact">
-      <div class="contact-inner">
-        <div class="section-label" style="justify-content:center">LET'S CONNECT</div>
-        <h2 class="section-title reveal">Got something<br/>interesting?</h2>
-        <p class="contact-tagline reveal">
-          I'm actively looking for new opportunities — internships,<br/>
-          research roles, or cool projects. My inbox is always open.
-        </p>
-        <a href="mailto:priyadharsanjayaseelan@gmail.com" class="contact-email reveal">
-          priyadharsanjayaseelan@gmail.com
-        </a>
-        <ul class="social-links reveal">
-          <li><a href="https://github.com/PriyadharsanJayaseelan" target="_blank">GITHUB</a></li>
-          <li><a href="https://linkedin.com/" target="_blank">LINKEDIN</a></li>
-        </ul>
+    </div>
+  </section>
+
+  <!-- ══════ CONTACT ══════ -->
+  <section id="contact" data-bg="#080808">
+    <div class="contact-wrap">
+      <p class="section-sub reveal">Let's Connect</p>
+      <h2 class="contact-big reveal">Got something<br/><em>interesting?</em></h2>
+      <p class="contact-sub reveal">Actively looking for internships, research roles, and cool projects.<br/>My inbox is always open.</p>
+      <a href="mailto:priyadharsanjayaseelan@gmail.com" class="contact-email reveal">priyadharsanjayaseelan@gmail.com</a>
+      <div class="contact-social reveal">
+        <a href="https://github.com/PriyadharsanJayaseelan" target="_blank">GitHub ↗</a>
+        <a href="https://linkedin.com/" target="_blank">LinkedIn ↗</a>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
-
-  <!-- ======= FOOTER ======= -->
+  <!-- FOOTER -->
   <footer>
-    <p>© 2025 Priyadharsan Jayaseelan — Built with code, deployed on GitHub Pages.</p>
-    <p style="color:var(--blue)">AVAILABLE FOR HIRE</p>
+    <span>© 2025 Priyadharsan Jayaseelan</span>
+    <span class="f-status"><span class="status-dot"></span>Available for hire</span>
+    <span>Built with code · GitHub Pages</span>
   </footer>
 
-  <!-- Scripts — loaded at end of body so HTML is ready -->
   <script src="js/particles.js"></script>
   <script src="js/cursor.js"></script>
+  <script src="js/tilt.js"></script>
+  <script src="js/misc.js"></script>
   <script src="js/animations.js"></script>
 
 </body>
