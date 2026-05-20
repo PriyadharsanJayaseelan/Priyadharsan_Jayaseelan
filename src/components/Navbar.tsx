@@ -9,8 +9,8 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
-export default function Navbar({ scrolled }: NavProps) {
-  return (
+export default function Navbar({ scrolled: _scrolled }: NavProps) {
+    return (
     <nav
       className="relative z-20 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto"
       style={{
