@@ -19,7 +19,7 @@ export default function Hero({ scrolled }: HeroProps) {
         playsInline
       >
         {/* Place your video.mp4 in the /public folder */}
-        <source src="/video.mp4" type="video/mp4" />
+      <source src="/Priyadharsan_Jayaseelan/video.mp4" type="video/mp4" />
       </video>
 
       {/* ── Overlay ── */}
