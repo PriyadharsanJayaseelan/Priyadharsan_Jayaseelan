@@ -145,7 +145,7 @@ export default function Hero() {
             GitHub ↗
           </a>
           <a
-            href="https://linkedin.com/"
+            href="https://www.linkedin.com/in/priyadharsan-jayaseelan/"
             target="_blank"
             rel="noreferrer"
             className="rounded-full px-8 py-3 text-sm no-underline transition-all duration-200 hover:scale-[1.04] border"

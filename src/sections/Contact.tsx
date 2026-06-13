@@ -66,7 +66,7 @@ export default function Contact() {
               label: "GitHub ↗",
               href: "https://github.com/PriyadharsanJayaseelan",
             },
-            { label: "LinkedIn ↗", href: "https://linkedin.com/" },
+            { label: "LinkedIn ↗", href: "https://www.linkedin.com/in/priyadharsan-jayaseelan/" },
             {
               label: "My Story ✦",
               href: "https://priyadharsanjayaseelan.github.io/Priyadharsan_Jayaseelan/story.html",
