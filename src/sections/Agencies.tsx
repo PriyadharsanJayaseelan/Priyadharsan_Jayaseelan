@@ -64,30 +64,24 @@ const agencies = [
 function AgencyCard({ a }: { a: (typeof agencies)[0] }) {
   return (
     <div
-      className="flex-shrink-0 flex flex-col items-center gap-3 px-6 py-5 rounded-2xl mx-3 transition-all duration-300 cursor-default"
-      style={{
-        background: `${a.color}22`,
-        border: `1px solid ${a.color}66`,
-        minWidth: "140px",
-      }}
+      className="flex-shrink-0 flex flex-col items-center gap-3 mx-8 cursor-default transition-all duration-300"
+      style={{ minWidth: "100px", opacity: 0.75 }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.background = `${a.color}44`;
-        (e.currentTarget as HTMLElement).style.borderColor = `${a.color}cc`;
-        (e.currentTarget as HTMLElement).style.transform = "translateY(-3px)";
+        (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
+        (e.currentTarget as HTMLElement).style.opacity = "1";
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.background = `${a.color}22`;
-        (e.currentTarget as HTMLElement).style.borderColor = `${a.color}66`;
         (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+        (e.currentTarget as HTMLElement).style.opacity = "0.75";
       }}
     >
       <img
         src={a.logo}
         alt={a.name}
-        width={64}
-        height={64}
-        className="object-contain rounded-full"
-        style={{ background: "rgba(255,255,255,0.06)", padding: "4px" }}
+        width={80}
+        height={80}
+        className="object-contain"
+        style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.5))" }}
       />
       <div className="text-center">
         <div className="text-xs font-semibold text-white mb-0.5 tracking-wide">
@@ -95,7 +89,7 @@ function AgencyCard({ a }: { a: (typeof agencies)[0] }) {
         </div>
         <div
           className="text-xs leading-tight text-center"
-          style={{ color: "hsl(240,4%,58%)", maxWidth: "110px" }}
+          style={{ color: "hsl(240,4%,55%)", maxWidth: "110px" }}
         >
           {a.name}
         </div>
