@@ -78,8 +78,8 @@ function AgencyCard({ a }: { a: (typeof agencies)[0] }) {
       <img
         src={a.logo}
         alt={a.name}
-        width={96}
-        height={96}
+        width={112}
+        height={112}
         className="object-contain"
         style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.5))" }}
       />
@@ -138,7 +138,10 @@ export default function Agencies() {
       </p>
 
       {/* Carousel */}
-      <div className="scroll-reveal reveal-delay-3 relative overflow-hidden">
+      <div
+        className="scroll-reveal reveal-delay-3 relative"
+        style={{ overflowX: "hidden", overflowY: "visible", paddingTop: "16px" }}
+      >
         {/* Fade edges */}
         <div
           className="absolute inset-y-0 left-0 z-10 w-28 pointer-events-none"
