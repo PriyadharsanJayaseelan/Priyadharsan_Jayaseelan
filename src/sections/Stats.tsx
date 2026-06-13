@@ -7,7 +7,7 @@ const stats = [
   {
     num: "10+",
     label: "Federal Agencies Supported",
-    sub: "VA, DoD, USPTO, FDA, HHS, HUD & more · Pivotal ITS FAST Team",
+    sub: "VA, DoD, USPTO, FDA, HHS, HUD, USDA, DLA, Army & more · Supporting Effort FAST Team",
   },
   {
     num: "33",

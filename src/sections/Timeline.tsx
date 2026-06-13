@@ -3,9 +3,9 @@ const timeline = [
     num: "01",
     category: "Experience · Current",
     title: "Software Test Engineer Intern",
-    org: "Pivotal ITS — Federal Advanced Solutions Team (FAST) · May 2026 – Present",
+    org: "Pivotal ITS · Federal Advanced Solutions Team (FAST) · Supporting Effort · May 2026 – Present",
     detail:
-      "Quality gate for a secure federal web portal and AI-powered reporting assistant serving VA, DoD, USPTO, FDA, HHS, HUD, and more. Independently built and deployed an AI agent in Microsoft Copilot Studio org-wide via Teams. Led requirements gathering with federal program managers across a 6-person Agile Scrum team.",
+      "Supporting Effort is a Veteran-owned SDVOSB and federal modernization partner (Zero Delta + i4DM joint venture, 11+ years). Serving as quality gate for a secure internal web portal and AI-powered reporting assistant used by federal employees across VA, DoD, USPTO, FDA, HHS, HUD, USDA, DLA, Army, and State of Maryland. Independently designed, built, and deployed an AI agent in Microsoft Copilot Studio — pushed org-wide via Teams. Led requirements gathering with federal program managers across a 6-person Agile Scrum team.",
   },
   {
     num: "02",
