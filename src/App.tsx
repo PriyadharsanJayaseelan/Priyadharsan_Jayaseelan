@@ -4,6 +4,7 @@ import Hero from "./sections/Hero";
 import Stats from "./sections/Stats";
 import Projects from "./sections/Projects";
 import Timeline from "./sections/Timeline";
+import Agencies from "./sections/Agencies";
 import Certifications from "./sections/Certifications";
 import Contact from "./sections/Contact";
 import Marquee from "./components/Marquee";
@@ -34,6 +35,9 @@ export default function App() {
 
       {/* ── Stats / About ── */}
       <Stats />
+
+      {/* ── Federal Agencies ── */}
+      <Agencies />
 
       <Divider />
 
