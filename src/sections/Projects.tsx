@@ -5,7 +5,6 @@ const projects = [
     title: "Federal AI Agent — Copilot Studio",
     desc: "Independently designed, built, and deployed a fully functional AI agent in Microsoft Copilot Studio within Supporting Effort's federal dev environment. Configured SharePoint knowledge sources, enforced external data guardrails, implemented Entra ID (SSO/B2B) authentication, and deployed org-wide via Microsoft Teams — serving three federal organizations including VA, DoD, and Army.",
     tags: ["Copilot Studio", "Azure", "SharePoint", "Entra ID", "Teams"],
-    href: "https://github.com/PriyadharsanJayaseelan",
   },
   {
     num: "02",
@@ -13,7 +12,6 @@ const projects = [
     title: "Federal Web Portal — 33-Case Test Plan",
     desc: "Sole quality gate for a secure internal web portal and AI-powered reporting assistant built for federal employees and senior leadership at Supporting Effort (SDVOSB, VA/DoD partner). Authored a 33-case test plan covering security compliance, multi-tenant identity authentication, embedded Power BI dashboard reporting, RBAC, and performance benchmarking across a federal cloud environment.",
     tags: ["Manual Testing", "UAT", "Power BI", "RBAC", "Azure DevSecOps"],
-    href: "https://github.com/PriyadharsanJayaseelan",
   },
   {
     num: "03",
@@ -21,7 +19,6 @@ const projects = [
     title: "Street Stashed — Streetwear Platform",
     desc: "Developed responsive UI components for a Next.js, React & TypeScript streetwear e-commerce platform using Tailwind CSS with mobile-first principles. Resolved critical mobile layout issues and delivered pixel-perfect listings, navigation, and checkout flows within the first week.",
     tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    href: "https://github.com/PriyadharsanJayaseelan",
   },
   {
     num: "04",
@@ -29,7 +26,6 @@ const projects = [
     title: "VR IV Needle Simulation",
     desc: "Led a VR-based IV needle insertion research project analyzing mesh deformation and usability with haptic devices and VR interfaces across 50+ participants. Reported findings using NASA-TLX and SUS usability evaluation frameworks.",
     tags: ["VR", "Research", "NASA-TLX", "SUS", "Haptics"],
-    href: "https://github.com/PriyadharsanJayaseelan",
   },
 ];
 
@@ -72,12 +68,9 @@ export default function Projects() {
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {projects.map((p, i) => (
-          <a
+          <div
             key={p.num}
-            href={p.href}
-            target="_blank"
-            rel="noreferrer"
-            className={`scroll-reveal reveal-delay-${i + 1} no-underline card-glow shimmer-top rounded-[20px] p-9 flex flex-col cursor-pointer group`}
+            className={`scroll-reveal reveal-delay-${i + 1} card-glow shimmer-top rounded-[20px] p-9 flex flex-col`}
             style={{
               border: "1px solid rgba(255,255,255,0.08)",
               background: "rgba(255,255,255,0.02)",
@@ -132,17 +125,7 @@ export default function Projects() {
               ))}
             </div>
 
-            {/* View arrow */}
-            <div
-              className="mt-6 text-xs flex items-center gap-1.5 transition-all duration-200 group-hover:gap-2.5"
-              style={{ color: "hsl(240,4%,45%)" }}
-            >
-              View on GitHub
-              <span className="transition-transform duration-200 group-hover:translate-x-1">
-                ↗
-              </span>
-            </div>
-          </a>
+          </div>
         ))}
       </div>
     </section>
