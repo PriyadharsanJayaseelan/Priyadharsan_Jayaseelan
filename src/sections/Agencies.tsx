@@ -78,8 +78,8 @@ function AgencyCard({ a }: { a: (typeof agencies)[0] }) {
       <img
         src={a.logo}
         alt={a.name}
-        width={80}
-        height={80}
+        width={96}
+        height={96}
         className="object-contain"
         style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.5))" }}
       />
@@ -100,8 +100,6 @@ function AgencyCard({ a }: { a: (typeof agencies)[0] }) {
 
 export default function Agencies() {
   const doubled = [...agencies, ...agencies];
-  const reversed = [...agencies.slice(5), ...agencies.slice(0, 5)];
-  const doubledReversed = [...reversed, ...reversed];
 
   return (
     <section className="py-24 max-w-7xl mx-auto px-8">
@@ -155,16 +153,9 @@ export default function Agencies() {
           }}
         />
 
-        {/* Row 1 — left */}
-        <div className="flex mb-4 animate-marquee" style={{ width: "max-content" }}>
+        {/* Single row — scrolls left */}
+        <div className="flex animate-marquee" style={{ width: "max-content" }}>
           {doubled.map((a, i) => (
-            <AgencyCard key={i} a={a} />
-          ))}
-        </div>
-
-        {/* Row 2 — right (offset) */}
-        <div className="flex animate-marquee-reverse" style={{ width: "max-content" }}>
-          {doubledReversed.map((a, i) => (
             <AgencyCard key={i} a={a} />
           ))}
         </div>
