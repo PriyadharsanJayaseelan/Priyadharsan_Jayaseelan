@@ -8,7 +8,7 @@ export default function Contact() {
       >
         {/* Label */}
         <div
-          className="inline-flex items-center gap-3 text-xs tracking-widest uppercase mb-6"
+          className="scroll-reveal inline-flex items-center gap-3 text-xs tracking-widest uppercase mb-6"
           style={{ color: "hsl(240,4%,50%)" }}
         >
           Let's Connect
@@ -16,7 +16,7 @@ export default function Contact() {
 
         {/* Title */}
         <h2
-          className="text-5xl md:text-6xl font-normal text-white mb-5"
+          className="scroll-reveal reveal-delay-1 text-5xl md:text-6xl font-normal text-white mb-5"
           style={{
             fontFamily: "'Instrument Serif', serif",
             letterSpacing: "-0.02em",
@@ -29,7 +29,7 @@ export default function Contact() {
         </h2>
 
         <p
-          className="text-base mb-12 max-w-sm mx-auto leading-relaxed"
+          className="scroll-reveal reveal-delay-2 text-base mb-12 max-w-sm mx-auto leading-relaxed"
           style={{ color: "hsl(240,4%,62%)" }}
         >
           Actively looking for internships, research roles, and cool projects.
@@ -39,7 +39,7 @@ export default function Contact() {
         {/* Email */}
         <a
           href="mailto:priyadharsanjayaseelan@gmail.com"
-          className="no-underline transition-all duration-200"
+          className="scroll-reveal reveal-delay-3 no-underline transition-all duration-200 inline-block"
           style={{
             fontFamily: "'Instrument Serif', serif",
             fontSize: "clamp(1rem, 2vw, 1.4rem)",
@@ -60,7 +60,7 @@ export default function Contact() {
         </a>
 
         {/* Links */}
-        <div className="flex flex-wrap gap-4 justify-center mt-10">
+        <div className="scroll-reveal reveal-delay-4 flex flex-wrap gap-4 justify-center mt-10">
           {[
             {
               label: "GitHub ↗",

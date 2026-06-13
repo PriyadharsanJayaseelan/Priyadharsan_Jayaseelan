@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 interface NavProps {
   scrolled: boolean;
 }
@@ -9,50 +11,114 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
-export default function Navbar({ scrolled: _scrolled }: NavProps) {
-    return (
-    <nav
-      className="relative z-20 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto"
-      style={{
-        transition: "all 0.3s",
-      }}
-    >
-      {/* Logo */}
-      <a
-        href="#hero"
-        style={{ fontFamily: "'Instrument Serif', serif" }}
-        className="text-2xl tracking-tight text-white no-underline"
-      >
-        PJ<sup className="text-xs">®</sup>
-      </a>
+export default function Navbar({ scrolled }: NavProps) {
+  const [menuOpen, setMenuOpen] = useState(false);
 
-      {/* Nav links — hidden on mobile */}
-      <div className="hidden md:flex gap-8 items-center">
-        {navLinks.map((link) => (
+  return (
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled ? "liquid-glass-nav" : ""
+      }`}
+    >
+      <div className="flex items-center justify-between px-8 py-5 max-w-7xl mx-auto">
+        {/* Logo */}
+        <a
+          href="#hero"
+          style={{ fontFamily: "'Instrument Serif', serif" }}
+          className="text-2xl tracking-tight text-white no-underline"
+        >
+          PJ<sup className="text-xs">®</sup>
+        </a>
+
+        {/* Nav links — hidden on mobile */}
+        <div className="hidden md:flex gap-8 items-center">
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="text-sm no-underline transition-colors duration-200"
+              style={{ color: "hsl(240,4%,66%)" }}
+              onMouseEnter={(e) =>
+                ((e.target as HTMLElement).style.color = "#fff")
+              }
+              onMouseLeave={(e) =>
+                ((e.target as HTMLElement).style.color = "hsl(240,4%,66%)")
+              }
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        {/* Right: CTA + hamburger */}
+        <div className="flex items-center gap-4">
           <a
-            key={link.label}
-            href={link.href}
-            className="text-sm no-underline transition-colors duration-200"
-            style={{ color: "hsl(240,4%,66%)" }}
-            onMouseEnter={(e) =>
-              ((e.target as HTMLElement).style.color = "#fff")
-            }
-            onMouseLeave={(e) =>
-              ((e.target as HTMLElement).style.color = "hsl(240,4%,66%)")
-            }
+            href="mailto:priyadharsanjayaseelan@gmail.com"
+            className="hidden md:inline-block liquid-glass rounded-full px-6 py-2.5 text-sm text-white no-underline transition-transform duration-200 hover:scale-[1.04]"
           >
-            {link.label}
+            Get In Touch
           </a>
-        ))}
+
+          {/* Hamburger — mobile only */}
+          <button
+            className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span
+              className="block w-5 h-px bg-white transition-all duration-300"
+              style={{
+                transform: menuOpen
+                  ? "translateY(6px) rotate(45deg)"
+                  : "none",
+              }}
+            />
+            <span
+              className="block w-5 h-px bg-white transition-all duration-300"
+              style={{ opacity: menuOpen ? 0 : 1 }}
+            />
+            <span
+              className="block w-5 h-px bg-white transition-all duration-300"
+              style={{
+                transform: menuOpen
+                  ? "translateY(-6px) rotate(-45deg)"
+                  : "none",
+              }}
+            />
+          </button>
+        </div>
       </div>
 
-      {/* CTA */}
-      <a
-        href="mailto:priyadharsanjayaseelan@gmail.com"
-        className="liquid-glass rounded-full px-6 py-2.5 text-sm text-white no-underline transition-transform duration-200 hover:scale-[1.03]"
+      {/* Mobile dropdown */}
+      <div
+        className="md:hidden overflow-hidden transition-all duration-300"
+        style={{
+          maxHeight: menuOpen ? "280px" : "0",
+          background: "rgba(0,26,51,0.92)",
+          backdropFilter: "blur(20px)",
+          borderBottom: menuOpen ? "1px solid rgba(255,255,255,0.08)" : "none",
+        }}
       >
-        Get In Touch
-      </a>
+        <div className="flex flex-col px-8 py-6 gap-5">
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="text-sm no-underline text-white"
+              style={{ color: "hsl(240,4%,75%)" }}
+              onClick={() => setMenuOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
+          <a
+            href="mailto:priyadharsanjayaseelan@gmail.com"
+            className="liquid-glass rounded-full px-6 py-2.5 text-sm text-white no-underline text-center mt-2"
+          >
+            Get In Touch
+          </a>
+        </div>
+      </div>
     </nav>
   );
 }

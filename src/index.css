@@ -40,12 +40,13 @@ body {
 
 /* ─── Liquid Glass ──────────────────────────────────── */
 .liquid-glass {
-  background: rgba(255, 255, 255, 0.01);
-  background-blend-mode: luminosity;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px) saturate(1.5);
+  -webkit-backdrop-filter: blur(12px) saturate(1.5);
   border: none;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.12),
+    0 4px 24px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
 }
@@ -58,18 +59,43 @@ body {
   padding: 1.4px;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.45) 0%,
-    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.18) 20%,
     rgba(255, 255, 255, 0) 40%,
     rgba(255, 255, 255, 0) 60%,
-    rgba(255, 255, 255, 0.15) 80%,
-    rgba(255, 255, 255, 0.45) 100%
+    rgba(255, 255, 255, 0.18) 80%,
+    rgba(255, 255, 255, 0.5) 100%
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
 }
+
+/* ─── Liquid Glass — Scrolled Navbar variant ────────── */
+.liquid-glass-nav {
+  background: rgba(0, 26, 51, 0.75);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── Scroll Reveal ─────────────────────────────────── */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s ease-out, transform 0.75s ease-out;
+}
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+.reveal-delay-5 { transition-delay: 0.40s; }
 
 /* ─── Keyframe Animations ───────────────────────────── */
 @keyframes fade-rise {
@@ -84,57 +110,104 @@ body {
 }
 
 @keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 @keyframes pulse-dot {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.3;
-  }
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(-16px) scale(1.04); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(-10px) scale(1.02); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.25; }
+  50%       { opacity: 0.55; }
+}
+
+@keyframes bounce-down {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50%       { transform: translateY(10px); opacity: 1; }
+}
+
+@keyframes shimmer-line {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 /* ─── Animation classes ─────────────────────────────── */
-.animate-fade-rise {
-  animation: fade-rise 0.8s ease-out both;
+.animate-fade-rise         { animation: fade-rise 0.8s ease-out both; }
+.animate-fade-rise-delay   { animation: fade-rise 0.8s ease-out 0.2s both; }
+.animate-fade-rise-delay-2 { animation: fade-rise 0.8s ease-out 0.4s both; }
+.animate-fade-rise-delay-3 { animation: fade-rise 0.8s ease-out 0.6s both; }
+.animate-marquee           { animation: marquee 35s linear infinite; }
+.animate-pulse-dot         { animation: pulse-dot 2s ease-in-out infinite; }
+.animate-float             { animation: float 7s ease-in-out infinite; }
+.animate-float-slow        { animation: float-slow 9s ease-in-out infinite; }
+.animate-glow-pulse        { animation: glow-pulse 4s ease-in-out infinite; }
+.animate-bounce-down       { animation: bounce-down 1.8s ease-in-out infinite; }
+
+/* ─── Card hover glow ───────────────────────────────── */
+.card-glow {
+  transition: border-color 0.3s, background 0.3s, transform 0.3s,
+    box-shadow 0.3s;
 }
-.animate-fade-rise-delay {
-  animation: fade-rise 0.8s ease-out 0.2s both;
+.card-glow:hover {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 8px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-4px);
 }
-.animate-fade-rise-delay-2 {
-  animation: fade-rise 0.8s ease-out 0.4s both;
+
+/* ─── Shimmer top edge on hover ─────────────────────── */
+.shimmer-top {
+  position: relative;
+  overflow: hidden;
 }
-.animate-fade-rise-delay-3 {
-  animation: fade-rise 0.8s ease-out 0.6s both;
+.shimmer-top::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  transition: none;
 }
-.animate-marquee {
-  animation: marquee 35s linear infinite;
-}
-.animate-pulse-dot {
-  animation: pulse-dot 2s ease-in-out infinite;
+.shimmer-top:hover::after {
+  animation: shimmer-line 0.6s ease forwards;
 }
 
 /* ─── Scrollbar ──────────────────────────────────────── */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: hsl(201, 100%, 10%);
+  background: hsl(201, 100%, 9%);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.22);
 }
 
 /* ─── Selection ─────────────────────────────────────── */

@@ -38,7 +38,7 @@ export default function Timeline() {
     <section className="px-8 py-32 max-w-7xl mx-auto">
       {/* Label */}
       <div
-        className="flex items-center gap-3 text-xs tracking-widest uppercase mb-4"
+        className="scroll-reveal flex items-center gap-3 text-xs tracking-widest uppercase mb-4"
         style={{ color: "hsl(240,4%,50%)" }}
       >
         The Manifesto
@@ -50,7 +50,7 @@ export default function Timeline() {
 
       {/* Title */}
       <h2
-        className="text-5xl md:text-6xl font-normal mb-20"
+        className="scroll-reveal reveal-delay-1 text-5xl md:text-6xl font-normal mb-20"
         style={{
           fontFamily: "'Instrument Serif', serif",
           letterSpacing: "-0.02em",
@@ -68,10 +68,8 @@ export default function Timeline() {
         {timeline.map((item, i) => (
           <div
             key={item.num}
-            className="grid gap-8 pb-14"
-            style={{
-              gridTemplateColumns: "64px 1px 1fr",
-            }}
+            className={`scroll-reveal reveal-delay-${i + 1} grid gap-8 pb-14`}
+            style={{ gridTemplateColumns: "64px 1px 1fr" }}
           >
             {/* Number */}
             <div
@@ -83,21 +81,23 @@ export default function Timeline() {
 
             {/* Line + dot */}
             <div className="relative flex justify-center">
-              {/* Dot */}
               <div
-                className="absolute top-1.5 w-2 h-2 rounded-full"
+                className="absolute top-1.5 w-2.5 h-2.5 rounded-full transition-all duration-300"
                 style={{
-                  border: "1px solid rgba(255,255,255,0.3)",
+                  border: "1px solid rgba(255,255,255,0.35)",
                   background: "hsl(201,100%,13%)",
                   left: "50%",
                   transform: "translateX(-50%)",
+                  boxShadow: "0 0 8px rgba(255,255,255,0.1)",
                 }}
               />
-              {/* Line (skip on last) */}
               {i < timeline.length - 1 && (
                 <div
                   className="w-px h-full"
-                  style={{ background: "rgba(255,255,255,0.08)" }}
+                  style={{
+                    background:
+                      "linear-gradient(to bottom, rgba(255,255,255,0.12), rgba(255,255,255,0.03))",
+                  }}
                 />
               )}
             </div>
@@ -116,10 +116,7 @@ export default function Timeline() {
               >
                 {item.title}
               </div>
-              <div
-                className="text-sm mb-3"
-                style={{ color: "hsl(240,4%,62%)" }}
-              >
+              <div className="text-sm mb-3" style={{ color: "hsl(240,4%,62%)" }}>
                 {item.org}
               </div>
               <div
