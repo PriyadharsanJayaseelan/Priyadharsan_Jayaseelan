@@ -1,34 +1,34 @@
 const projects = [
   {
     num: "01",
-    type: "Database",
-    title: "University Dining Database",
-    desc: "Comprehensive SQL + Python database system. Optimized staff scheduling and inventory — cutting operational overhead significantly.",
-    tags: ["SQL", "Python", "Database Design"],
+    type: "AI / Enterprise",
+    title: "Federal AI Agent — Copilot Studio",
+    desc: "Independently designed, built, and deployed a fully functional AI agent in Microsoft Copilot Studio within a federal dev environment. Configured SharePoint knowledge sources, enforced external data guardrails, implemented Entra ID (SSO/B2B) authentication, and deployed org-wide via Microsoft Teams across three federal organizations.",
+    tags: ["Copilot Studio", "Azure", "SharePoint", "Entra ID", "Teams"],
     href: "https://github.com/PriyadharsanJayaseelan",
   },
   {
     num: "02",
-    type: "C++ System",
-    title: "Inventory Tracking System",
-    desc: "C++ system with custom data structures built from scratch. Improved operational efficiency by 20% through clean algorithmic design.",
-    tags: ["C++", "Data Structures", "Algorithms"],
+    type: "QA / Federal",
+    title: "Federal Web Portal — 33-Case Test Plan",
+    desc: "Sole quality gate for a secure internal web portal and AI-powered reporting assistant built for federal employees and senior leadership. Authored a 33-case test plan covering security compliance, multi-tenant identity authentication, embedded dashboard reporting, RBAC, and performance benchmarking across a federal cloud environment.",
+    tags: ["Manual Testing", "UAT", "Power BI", "RBAC", "Azure DevSecOps"],
     href: "https://github.com/PriyadharsanJayaseelan",
   },
   {
     num: "03",
-    type: "ML Model",
-    title: "Student Performance ML",
-    desc: "End-to-end ML pipeline predicting at-risk students with 85% accuracy. Data cleaning, feature engineering, model evaluation.",
-    tags: ["Python", "Machine Learning", "Scikit-learn"],
+    type: "Frontend / E-Commerce",
+    title: "Street Stashed — Streetwear Platform",
+    desc: "Developed responsive UI components for a Next.js, React & TypeScript streetwear e-commerce platform using Tailwind CSS with mobile-first principles. Resolved critical mobile layout issues and delivered pixel-perfect listings, navigation, and checkout flows within the first week.",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     href: "https://github.com/PriyadharsanJayaseelan",
   },
   {
     num: "04",
     type: "VR Research",
     title: "VR IV Needle Simulation",
-    desc: "Research on VR-based medical simulation. Analyzed mesh deformation and haptic feedback across 50+ participants using NASA-TLX and SUS.",
-    tags: ["VR", "Research", "NASA-TLX", "SUS"],
+    desc: "Led a VR-based IV needle insertion research project analyzing mesh deformation and usability with haptic devices and VR interfaces across 50+ participants. Reported findings using NASA-TLX and SUS usability evaluation frameworks.",
+    tags: ["VR", "Research", "NASA-TLX", "SUS", "Haptics"],
     href: "https://github.com/PriyadharsanJayaseelan",
   },
 ];
@@ -66,7 +66,7 @@ export default function Projects() {
         className="scroll-reveal reveal-delay-2 text-base mb-16 max-w-xl"
         style={{ color: "hsl(240,4%,60%)" }}
       >
-        Projects at the intersection of data, systems, and real-world impact.
+        Projects at the intersection of federal systems, AI, and real-world impact.
       </p>
 
       {/* Grid */}
@@ -101,7 +101,7 @@ export default function Projects() {
             </div>
 
             <h3
-              className="text-2xl font-normal text-white mb-3 transition-colors duration-200 group-hover:text-white"
+              className="text-2xl font-normal text-white mb-3"
               style={{
                 fontFamily: "'Instrument Serif', serif",
                 lineHeight: "1.2",

@@ -66,7 +66,7 @@ export default function Contact() {
               label: "GitHub ↗",
               href: "https://github.com/PriyadharsanJayaseelan",
             },
-            { label: "LinkedIn ↗", href: "https://linkedin.com/" },
+            { label: "LinkedIn ↗", href: "https://www.linkedin.com/in/priyadharsan-jayaseelan/" },
             {
               label: "My Story ✦",
               href: "https://priyadharsanjayaseelan.github.io/Priyadharsan_Jayaseelan/story.html",
@@ -107,7 +107,7 @@ export default function Contact() {
           color: "hsl(240,4%,38%)",
         }}
       >
-        © 2025 Priyadharsan Jayaseelan · Built with precision.
+        © 2026 Priyadharsan Jayaseelan · Built with precision.
       </footer>
     </>
   );

@@ -5,12 +5,19 @@ const items = [
   "C++",
   "Python",
   "SQL",
+  "TypeScript",
+  "Next.js",
+  "React",
   "Machine Learning",
+  "Microsoft Azure",
+  "Copilot Studio",
+  "Power BI",
+  "SharePoint",
   "Data Analytics",
+  "Federal Systems",
+  "VR Research",
+  "Agile Scrum",
   "Kent State University",
-  "Computer Science",
-  "Research",
-  "VR",
 ];
 
 export default function Marquee() {

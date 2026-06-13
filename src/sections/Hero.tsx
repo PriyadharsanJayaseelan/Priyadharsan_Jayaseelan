@@ -109,8 +109,9 @@ export default function Hero() {
           className="text-base sm:text-lg max-w-xl mt-8 leading-relaxed animate-fade-rise-delay-2"
           style={{ color: "hsl(240,4%,66%)" }}
         >
-          ML Engineer & CS Researcher. From ML pipelines to databases — I build
-          things that actually matter. Kent State University · GPA 3.7
+          Software Engineer & CS Researcher. From federal AI systems to ML
+          pipelines — I build things that actually matter.
+          Kent State University · GPA 3.5
         </p>
 
         {/* Link row */}
@@ -144,7 +145,7 @@ export default function Hero() {
             GitHub ↗
           </a>
           <a
-            href="https://linkedin.com/"
+            href="https://www.linkedin.com/in/priyadharsan-jayaseelan/"
             target="_blank"
             rel="noreferrer"
             className="rounded-full px-8 py-3 text-sm no-underline transition-all duration-200 hover:scale-[1.04] border"

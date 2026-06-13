@@ -1,19 +1,19 @@
 const timeline = [
   {
     num: "01",
-    category: "Education",
-    title: "Kent State University",
-    org: "B.S. Computer Science · Minor in Data Analytics",
+    category: "Experience · Current",
+    title: "Software Test Engineer Intern",
+    org: "Pivotal ITS — Federal Advanced Solutions Team (FAST) · May 2026 – Present",
     detail:
-      "Alpha Lambda Delta Honor Society · International Scholarship · GPA 3.7 · Expected Graduation 2026",
+      "Quality gate for a secure federal web portal and AI-powered reporting assistant serving VA, DoD, USPTO, FDA, HHS, HUD, and more. Independently built and deployed an AI agent in Microsoft Copilot Studio org-wide via Teams. Led requirements gathering with federal program managers across a 6-person Agile Scrum team.",
   },
   {
     num: "02",
     category: "Experience",
-    title: "Lead Operations Coordinator",
-    org: "Kent State University",
+    title: "Software Developer Intern",
+    org: "Street Stashed · Jan 2026 – March 2026",
     detail:
-      "Managed 150+ employees. Streamlined scheduling and operational workflows, reducing no-shows by 30% through data-driven process improvements.",
+      "Built responsive UI components for a Next.js, React & TypeScript streetwear e-commerce platform using Tailwind CSS. Resolved critical mobile layout issues, delivered pixel-perfect checkout flows, and collaborated through code reviews and sprint planning in a cross-functional agile environment.",
   },
   {
     num: "03",
@@ -21,15 +21,15 @@ const timeline = [
     title: "VR Research Assistant",
     org: "Kent State University",
     detail:
-      "Conducted user studies on VR-based medical simulation. Analyzed mesh deformation and haptic feedback data from 50+ participants using NASA-TLX and SUS evaluation frameworks.",
+      "Led a VR-based IV needle insertion research project analyzing mesh deformation and usability with haptic devices. Conducted user studies with 50+ participants and reported findings using NASA-TLX and SUS evaluation frameworks.",
   },
   {
     num: "04",
-    category: "Early Career",
-    title: "Tech Lab Assistant",
-    org: "Technology Laboratory",
+    category: "Education",
+    title: "Kent State University",
+    org: "B.S. Computer Science · Minor in Data Analytics · GPA 3.5 · Aug 2023 – May 2027",
     detail:
-      "Supported technical operations and provided hands-on assistance in lab environments. Gained foundational experience in systems and infrastructure.",
+      "Alpha Lambda Delta Honor Society · International Scholarship. Coursework spanning data structures, algorithms, database systems, machine learning, and data analytics.",
   },
 ];
 
@@ -82,7 +82,7 @@ export default function Timeline() {
             {/* Line + dot */}
             <div className="relative flex justify-center">
               <div
-                className="absolute top-1.5 w-2.5 h-2.5 rounded-full transition-all duration-300"
+                className="absolute top-1.5 w-2.5 h-2.5 rounded-full"
                 style={{
                   border: "1px solid rgba(255,255,255,0.35)",
                   background: "hsl(201,100%,13%)",
