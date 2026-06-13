@@ -3,7 +3,7 @@ export default function Certifications() {
     <section className="px-8 py-32 max-w-7xl mx-auto">
       {/* Label */}
       <div
-        className="flex items-center gap-3 text-xs tracking-widest uppercase mb-4"
+        className="scroll-reveal flex items-center gap-3 text-xs tracking-widest uppercase mb-4"
         style={{ color: "hsl(240,4%,50%)" }}
       >
         Certifications
@@ -15,7 +15,7 @@ export default function Certifications() {
 
       {/* Title */}
       <h2
-        className="text-5xl md:text-6xl font-normal mb-16"
+        className="scroll-reveal reveal-delay-1 text-5xl md:text-6xl font-normal mb-16"
         style={{
           fontFamily: "'Instrument Serif', serif",
           letterSpacing: "-0.02em",
@@ -30,7 +30,7 @@ export default function Certifications() {
 
       {/* Cert card */}
       <div
-        className="rounded-[20px] p-10 max-w-3xl"
+        className="scroll-reveal reveal-delay-2 card-glow shimmer-top rounded-[20px] p-10 max-w-3xl"
         style={{
           border: "1px solid rgba(255,255,255,0.08)",
           background: "rgba(255,255,255,0.02)",
@@ -53,10 +53,7 @@ export default function Certifications() {
               PCI Essentials for Account Data Handlers
             </h3>
 
-            <p
-              className="text-sm mb-3"
-              style={{ color: "hsl(240,4%,62%)" }}
-            >
+            <p className="text-sm mb-3" style={{ color: "hsl(240,4%,62%)" }}>
               PCI DSS 4.0 · PCI-101-CS-02 · 2025
             </p>
 
@@ -73,7 +70,7 @@ export default function Certifications() {
               style={{ color: "#4ade80" }}
             >
               <span
-                className="w-1.5 h-1.5 rounded-full"
+                className="w-1.5 h-1.5 rounded-full animate-pulse-dot"
                 style={{
                   background: "#4ade80",
                   boxShadow: "0 0 8px #4ade80",
@@ -106,16 +103,14 @@ export default function Certifications() {
 
             <a
               href="#"
-              className="liquid-glass rounded-full px-5 py-2 text-xs text-white no-underline transition-transform duration-200 hover:scale-[1.03] inline-block"
+              className="liquid-glass rounded-full px-5 py-2 text-xs text-white no-underline transition-transform duration-200 hover:scale-[1.04] inline-block"
             >
               View Certificate ↗
             </a>
           </div>
 
           {/* Badge */}
-          <div
-            className="liquid-glass rounded-xl p-5 text-center min-w-[100px] hidden sm:block"
-          >
+          <div className="liquid-glass rounded-xl p-5 text-center min-w-[100px] hidden sm:block">
             <div className="text-3xl mb-2">🏆</div>
             <div className="text-xs font-medium text-white mb-1">KSU</div>
             <div
@@ -130,7 +125,7 @@ export default function Certifications() {
 
       {/* What this means */}
       <div
-        className="mt-8 p-6 rounded-xl max-w-3xl"
+        className="scroll-reveal reveal-delay-3 mt-8 p-6 rounded-xl max-w-3xl"
         style={{
           border: "1px solid rgba(255,255,255,0.06)",
           background: "rgba(255,255,255,0.015)",
@@ -146,9 +141,9 @@ export default function Certifications() {
           className="text-sm leading-relaxed"
           style={{ color: "hsl(240,4%,65%)" }}
         >
-          Certified in Payment Card Industry Data Security Standards — the
-          global standard for protecting cardholder data and managing secure
-          payment systems.
+          Certified in Payment Card Industry Data Security Standards — the global
+          standard for protecting cardholder data and managing secure payment
+          systems.
         </p>
       </div>
     </section>

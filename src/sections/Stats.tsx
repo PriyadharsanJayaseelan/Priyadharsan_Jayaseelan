@@ -26,7 +26,7 @@ export default function Stats() {
     <section id="about" className="px-8 py-32 max-w-7xl mx-auto">
       {/* Label */}
       <div
-        className="flex items-center gap-3 text-xs tracking-widest uppercase mb-4"
+        className="scroll-reveal flex items-center gap-3 text-xs tracking-widest uppercase mb-4"
         style={{ color: "hsl(240,4%,50%)" }}
       >
         What Sets Me Apart
@@ -38,7 +38,7 @@ export default function Stats() {
 
       {/* Title */}
       <h2
-        className="text-5xl md:text-6xl font-normal mb-16"
+        className="scroll-reveal reveal-delay-1 text-5xl md:text-6xl font-normal mb-16"
         style={{
           fontFamily: "'Instrument Serif', serif",
           letterSpacing: "-0.02em",
@@ -53,25 +53,13 @@ export default function Stats() {
 
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((s) => (
+        {stats.map((s, i) => (
           <div
             key={s.label}
-            className="rounded-2xl p-8 transition-all duration-300 cursor-default"
+            className={`scroll-reveal reveal-delay-${i + 1} card-glow shimmer-top rounded-2xl p-8 cursor-default`}
             style={{
               border: "1px solid rgba(255,255,255,0.08)",
               background: "rgba(255,255,255,0.02)",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor =
-                "rgba(255,255,255,0.18)";
-              (e.currentTarget as HTMLElement).style.background =
-                "rgba(255,255,255,0.04)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor =
-                "rgba(255,255,255,0.08)";
-              (e.currentTarget as HTMLElement).style.background =
-                "rgba(255,255,255,0.02)";
             }}
           >
             <div
@@ -93,8 +81,8 @@ export default function Stats() {
 
       {/* Quote */}
       <div
-        className="mt-24 pl-8"
-        style={{ borderLeft: "1px solid rgba(255,255,255,0.15)" }}
+        className="scroll-reveal reveal-delay-2 mt-24 pl-8"
+        style={{ borderLeft: "2px solid rgba(255,255,255,0.1)" }}
       >
         <p
           className="text-2xl md:text-3xl font-normal mb-4"
