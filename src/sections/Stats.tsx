@@ -1,23 +1,23 @@
 const stats = [
   {
-    num: "3.7",
+    num: "3.5",
     label: "GPA · Kent State University",
-    sub: "Alpha Lambda Delta Honor Society · International Scholarship",
+    sub: "Alpha Lambda Delta Honor Society · International Scholarship · May 2027",
   },
   {
-    num: "150+",
-    label: "Employees Managed",
-    sub: "Lead Operational Coordinator · Reduced no-shows by 30%",
+    num: "10+",
+    label: "Federal Agencies Supported",
+    sub: "VA, DoD, USPTO, FDA, HHS, HUD & more · Pivotal ITS FAST Team",
   },
   {
-    num: "85%",
-    label: "Model Accuracy",
-    sub: "Student performance prediction pipeline · Python · Scikit-learn",
+    num: "33",
+    label: "Test Cases Authored",
+    sub: "Federal cloud portal · Security, RBAC, auth & performance benchmarking",
   },
   {
     num: "50+",
     label: "Research Participants",
-    sub: "IV Needle Simulation · NASA-TLX · SUS metrics analysis",
+    sub: "VR IV Needle Simulation · NASA-TLX · SUS usability metrics",
   },
 ];
 

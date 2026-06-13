@@ -107,7 +107,7 @@ export default function Contact() {
           color: "hsl(240,4%,38%)",
         }}
       >
-        © 2025 Priyadharsan Jayaseelan · Built with precision.
+        © 2026 Priyadharsan Jayaseelan · Built with precision.
       </footer>
     </>
   );
