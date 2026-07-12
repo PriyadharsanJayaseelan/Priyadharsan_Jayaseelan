@@ -2,10 +2,10 @@ const timeline = [
   {
     num: "01",
     category: "Experience · Current",
-    title: "Software Test Engineer Intern",
+    title: "Software QA Intern",
     org: "Pivotal ITS · Federal Advanced Solutions Team (FAST) · Supporting Effort · May 2026 – Present",
     detail:
-      "Supporting Effort is a Veteran-owned SDVOSB and federal modernization partner (Zero Delta + i4DM joint venture, 11+ years). Serving as quality gate for a secure internal web portal and AI-powered reporting assistant used by federal employees across VA, DoD, USPTO, FDA, HHS, HUD, USDA, DLA, Army, and State of Maryland. Independently designed, built, and deployed an AI agent in Microsoft Copilot Studio — pushed org-wide via Teams. Led requirements gathering with federal program managers across a 6-person Agile Scrum team.",
+      "Supporting Effort is a Veteran-owned SDVOSB and federal modernization partner (Zero Delta + i4DM joint venture, 11+ years). Serving as quality gate for a secure internal web portal and AI-powered reporting assistant used by federal employees across VA, DoD, USPTO, FDA, HHS, HUD, USDA, DLA, Army, and State of Maryland. Independently designed, built, and deployed an AI agent in Microsoft Copilot Studio, pushed org-wide via Teams. Led requirements gathering with federal program managers across a 6-person Agile Scrum team.",
   },
   {
     num: "02",
@@ -13,10 +13,18 @@ const timeline = [
     title: "Software Developer Intern",
     org: "Street Stashed · Jan 2026 – March 2026",
     detail:
-      "Built responsive UI components for a Next.js, React & TypeScript streetwear e-commerce platform using Tailwind CSS. Resolved critical mobile layout issues, delivered pixel-perfect checkout flows, and collaborated through code reviews and sprint planning in a cross-functional agile environment.",
+      "Built responsive UI components for a Next.js, React and TypeScript streetwear e-commerce platform using Tailwind CSS. Resolved critical mobile layout issues, delivered pixel-perfect checkout flows, and collaborated through code reviews and sprint planning in a cross-functional agile environment.",
   },
   {
     num: "03",
+    category: "Experience",
+    title: "Lead Student Operations Coordinator",
+    org: "Kent State University Culinary Services · Aug 2024 – Present",
+    detail:
+      "Managed scheduling for 250+ student employees using WhenToWork, reducing no-shows by 30% via automated text reminder workflows. Updated daily menus for three meal services using CBORD with 100% accuracy across student-facing listings. Configured automated inventory alerts reducing stockouts by 25% and excess costs by 10%. Implemented a food waste tracking system cutting over-ordering by 15%. Developed a QR-based event sign-in and feedback system minimizing manual entry errors by 90% and increasing dining satisfaction by 20%. Designed food safety training for 50+ new hires achieving a 95% pass rate.",
+  },
+  {
+    num: "04",
     category: "Research",
     title: "VR Research Assistant",
     org: "Kent State University",
@@ -24,7 +32,7 @@ const timeline = [
       "Led a VR-based IV needle insertion research project analyzing mesh deformation and usability with haptic devices. Conducted user studies with 50+ participants and reported findings using NASA-TLX and SUS evaluation frameworks.",
   },
   {
-    num: "04",
+    num: "05",
     category: "Education",
     title: "Kent State University",
     org: "B.S. Computer Science · Minor in Data Analytics · GPA 3.5 · Aug 2023 – May 2027",
@@ -68,7 +76,7 @@ export default function Timeline() {
         {timeline.map((item, i) => (
           <div
             key={item.num}
-            className={`scroll-reveal reveal-delay-${i + 1} grid gap-8 pb-14`}
+            className={`scroll-reveal reveal-delay-${Math.min(i + 1, 5)} grid gap-8 pb-14`}
             style={{ gridTemplateColumns: "64px 1px 1fr" }}
           >
             {/* Number */}

@@ -134,7 +134,7 @@ export default function Agencies() {
         style={{ color: "hsl(240,4%,60%)" }}
       >
         Supporting federal modernization across defense, healthcare, agriculture,
-        and civil agencies — via Supporting Effort's FAST Team.
+        and civil agencies, via Supporting Effort's FAST Team.
       </p>
 
       {/* Carousel */}

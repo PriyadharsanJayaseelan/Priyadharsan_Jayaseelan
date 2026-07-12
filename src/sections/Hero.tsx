@@ -110,7 +110,7 @@ export default function Hero() {
           style={{ color: "hsl(240,4%,66%)" }}
         >
           Software Engineer & CS Researcher. From federal AI systems to ML
-          pipelines — I build things that actually matter.
+          pipelines. I build things that actually matter.
           Kent State University · GPA 3.5
         </p>
 

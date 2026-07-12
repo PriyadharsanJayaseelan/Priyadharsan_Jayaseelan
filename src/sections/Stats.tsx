@@ -95,7 +95,7 @@ export default function Stats() {
           "Building things that actually matter."
         </p>
         <p className="text-sm" style={{ color: "hsl(240,4%,50%)" }}>
-          — Priyadharsan Jayaseelan
+          Priyadharsan Jayaseelan
         </p>
       </div>
     </section>

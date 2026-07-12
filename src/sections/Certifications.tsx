@@ -141,7 +141,7 @@ export default function Certifications() {
           className="text-sm leading-relaxed"
           style={{ color: "hsl(240,4%,65%)" }}
         >
-          Certified in Payment Card Industry Data Security Standards — the global
+          Certified in Payment Card Industry Data Security Standards, the global
           standard for protecting cardholder data and managing secure payment
           systems.
         </p>
