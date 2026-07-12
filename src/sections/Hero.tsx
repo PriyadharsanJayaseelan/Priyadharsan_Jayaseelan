@@ -119,7 +119,7 @@ export default function Hero() {
         {/* Typewriter role */}
         <p
           className="text-sm sm:text-base animate-fade-rise-delay-2 mt-2"
-          style={{ color: "hsl(240,4%,50%)", fontFamily: "'Instrument Serif', serif", fontStyle: "italic" }}
+          style={{ color: "hsl(240,4%,82%)", fontFamily: "'Instrument Serif', serif", fontStyle: "italic" }}
         >
           <Typewriter />
         </p>

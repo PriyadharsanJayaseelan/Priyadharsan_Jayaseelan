@@ -12,7 +12,6 @@ import Marquee from "./components/Marquee";
 import Divider from "./components/Divider";
 import Agencies from "./sections/Agencies";
 import { useScrollReveal } from "./hooks/useScrollReveal";
-import { useCursorGlow } from "./hooks/useCursorGlow";
 
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
@@ -24,7 +23,6 @@ export default function App() {
   }, []);
 
   useScrollReveal();
-  useCursorGlow();
 
   return (
     <div

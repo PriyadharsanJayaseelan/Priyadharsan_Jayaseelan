@@ -4,7 +4,9 @@ const roles = [
   "Software QA Engineer",
   "Federal Systems Builder",
   "CS Researcher",
-  "ML Engineer",
+  "VR Researcher",
+  "Data Analytics Enthusiast",
+  "Operations Leader",
 ];
 
 export default function Typewriter() {
