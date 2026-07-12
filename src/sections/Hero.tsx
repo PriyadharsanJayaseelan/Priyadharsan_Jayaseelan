@@ -1,14 +1,20 @@
 import Typewriter from "../components/Typewriter";
+import { useHeroParallax } from "../hooks/useHeroParallax";
 
 export default function Hero() {
+  const { videoRef, lineLeftRef, lineRightRef, badgeRef, bodyRef } =
+    useHeroParallax();
+
   return (
     <section
       id="hero"
       className="relative min-h-screen flex flex-col overflow-hidden"
     >
-      {/* ── Video background ── */}
+      {/* ── Video background (zooms slightly on scroll) ── */}
       <video
+        ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover z-0"
+        style={{ willChange: "transform", transformOrigin: "center center" }}
         autoPlay
         loop
         muted
@@ -73,8 +79,9 @@ export default function Hero() {
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6 pt-28 pb-40">
         {/* Status badge */}
         <div
+          ref={badgeRef}
           className="inline-flex items-center gap-2 text-xs tracking-widest mb-6 animate-fade-rise"
-          style={{ color: "hsl(240,4%,66%)" }}
+          style={{ color: "hsl(240,4%,66%)", willChange: "opacity" }}
         >
           <span
             className="w-1.5 h-1.5 rounded-full animate-pulse-dot"
@@ -96,16 +103,34 @@ export default function Hero() {
             color: "#fff",
           }}
         >
-          Building systems that{" "}
-          <em className="not-italic" style={{ color: "hsl(240,4%,66%)" }}>
-            solve
-          </em>{" "}
-          real{" "}
-          <em className="not-italic" style={{ color: "hsl(240,4%,66%)" }}>
-            problems.
-          </em>
+          <span
+            ref={lineLeftRef}
+            className="inline-block"
+            style={{ willChange: "transform, opacity" }}
+          >
+            Building systems that{" "}
+            <em className="not-italic" style={{ color: "hsl(240,4%,66%)" }}>
+              solve
+            </em>
+          </span>{" "}
+          <span
+            ref={lineRightRef}
+            className="inline-block"
+            style={{ willChange: "transform, opacity" }}
+          >
+            real{" "}
+            <em className="not-italic" style={{ color: "hsl(240,4%,66%)" }}>
+              problems.
+            </em>
+          </span>
         </h1>
 
+        {/* Body group (sinks + fades on scroll) */}
+        <div
+          ref={bodyRef}
+          className="flex flex-col items-center"
+          style={{ willChange: "transform, opacity" }}
+        >
         {/* Sub */}
         <p
           className="text-base sm:text-lg max-w-xl mt-8 leading-relaxed animate-fade-rise-delay-2"
@@ -207,6 +232,7 @@ export default function Hero() {
         >
           Explore Work ↓
         </a>
+        </div>
       </div>
 
       {/* ── Scroll indicator ── */}
