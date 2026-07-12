@@ -1,3 +1,5 @@
+import Typewriter from "../components/Typewriter";
+
 export default function Hero() {
   return (
     <section
@@ -112,6 +114,14 @@ export default function Hero() {
           Software Engineer & CS Researcher. From federal AI systems to ML
           pipelines. I build things that actually matter.
           Kent State University · GPA 3.5
+        </p>
+
+        {/* Typewriter role */}
+        <p
+          className="text-sm sm:text-base animate-fade-rise-delay-2 mt-2"
+          style={{ color: "hsl(240,4%,50%)", fontFamily: "'Instrument Serif', serif", fontStyle: "italic" }}
+        >
+          <Typewriter />
         </p>
 
         {/* Link row */}
