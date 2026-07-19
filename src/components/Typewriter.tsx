@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
 const roles = [
-  "Software QA Engineer",
-  "Federal Systems Builder",
-  "CS Researcher",
-  "VR Researcher",
-  "Data Analytics Enthusiast",
-  "Operations Leader",
+  "Software QA Engineer.",
+  "Federal Systems Builder.",
+  "Frontend Developer.",
+  "VR Researcher.",
+  "Leader of 250+ People.",
+  "Problem Solver.",
 ];
 
 export default function Typewriter() {

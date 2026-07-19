@@ -145,20 +145,19 @@ export default function Hero() {
           CS student by transcript.
         </p>
         <p
-          className="text-base sm:text-lg max-w-xl mt-3 leading-relaxed animate-fade-rise-delay-2"
-          style={{ color: "hsl(240,4%,66%)" }}
+          className="text-lg sm:text-xl animate-fade-rise-delay-2 mt-3 flex items-baseline gap-2"
+          style={{ color: "hsl(240,4%,60%)" }}
         >
-          In practice: quality gate for federal AI systems, frontend engineer
-          for a startup, and operations lead for 250+ people.
-          Kent State University.
-        </p>
-
-        {/* Typewriter role */}
-        <p
-          className="text-sm sm:text-base animate-fade-rise-delay-2 mt-2"
-          style={{ color: "hsl(240,4%,82%)", fontFamily: "'Instrument Serif', serif", fontStyle: "italic" }}
-        >
-          <Typewriter />
+          <span>but also a</span>
+          <span
+            style={{
+              fontFamily: "'Instrument Serif', serif",
+              fontStyle: "italic",
+              color: "#fff",
+            }}
+          >
+            <Typewriter />
+          </span>
         </p>
 
         {/* Link row */}
