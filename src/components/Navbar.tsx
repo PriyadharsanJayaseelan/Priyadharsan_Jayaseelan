@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { openEmailPicker } from "./EmailPicker";
 
 interface NavProps {
   scrolled: boolean;
@@ -52,12 +53,13 @@ export default function Navbar({ scrolled }: NavProps) {
 
         {/* Right: CTA + hamburger */}
         <div className="flex items-center gap-4">
-          <a
-            href="mailto:priyadharsanjayaseelan@gmail.com"
-            className="hidden md:inline-block liquid-glass rounded-full px-6 py-2.5 text-sm text-white no-underline transition-transform duration-200 hover:scale-[1.04]"
+          <button
+            onClick={openEmailPicker}
+            className="hidden md:inline-block liquid-glass rounded-full px-6 py-2.5 text-sm text-white cursor-pointer transition-transform duration-200 hover:scale-[1.04]"
+            style={{ fontFamily: "inherit" }}
           >
             Get In Touch
-          </a>
+          </button>
 
           {/* Hamburger — mobile only */}
           <button
@@ -111,12 +113,16 @@ export default function Navbar({ scrolled }: NavProps) {
               {link.label}
             </a>
           ))}
-          <a
-            href="mailto:priyadharsanjayaseelan@gmail.com"
-            className="liquid-glass rounded-full px-6 py-2.5 text-sm text-white no-underline text-center mt-2"
+          <button
+            onClick={() => {
+              setMenuOpen(false);
+              openEmailPicker();
+            }}
+            className="liquid-glass rounded-full px-6 py-2.5 text-sm text-white cursor-pointer text-center mt-2"
+            style={{ fontFamily: "inherit" }}
           >
             Get In Touch
-          </a>
+          </button>
         </div>
       </div>
     </nav>

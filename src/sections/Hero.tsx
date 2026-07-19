@@ -1,4 +1,5 @@
 import Typewriter from "../components/Typewriter";
+import { openEmailPicker } from "../components/EmailPicker";
 import { useHeroParallax } from "../hooks/useHeroParallax";
 
 export default function Hero() {
@@ -136,9 +137,9 @@ export default function Hero() {
           className="text-base sm:text-lg max-w-xl mt-8 leading-relaxed animate-fade-rise-delay-2"
           style={{ color: "hsl(240,4%,66%)" }}
         >
-          Software Engineer & CS Researcher. From federal AI systems to ML
-          pipelines. I build things that actually matter.
-          Kent State University · GPA 3.5
+          Software Engineer & CS Researcher. Securing federal AI systems,
+          shipping polished web experiences, and leading 250+ people on campus.
+          I build things that actually matter. Kent State University · GPA 3.5
         </p>
 
         {/* Typewriter role */}
@@ -151,12 +152,13 @@ export default function Hero() {
 
         {/* Link row */}
         <div className="flex flex-wrap gap-4 justify-center mt-10 animate-fade-rise-delay-3">
-          <a
-            href="mailto:priyadharsanjayaseelan@gmail.com"
-            className="liquid-glass rounded-full px-8 py-3 text-sm text-white no-underline transition-transform duration-200 hover:scale-[1.04]"
+          <button
+            onClick={openEmailPicker}
+            className="liquid-glass rounded-full px-8 py-3 text-sm text-white cursor-pointer transition-transform duration-200 hover:scale-[1.04]"
+            style={{ fontFamily: "inherit" }}
           >
             Get In Touch →
-          </a>
+          </button>
           <a
             href="https://github.com/PriyadharsanJayaseelan"
             target="_blank"

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import ScrollProgress from "./components/ScrollProgress";
 import BackToTop from "./components/BackToTop";
+import EmailPicker from "./components/EmailPicker";
 import Hero from "./sections/Hero";
 import Stats from "./sections/Stats";
 import Projects from "./sections/Projects";
@@ -83,6 +84,9 @@ export default function App() {
 
       {/* ── Back to top ── */}
       <BackToTop />
+
+      {/* ── Email provider picker ── */}
+      <EmailPicker />
     </div>
   );
 }

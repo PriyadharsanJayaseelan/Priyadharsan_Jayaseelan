@@ -1,3 +1,5 @@
+import { openEmailPicker } from "../components/EmailPicker";
+
 export default function Contact() {
   return (
     <>
@@ -37,13 +39,14 @@ export default function Contact() {
         </p>
 
         {/* Email */}
-        <a
-          href="mailto:priyadharsanjayaseelan@gmail.com"
-          className="scroll-reveal reveal-delay-3 no-underline transition-all duration-200 inline-block"
+        <button
+          onClick={openEmailPicker}
+          className="scroll-reveal reveal-delay-3 cursor-pointer transition-all duration-200 inline-block bg-transparent"
           style={{
             fontFamily: "'Instrument Serif', serif",
             fontSize: "clamp(1rem, 2vw, 1.4rem)",
             color: "#fff",
+            border: "none",
             borderBottom: "1px solid rgba(255,255,255,0.2)",
             paddingBottom: "4px",
           }}
@@ -57,7 +60,7 @@ export default function Contact() {
           }}
         >
           priyadharsanjayaseelan@gmail.com
-        </a>
+        </button>
 
         {/* Links */}
         <div className="scroll-reveal reveal-delay-4 flex flex-wrap gap-4 justify-center mt-10">
