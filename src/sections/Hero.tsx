@@ -134,12 +134,23 @@ export default function Hero() {
         >
         {/* Sub */}
         <p
-          className="text-base sm:text-lg max-w-xl mt-8 leading-relaxed animate-fade-rise-delay-2"
+          className="text-xl sm:text-2xl max-w-xl mt-8 animate-fade-rise-delay-2"
+          style={{
+            fontFamily: "'Instrument Serif', serif",
+            fontStyle: "italic",
+            color: "hsl(240,4%,85%)",
+            lineHeight: 1.3,
+          }}
+        >
+          CS student by transcript.
+        </p>
+        <p
+          className="text-base sm:text-lg max-w-xl mt-3 leading-relaxed animate-fade-rise-delay-2"
           style={{ color: "hsl(240,4%,66%)" }}
         >
-          Software Engineer & CS Researcher. Securing federal AI systems,
-          shipping polished web experiences, and leading 250+ people on campus.
-          I build things that actually matter. Kent State University · GPA 3.5
+          In practice: quality gate for federal AI systems, frontend engineer
+          for a startup, and operations lead for 250+ people.
+          Kent State University.
         </p>
 
         {/* Typewriter role */}
