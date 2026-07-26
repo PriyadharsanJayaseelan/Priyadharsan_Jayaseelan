@@ -1,4 +1,5 @@
 import { openEmailPicker } from "../components/EmailPicker";
+import { openStoryModal } from "../components/StoryModal";
 
 export default function Contact() {
   return (
@@ -70,10 +71,6 @@ export default function Contact() {
               href: "https://github.com/PriyadharsanJayaseelan",
             },
             { label: "LinkedIn ↗", href: "https://www.linkedin.com/in/priyadharsan-jayaseelan/" },
-            {
-              label: "My Story ✦",
-              href: "https://priyadharsanjayaseelan.github.io/Priyadharsan_Jayaseelan/story.html",
-            },
           ].map((link) => (
             <a
               key={link.label}
@@ -100,6 +97,27 @@ export default function Contact() {
               {link.label}
             </a>
           ))}
+          <button
+            onClick={openStoryModal}
+            className="rounded-full px-6 py-2.5 text-sm transition-all duration-200 cursor-pointer bg-transparent"
+            style={{
+              color: "hsl(240,4%,62%)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              fontFamily: "inherit",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.color = "#fff";
+              (e.currentTarget as HTMLElement).style.borderColor =
+                "rgba(255,255,255,0.3)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.color = "hsl(240,4%,62%)";
+              (e.currentTarget as HTMLElement).style.borderColor =
+                "rgba(255,255,255,0.1)";
+            }}
+          >
+            My Story ✦
+          </button>
         </div>
       </section>
 
