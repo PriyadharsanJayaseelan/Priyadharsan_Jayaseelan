@@ -1,39 +1,66 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { openEmailPicker } from "./EmailPicker";
 
-const LINES = [
-  "I grew up in Tamil Nadu, India — curious about everything, settled on none of it.",
-  "At 18, I moved to the United States with one carry-on and one goal: build things that matter.",
-  "I found that goal at the intersection of software, security, and systems that serve millions.",
-  "By day, I'm a QA engineer helping secure federal AI platforms — code that can't afford to fail.",
-  "By evening, I lead a 250+ person organization on campus, because I believe builders also need to serve.",
-  "I'm a CS student by transcript. But the real curriculum has been shipping, breaking, and fixing things under pressure.",
-  "I'm looking for the next problem worth solving. Maybe that's with you.",
+type Side = "left" | "right";
+
+interface Bubble {
+  side: Side;
+  text: string;
+  timestamp?: string;
+  delay: number; // ms after previous bubble finishes appearing
+}
+
+const BUBBLES: Bubble[] = [
+  { side: "left",  text: "Tamil Nadu, India.",              timestamp: "2005",  delay: 400  },
+  { side: "left",  text: "Grew up curious about everything. Committed to none of it.", delay: 700 },
+  { side: "right", text: "Kent, Ohio.",                     timestamp: "2023",  delay: 900  },
+  { side: "right", text: "Moved at 18. One carry-on. Zero contacts. One goal.", delay: 700 },
+  { side: "left",  text: "Landed my first federal project before sophomore year. AI systems — the kind that can't afford to fail.", delay: 1000 },
+  { side: "right", text: "Started leading people almost by accident.",           delay: 800  },
+  { side: "right", text: "250+ now. Turns out builders make good leaders.",      delay: 600  },
+  { side: "left",  text: "Still a CS student by transcript.",                    delay: 900  },
+  { side: "left",  text: "But the real degree has been shipping things under pressure.", delay: 600 },
+  { side: "right", text: "Looking for the next problem worth solving.",          delay: 900  },
+  { side: "right", text: "Maybe that's with you. 👋",                           delay: 500  },
 ];
-
-const CHAR_DELAY = 28;
-const LINE_GAP = 420;
 
 export function openStoryModal() {
   window.dispatchEvent(new CustomEvent("open-story-modal"));
 }
 
+function TypingDots() {
+  return (
+    <div
+      className="flex items-center gap-1 px-4 py-3 rounded-2xl rounded-bl-sm"
+      style={{ background: "rgba(255,255,255,0.10)", width: 56 }}
+    >
+      {[0, 1, 2].map((i) => (
+        <span
+          key={i}
+          className="block rounded-full"
+          style={{
+            width: 6,
+            height: 6,
+            background: "rgba(255,255,255,0.45)",
+            animation: `typing-dot 1.2s ease-in-out ${i * 0.2}s infinite`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 export default function StoryModal() {
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [linesDone, setLinesDone] = useState<string[]>([]);
-  const [currentLine, setCurrentLine] = useState("");
-  const [lineIndex, setLineIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
-  const [phase, setPhase] = useState<"typing" | "gap" | "done">("typing");
+  const [shown, setShown] = useState<number>(-1); // index of last revealed bubble
+  const [typing, setTyping] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Reset animation state when modal opens
   const startAnimation = () => {
-    setLinesDone([]);
-    setCurrentLine("");
-    setLineIndex(0);
-    setCharIndex(0);
-    setPhase("typing");
+    setShown(-1);
+    setTyping(false);
   };
 
   useEffect(() => {
@@ -48,6 +75,7 @@ export default function StoryModal() {
 
   const close = useCallback(() => {
     setVisible(false);
+    if (timerRef.current) clearTimeout(timerRef.current);
     setTimeout(() => setOpen(false), 300);
   }, []);
 
@@ -63,243 +91,210 @@ export default function StoryModal() {
     };
   }, [open, close]);
 
-  // Typewriter animation
+  // Drive bubble reveal sequence
   useEffect(() => {
-    if (!open || phase === "done") return;
+    if (!open) return;
+    const next = shown + 1;
+    if (next >= BUBBLES.length) return;
 
-    if (phase === "typing") {
-      const target = LINES[lineIndex];
-      if (charIndex < target.length) {
-        const t = setTimeout(() => {
-          setCurrentLine(target.slice(0, charIndex + 1));
-          setCharIndex((c) => c + 1);
-        }, CHAR_DELAY);
-        return () => clearTimeout(t);
-      } else {
-        // Line complete — wait before starting next
-        const t = setTimeout(() => {
-          setLinesDone((prev) => [...prev, target]);
-          setCurrentLine("");
-          const next = lineIndex + 1;
-          if (next >= LINES.length) {
-            setPhase("done");
-          } else {
-            setLineIndex(next);
-            setCharIndex(0);
-            setPhase("gap");
-          }
-        }, LINE_GAP);
-        return () => clearTimeout(t);
-      }
-    }
+    const bubble = BUBBLES[next];
+    // Show typing indicator for a bit, then reveal bubble
+    const typingDuration = Math.min(800 + bubble.text.length * 18, 2200);
 
-    if (phase === "gap") {
-      const t = setTimeout(() => setPhase("typing"), 160);
-      return () => clearTimeout(t);
-    }
-  }, [open, phase, lineIndex, charIndex]);
+    timerRef.current = setTimeout(() => {
+      setTyping(true);
+      timerRef.current = setTimeout(() => {
+        setTyping(false);
+        setShown(next);
+      }, typingDuration);
+    }, bubble.delay);
 
-  // Auto-scroll to bottom as text appears
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+  }, [open, shown]);
+
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [linesDone, currentLine]);
+  }, [shown, typing]);
 
   if (!open) return null;
 
-  return (
-    <div className="fixed inset-0 z-[300] flex items-end sm:items-center justify-center px-4 sm:px-6 pb-4 sm:pb-0">
-      {/* Backdrop */}
-      <div
-        onClick={close}
-        className="absolute inset-0 transition-opacity duration-300"
-        style={{
-          background: "rgba(0,10,22,0.82)",
-          backdropFilter: "blur(14px)",
-          WebkitBackdropFilter: "blur(14px)",
-          opacity: visible ? 1 : 0,
-        }}
-      />
+  const nextBubble = shown + 1 < BUBBLES.length ? BUBBLES[shown + 1] : null;
+  const typingOnRight = typing && nextBubble?.side === "right";
+  const done = shown === BUBBLES.length - 1 && !typing;
 
-      {/* Panel */}
-      <div
-        className="relative w-full max-w-xl rounded-3xl transition-all duration-300 flex flex-col"
-        style={{
-          background: "hsl(201,80%,9%)",
-          border: "1px solid rgba(255,255,255,0.10)",
-          boxShadow: "0 32px 100px rgba(0,0,0,0.6)",
-          opacity: visible ? 1 : 0,
-          transform: visible ? "scale(1) translateY(0)" : "scale(0.96) translateY(16px)",
-          maxHeight: "88vh",
-        }}
-      >
-        {/* Header */}
+  return (
+    <>
+      <style>{`
+        @keyframes typing-dot {
+          0%, 60%, 100% { transform: translateY(0); opacity: 0.45; }
+          30% { transform: translateY(-4px); opacity: 1; }
+        }
+        @keyframes bubble-in-left {
+          from { opacity: 0; transform: translateX(-10px) scale(0.95); }
+          to   { opacity: 1; transform: translateX(0) scale(1); }
+        }
+        @keyframes bubble-in-right {
+          from { opacity: 0; transform: translateX(10px) scale(0.95); }
+          to   { opacity: 1; transform: translateX(0) scale(1); }
+        }
+        @keyframes reply-fade {
+          from { opacity: 0; transform: translateY(8px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+
+      <div className="fixed inset-0 z-[300] flex items-end sm:items-center justify-center px-4 sm:px-6 pb-4 sm:pb-0">
+        {/* Backdrop */}
         <div
-          className="flex items-center justify-between px-8 pt-8 pb-6 flex-shrink-0"
-          style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+          onClick={close}
+          className="absolute inset-0 transition-opacity duration-300"
+          style={{
+            background: "rgba(0,10,22,0.85)",
+            backdropFilter: "blur(14px)",
+            WebkitBackdropFilter: "blur(14px)",
+            opacity: visible ? 1 : 0,
+          }}
+        />
+
+        {/* Panel */}
+        <div
+          className="relative w-full max-w-md rounded-3xl flex flex-col transition-all duration-300 overflow-hidden"
+          style={{
+            background: "hsl(201,80%,8%)",
+            border: "1px solid rgba(255,255,255,0.10)",
+            boxShadow: "0 32px 100px rgba(0,0,0,0.65)",
+            opacity: visible ? 1 : 0,
+            transform: visible ? "scale(1) translateY(0)" : "scale(0.96) translateY(16px)",
+            maxHeight: "88vh",
+          }}
         >
-          <div>
-            <p
-              className="text-xs tracking-widest uppercase mb-1"
-              style={{ color: "hsl(240,4%,48%)" }}
+          {/* Chat header */}
+          <div
+            className="flex items-center gap-3 px-5 py-4 flex-shrink-0"
+            style={{ borderBottom: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.03)" }}
+          >
+            {/* Avatar */}
+            <div
+              className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0"
+              style={{ background: "linear-gradient(135deg, hsl(201,80%,30%), hsl(240,60%,40%))", color: "#fff" }}
             >
-              My Story
-            </p>
-            <h3
-              className="text-3xl font-normal text-white"
-              style={{ fontFamily: "'Instrument Serif', serif", letterSpacing: "-0.02em" }}
+              PJ
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-white leading-none mb-0.5">Priyadharsan</p>
+              <p className="text-xs" style={{ color: "#4ade80" }}>
+                <span
+                  className="inline-block w-1.5 h-1.5 rounded-full mr-1.5 align-middle"
+                  style={{ background: "#4ade80", boxShadow: "0 0 6px #4ade80" }}
+                />
+                Active now
+              </p>
+            </div>
+            <button
+              onClick={close}
+              aria-label="Close"
+              className="w-8 h-8 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 flex-shrink-0"
+              style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)" }}
             >
-              How I got{" "}
-              <em className="not-italic" style={{ color: "hsl(240,4%,66%)" }}>
-                here.
-              </em>
-            </h3>
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                <path d="M1 1l10 10M11 1L1 11" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            </button>
           </div>
 
-          <button
-            onClick={close}
-            aria-label="Close"
-            className="w-9 h-9 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 flex-shrink-0"
-            style={{
-              background: "rgba(255,255,255,0.07)",
-              border: "1px solid rgba(255,255,255,0.12)",
-            }}
+          {/* Messages area */}
+          <div
+            className="flex-1 overflow-y-auto px-4 py-5 flex flex-col gap-2"
+            style={{ scrollbarWidth: "none" }}
           >
-            <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-              <path
-                d="M1 1l10 10M11 1L1 11"
-                stroke="rgba(255,255,255,0.8)"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
-          </button>
-        </div>
+            {BUBBLES.slice(0, shown + 1).map((bubble, i) => {
+              const isLeft = bubble.side === "left";
+              return (
+                <div key={i} className={`flex flex-col gap-0.5 ${isLeft ? "items-start" : "items-end"}`}>
+                  {bubble.timestamp && (
+                    <p
+                      className="text-xs px-2 mb-1"
+                      style={{ color: "hsl(240,4%,42%)", alignSelf: "center" }}
+                    >
+                      {bubble.timestamp}
+                    </p>
+                  )}
+                  <div
+                    className="max-w-[78%] px-4 py-2.5 text-sm leading-relaxed"
+                    style={{
+                      background: isLeft
+                        ? "rgba(255,255,255,0.10)"
+                        : "linear-gradient(135deg, hsl(201,70%,28%), hsl(220,60%,32%))",
+                      color: "#fff",
+                      borderRadius: isLeft
+                        ? "18px 18px 18px 4px"
+                        : "18px 18px 4px 18px",
+                      animation: `${isLeft ? "bubble-in-left" : "bubble-in-right"} 0.3s ease both`,
+                    }}
+                  >
+                    {bubble.text}
+                  </div>
+                </div>
+              );
+            })}
 
-        {/* Story body — scrollable */}
-        <div
-          className="px-8 py-7 overflow-y-auto flex-1"
-          style={{ scrollbarWidth: "none" }}
-        >
-          <div className="flex flex-col gap-5">
-            {linesDone.map((line, i) => (
-              <p
-                key={i}
-                className="text-base leading-relaxed"
-                style={{
-                  color: i === linesDone.length - 1 && phase !== "done"
-                    ? "hsl(240,4%,78%)"
-                    : "hsl(240,4%,70%)",
-                  fontFamily: "'Instrument Serif', serif",
-                  fontStyle: "italic",
-                  transition: "color 0.4s",
-                }}
-              >
-                {line}
-              </p>
-            ))}
-
-            {/* Currently typing line */}
-            {currentLine && (
-              <p
-                className="text-base leading-relaxed"
-                style={{
-                  color: "#fff",
-                  fontFamily: "'Instrument Serif', serif",
-                  fontStyle: "italic",
-                }}
-              >
-                {currentLine}
-                <span
-                  style={{
-                    display: "inline-block",
-                    width: "2px",
-                    height: "1em",
-                    background: "hsl(240,4%,66%)",
-                    marginLeft: "2px",
-                    verticalAlign: "middle",
-                    animation: "pulse-dot 1s ease-in-out infinite",
-                  }}
-                />
-              </p>
-            )}
-
-            {/* Cursor while gap between lines */}
-            {phase === "gap" && (
-              <p style={{ height: "1.5rem" }}>
-                <span
-                  style={{
-                    display: "inline-block",
-                    width: "2px",
-                    height: "1em",
-                    background: "hsl(240,4%,55%)",
-                    verticalAlign: "middle",
-                    animation: "pulse-dot 1s ease-in-out infinite",
-                  }}
-                />
-              </p>
+            {/* Typing indicator */}
+            {typing && (
+              <div className={`flex ${typingOnRight ? "justify-end" : "justify-start"}`}>
+                <div style={{ animation: "bubble-in-left 0.2s ease both" }}>
+                  <TypingDots />
+                </div>
+              </div>
             )}
 
             <div ref={bottomRef} />
           </div>
-        </div>
 
-        {/* Footer — shown only when done */}
-        {phase === "done" && (
-          <div
-            className="px-8 pb-8 pt-5 flex-shrink-0 flex flex-wrap gap-3 items-center justify-between"
-            style={{
-              borderTop: "1px solid rgba(255,255,255,0.06)",
-              animation: "fadeRise 0.5s ease both",
-            }}
-          >
-            <p className="text-xs" style={{ color: "hsl(240,4%,48%)" }}>
-              Tamil Nadu → Kent, Ohio → wherever the work is.
-            </p>
-            <div className="flex gap-2">
-              <a
-                href="https://github.com/PriyadharsanJayaseelan"
-                target="_blank"
-                rel="noreferrer"
-                className="no-underline rounded-full px-4 py-2 text-xs transition-all duration-200"
+          {/* Reply bar — appears when done */}
+          {done && (
+            <div
+              className="flex items-center gap-3 px-4 py-3 flex-shrink-0"
+              style={{
+                borderTop: "1px solid rgba(255,255,255,0.07)",
+                background: "rgba(255,255,255,0.02)",
+                animation: "reply-fade 0.5s ease both",
+              }}
+            >
+              <button
+                onClick={() => { close(); setTimeout(openEmailPicker, 320); }}
+                className="flex-1 text-left text-sm px-4 py-2.5 rounded-full cursor-pointer transition-all duration-200"
                 style={{
-                  color: "hsl(240,4%,62%)",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(255,255,255,0.10)",
+                  color: "hsl(240,4%,50%)",
+                  fontFamily: "inherit",
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "#fff";
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.28)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.25)";
+                  (e.currentTarget as HTMLElement).style.color = "hsl(240,4%,70%)";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "hsl(240,4%,62%)";
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.1)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.10)";
+                  (e.currentTarget as HTMLElement).style.color = "hsl(240,4%,50%)";
                 }}
               >
-                GitHub ↗
-              </a>
-              <a
-                href="https://www.linkedin.com/in/priyadharsan-jayaseelan/"
-                target="_blank"
-                rel="noreferrer"
-                className="no-underline rounded-full px-4 py-2 text-xs transition-all duration-200"
+                Reply...
+              </button>
+              <button
+                onClick={() => { close(); setTimeout(openEmailPicker, 320); }}
+                className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 cursor-pointer transition-all duration-200 hover:scale-110"
                 style={{
-                  color: "hsl(240,4%,62%)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "#fff";
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.28)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "hsl(240,4%,62%)";
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.1)";
+                  background: "linear-gradient(135deg, hsl(201,70%,32%), hsl(220,60%,36%))",
                 }}
               >
-                LinkedIn ↗
-              </a>
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                  <path d="M2 8h10M9 4l5 4-5 4" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
