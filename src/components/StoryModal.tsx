@@ -19,12 +19,12 @@ const MILESTONES = [
 ];
 
 /* ── Layout constants ───────────────────────────────────────── */
-const CARD_W   = 128;
-const CARD_GAP = 20;
-const STEP     = CARD_W + CARD_GAP;   // 148
-const PAD      = 36;
-const ECG_H    = 88;                   // px height of ECG strip
-const BASE_Y   = 66;                   // baseline y inside ECG strip
+const CARD_W   = 158;
+const CARD_GAP = 24;
+const STEP     = CARD_W + CARD_GAP;   // 182
+const PAD      = 40;
+const ECG_H    = 112;                  // px height of ECG strip
+const BASE_Y   = 82;                   // baseline y inside ECG strip
 const N        = MILESTONES.length;
 const TOTAL_W  = PAD * 2 + N * STEP;  // total scrollable width
 
@@ -38,7 +38,7 @@ const buildEcgPath = () => {
     const cx = nodeX(i);
     // QRS complex: Q dip, R spike up, S dip below, return
     d += `L ${cx - 8},${BASE_Y + 6} `;   // Q
-    d += `L ${cx},${BASE_Y - 44} `;      // R  (dramatic spike)
+    d += `L ${cx},${BASE_Y - 60} `;      // R  (dramatic spike)
     d += `L ${cx + 6},${BASE_Y + 14} `; // S
     d += `L ${cx + 14},${BASE_Y} `;     // return
     if (i < N - 1) d += `L ${nodeX(i + 1) - 20},${BASE_Y} `;
@@ -176,7 +176,7 @@ export default function StoryModal() {
 
         {/* Panel */}
         <div
-          className="relative w-full sm:max-w-2xl flex flex-col overflow-hidden sm:rounded-3xl rounded-t-3xl"
+          className="relative w-full sm:max-w-4xl flex flex-col overflow-hidden sm:rounded-3xl rounded-t-3xl"
           style={{
             background: "hsl(212,50%,6%)",
             border: "1px solid rgba(255,255,255,0.08)",
