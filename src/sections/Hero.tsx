@@ -1,5 +1,6 @@
 import Typewriter from "../components/Typewriter";
 import { openEmailPicker } from "../components/EmailPicker";
+import { openStoryModal } from "../components/StoryModal";
 import { useHeroParallax } from "../hooks/useHeroParallax";
 
 export default function Hero() {
@@ -213,14 +214,13 @@ export default function Hero() {
           >
             LinkedIn ↗
           </a>
-          <a
-            href="https://priyadharsanjayaseelan.github.io/Priyadharsan_Jayaseelan/story.html"
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-full px-8 py-3 text-sm no-underline transition-all duration-200 hover:scale-[1.04] border"
+          <button
+            onClick={openStoryModal}
+            className="rounded-full px-8 py-3 text-sm transition-all duration-200 hover:scale-[1.04] border cursor-pointer bg-transparent"
             style={{
               color: "hsl(240,4%,66%)",
               borderColor: "rgba(255,255,255,0.12)",
+              fontFamily: "inherit",
             }}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLElement).style.color = "#fff";
@@ -234,7 +234,7 @@ export default function Hero() {
             }}
           >
             My Story ✦
-          </a>
+          </button>
         </div>
 
         {/* CTA scroll */}

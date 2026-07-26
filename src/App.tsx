@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import ScrollProgress from "./components/ScrollProgress";
 import BackToTop from "./components/BackToTop";
 import EmailPicker from "./components/EmailPicker";
+import StoryModal from "./components/StoryModal";
 import Hero from "./sections/Hero";
 import Stats from "./sections/Stats";
 import Projects from "./sections/Projects";
@@ -87,6 +88,9 @@ export default function App() {
 
       {/* ── Email provider picker ── */}
       <EmailPicker />
+
+      {/* ── Story modal ── */}
+      <StoryModal />
     </div>
   );
 }
