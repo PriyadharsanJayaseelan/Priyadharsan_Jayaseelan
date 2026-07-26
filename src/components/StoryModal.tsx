@@ -50,8 +50,8 @@ const buildEcgPath = () => {
 const ECG_PATH = buildEcgPath();
 
 /* ── Timing ─────────────────────────────────────────────────── */
-const START_MS    = 500;
-const INTERVAL_MS = 820;
+const START_MS    = 700;
+const INTERVAL_MS = 1300;
 const TOTAL_DUR   = START_MS + N * INTERVAL_MS + 600;
 
 /* ── Component ──────────────────────────────────────────────── */
