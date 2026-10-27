@@ -32,20 +32,13 @@ const certs = [
 export default function Certifications() {
   return (
     <section className="px-8 py-32 max-w-7xl mx-auto">
-      <div
-        className="scroll-reveal flex items-center gap-3 text-xs tracking-widest uppercase mb-4"
-        style={{ color: "hsl(240,4%,50%)" }}
-      >
-        Certifications
-        <span className="flex-1 h-px max-w-[80px]" style={{ background: "rgba(255,255,255,0.08)" }} />
-      </div>
 
       <h2
         className="scroll-reveal reveal-delay-1 text-5xl md:text-6xl font-normal mb-16"
-        style={{ fontFamily: "'Instrument Serif', serif", letterSpacing: "-0.02em", lineHeight: "1.05" }}
+        style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.02em", lineHeight: "1.05" }}
       >
         Verified{" "}
-        <em className="not-italic" style={{ color: "hsl(240,4%,66%)" }}>Credentials.</em>
+        <em className="not-italic">Credentials.</em>
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -77,7 +70,7 @@ export default function Certifications() {
             </div>
             <h3
               className="text-2xl font-normal text-white mb-2"
-              style={{ fontFamily: "'Instrument Serif', serif", lineHeight: 1.2 }}
+              style={{ fontFamily: "var(--font-display)", lineHeight: 1.2 }}
             >
               {c.title}
             </h3>

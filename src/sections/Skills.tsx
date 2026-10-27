@@ -38,20 +38,13 @@ export default function Skills() {
 
   return (
     <section id="skills" className="px-8 py-32 max-w-7xl mx-auto">
-      <div
-        className="scroll-reveal flex items-center gap-3 text-xs tracking-widest uppercase mb-4"
-        style={{ color: "hsl(240,4%,50%)" }}
-      >
-        Toolkit
-        <span className="flex-1 h-px max-w-[80px]" style={{ background: "rgba(255,255,255,0.08)" }} />
-      </div>
 
       <h2
         className="scroll-reveal reveal-delay-1 text-5xl md:text-6xl font-normal mb-4"
-        style={{ fontFamily: "'Instrument Serif', serif", letterSpacing: "-0.02em", lineHeight: "1.05" }}
+        style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.02em", lineHeight: "1.05" }}
       >
         What I{" "}
-        <em className="not-italic" style={{ color: "hsl(240,4%,66%)" }}>work with.</em>
+        <em className="not-italic">work with.</em>
       </h2>
       <p className="scroll-reveal reveal-delay-2 text-base mb-12 max-w-xl" style={{ color: "hsl(240,4%,60%)" }}>
         Tap or hover a category to light up its tools.

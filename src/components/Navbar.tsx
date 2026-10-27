@@ -26,7 +26,7 @@ export default function Navbar({ scrolled }: NavProps) {
         {/* Logo */}
         <a
           href="#hero"
-          style={{ fontFamily: "'Instrument Serif', serif" }}
+          style={{ fontFamily: "var(--font-display)" }}
           className="text-2xl tracking-tight text-white no-underline"
         >
           PJ<sup className="text-xs">®</sup>

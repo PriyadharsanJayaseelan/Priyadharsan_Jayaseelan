@@ -52,29 +52,18 @@ const timeline = [
 export default function Timeline() {
   return (
     <section className="px-8 py-32 max-w-7xl mx-auto">
-      {/* Label */}
-      <div
-        className="scroll-reveal flex items-center gap-3 text-xs tracking-widest uppercase mb-4"
-        style={{ color: "hsl(240,4%,50%)" }}
-      >
-        The Journey
-        <span
-          className="flex-1 h-px max-w-[80px]"
-          style={{ background: "rgba(255,255,255,0.08)" }}
-        />
-      </div>
 
       {/* Title */}
       <h2
         className="scroll-reveal reveal-delay-1 text-5xl md:text-6xl font-normal mb-20"
         style={{
-          fontFamily: "'Instrument Serif', serif",
+          fontFamily: "var(--font-display)",
           letterSpacing: "-0.02em",
           lineHeight: "1.05",
         }}
       >
         Experience &{" "}
-        <em className="not-italic" style={{ color: "hsl(240,4%,66%)" }}>
+        <em className="not-italic">
           Education.
         </em>
       </h2>
@@ -101,7 +90,7 @@ export default function Timeline() {
                 className="absolute top-1.5 w-2.5 h-2.5 rounded-full"
                 style={{
                   border: "1px solid rgba(255,255,255,0.35)",
-                  background: "hsl(201,100%,13%)",
+                  background: "#050B14",
                   left: "50%",
                   transform: "translateX(-50%)",
                   boxShadow: "0 0 8px rgba(255,255,255,0.1)",
@@ -128,7 +117,7 @@ export default function Timeline() {
               </div>
               <div
                 className="text-2xl font-normal text-white mb-1"
-                style={{ fontFamily: "'Instrument Serif', serif" }}
+                style={{ fontFamily: "var(--font-display)" }}
               >
                 {item.title}
               </div>

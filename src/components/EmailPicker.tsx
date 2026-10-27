@@ -174,7 +174,7 @@ export default function EmailPicker() {
 
         <h3
           className="text-3xl font-normal text-white mb-2"
-          style={{ fontFamily: "'Instrument Serif', serif" }}
+          style={{ fontFamily: "var(--font-display)" }}
         >
           Let's talk.
         </h3>
