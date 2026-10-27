@@ -2,42 +2,50 @@ const timeline = [
   {
     num: "01",
     category: "Experience · Current",
-    title: "Software QA Intern",
-    org: "Pivotal ITS · Federal Advanced Solutions Team (FAST) · Supporting Effort · May 2026 – Present",
+    title: "Software QA Engineer Intern",
+    org: "Pivotal ITS · Federal Advanced Solutions Team (FAST) · May 2026 – Aug 2026",
     detail:
-      "Supporting Effort is a Veteran-owned SDVOSB and federal modernization partner (Zero Delta + i4DM joint venture, 11+ years). Serving as quality gate for a secure internal web portal and AI-powered reporting assistant used by federal employees across VA, DoD, USPTO, FDA, HHS, HUD, USDA, DLA, Army, and State of Maryland. Independently designed, built, and deployed an AI agent in Microsoft Copilot Studio, pushed org-wide via Teams. Led requirements gathering with federal program managers across a 6-person Agile Scrum team.",
+      "Supporting federal clients including the VA/VHA, DoD and GSA. Designed a 51-case test framework and 22-case regression suite for a secure, role-based intranet portal and AI reporting assistant, with traceability from user story to UAT. Caught a critical privilege-escalation defect where report metadata changes bypassed RBAC clearance checks. Built a proof-of-concept Copilot Studio agent whose SharePoint + Entra ID pattern was adopted for production, and an 80+ question validation suite for the AI assistant.",
   },
   {
     num: "02",
     category: "Experience",
     title: "Software Developer Intern",
-    org: "Street Stashed · Jan 2026 – March 2026",
+    org: "StreetStashed · Fashion & Lifestyle Delivery Platform · Jan 2026 – Mar 2026",
     detail:
-      "Built responsive UI components for a Next.js, React and TypeScript streetwear e-commerce platform using Tailwind CSS. Resolved critical mobile layout issues, delivered pixel-perfect checkout flows, and collaborated through code reviews and sprint planning in a cross-functional agile environment.",
+      "Root-caused a marketplace search failure to component state that never synced with URL parameters, and built a useSearchParams/useEffect sync layer in React/Next.js to restore search. Fixed two more defects (filters not applying, state resetting on refresh) so filtered links are shareable. Fixed broken image placeholders on every product page with error-safe fallbacks and lazy loading.",
   },
   {
     num: "03",
-    category: "Experience",
+    category: "Leadership",
     title: "Lead Student Operations Coordinator",
-    org: "Kent State University Culinary Services · Aug 2024 – Present",
+    org: "Kent State University · Aug 2024 – Present",
     detail:
-      "Managed scheduling for 250+ student employees using WhenToWork, reducing no-shows by 30% via automated text reminder workflows. Updated daily menus for three meal services using CBORD with 100% accuracy across student-facing listings. Configured automated inventory alerts reducing stockouts by 25% and excess costs by 10%. Implemented a food waste tracking system cutting over-ordering by 15%. Developed a QR-based event sign-in and feedback system minimizing manual entry errors by 90% and increasing dining satisfaction by 20%. Designed food safety training for 50+ new hires achieving a 95% pass rate.",
+      "Manage scheduling for 200+ student employees in When to Work, cutting no-shows by 30% with automated text reminders through Simple Texting. Configured threshold-based stock alerts in CBORD, cutting stockouts by 25% and excess inventory costs by 10%.",
   },
   {
     num: "04",
-    category: "Research",
-    title: "VR Research Assistant",
-    org: "Kent State University",
+    category: "Project",
+    title: "RollCall · ROTC Attendance Platform",
+    org: "Streamlit · MongoDB · Fall 2025",
     detail:
-      "Led a VR-based IV needle insertion research project analyzing mesh deformation and usability with haptic devices. Conducted user studies with 50+ participants and reported findings using NASA-TLX and SUS evaluation frameworks.",
+      "Built the Event Management module from a blank file and resolved 4 reviewer-flagged issues across two PR cycles. Replaced a hardcoded schedule with a database-backed settings page with role-based access for four roles. Designed the SVG logo and wrote the full README.",
   },
   {
     num: "05",
+    category: "Research",
+    title: "VR IV Needle Insertion Usability Study",
+    org: "Research Assistant · Kent State University · Spring 2025",
+    detail:
+      "Ran VR and haptic IV insertion simulations for 50+ biotech students across 100+ attempts each. Cleaned 5,000+ raw responses into trial-range datasets and computed SUS and NASA-TLX scores that showed learning-curve trends and informed the training redesign.",
+  },
+  {
+    num: "06",
     category: "Education",
     title: "Kent State University",
-    org: "B.S. Computer Science · Minor in Data Analytics · GPA 3.5 · Aug 2023 – May 2027",
+    org: "B.S. Computer Science · Minor in Data Analytics · GPA 3.5 · Expected May 2027",
     detail:
-      "Alpha Lambda Delta Honor Society · International Scholarship. Coursework spanning data structures, algorithms, database systems, machine learning, and data analytics.",
+      "Alpha Lambda Delta National Honor Society (2024) · Global Scholarship. Coursework: Data Structures, Database Management, Software Engineering, Big Data Analytics.",
   },
 ];
 
@@ -49,7 +57,7 @@ export default function Timeline() {
         className="scroll-reveal flex items-center gap-3 text-xs tracking-widest uppercase mb-4"
         style={{ color: "hsl(240,4%,50%)" }}
       >
-        The Manifesto
+        The Journey
         <span
           className="flex-1 h-px max-w-[80px]"
           style={{ background: "rgba(255,255,255,0.08)" }}

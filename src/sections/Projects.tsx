@@ -15,117 +15,131 @@ interface Project {
 const projects: Project[] = [
   {
     num: "01",
-    type: "AI / Enterprise",
-    title: "Federal AI Agent",
+    type: "QA / Federal Security",
+    title: "Federal Intranet Portal QA",
     tagline:
-      "Copilot Studio agent deployed org-wide across three federal organizations.",
-    tags: ["Copilot Studio", "Azure", "Entra ID"],
+      "51-case test framework that caught a critical privilege-escalation bug before it shipped.",
+    tags: ["RBAC", "UAT", "Traceability"],
     overview:
-      "Supporting Effort's FAST team needed to validate a real federal tech stack before development began on a client-facing AI system. I independently designed, built, and deployed a fully functional AI agent in Microsoft Copilot Studio within the federal dev environment, proving out the architecture end to end.",
+      "Pivotal ITS's FAST team was building a secure, role-based intranet portal and AI reporting assistant for federal clients including the VA/VHA, DoD and GSA. I owned test design end to end, where a single permissions bug can expose restricted data.",
     contributions: [
-      "Designed and built the agent in Microsoft Copilot Studio from scratch, within the FAST dev environment.",
-      "Configured SharePoint knowledge sources so the agent answers from approved internal documentation only.",
-      "Enforced guardrails preventing any external data access, a hard requirement in federal environments.",
-      "Implemented Entra ID (SSO/B2B) authentication to mirror the production identity setup.",
-      "Deployed the agent organization-wide to Microsoft Teams through the Teams admin center.",
-      "Coordinated with IT support to resolve federal authentication and knowledge source permission issues across a multi-tenant environment.",
+      "Designed a 51-case test framework and a 22-case regression suite, with full requirements traceability from user story to UAT on every release.",
+      "Surfaced a critical privilege-escalation defect: report metadata changes silently bypassed RBAC clearance checks and exposed restricted data to unauthorized roles. Root-caused it and drove the fix with development.",
+      "Validated Power BI embedded analytics and multi-tenant access end to end, isolating dashboard load failures, permission gaps and workspace misconfigurations.",
+      "Diagnosed deployment failures across Azure SQL firewall ACLs, SPA deep-link routing and UTC/EST timezone drift, and coordinated fixes across IT and development.",
     ],
     metrics: [
-      { value: "3", label: "Federal orgs served" },
-      { value: "100%", label: "Internal-only data access" },
-      { value: "Org-wide", label: "Teams deployment" },
+      { value: "51", label: "Test cases designed" },
+      { value: "22", label: "Regression cases" },
+      { value: "1", label: "Critical RBAC bug caught" },
     ],
-    stack: [
-      "Microsoft Copilot Studio",
-      "SharePoint",
-      "Entra ID (SSO/B2B)",
-      "Microsoft Teams",
-      "Azure",
-      "Multi-tenant admin",
-    ],
+    stack: ["HLTS/LLTS", "RBAC Testing", "UAT", "Power BI", "Azure SQL", "Entra ID", "NIST SP 800-171", "ClickUp"],
   },
   {
     num: "02",
-    type: "QA / Federal",
-    title: "Federal Web Portal QA",
+    type: "AI / Enterprise",
+    title: "Copilot Studio AI Agent",
     tagline:
-      "Sole quality gate for a secure portal and AI reporting assistant for federal leadership.",
-    tags: ["Manual Testing", "UAT", "RBAC"],
+      "Proof-of-concept AI agent whose auth and knowledge pattern was adopted for production.",
+    tags: ["Copilot Studio", "SharePoint", "Entra ID"],
     overview:
-      "A secure internal web portal and AI-powered reporting assistant was being built for federal employees and senior leadership at Supporting Effort (SDVOSB, VA/DoD partner). As the quality gate, I owned test strategy and coverage for a system where security failures are not an option.",
+      "Before the production AI reporting assistant was built, the team needed proof that the Microsoft stack could work inside a federal environment. I built and published a proof-of-concept agent on my own, then built the validation suite for the real assistant.",
     contributions: [
-      "Authored a 33-case test plan covering security compliance, multi-tenant identity authentication, embedded dashboard reporting, role-based access control, and performance benchmarking.",
-      "Led requirements gathering and documentation through stakeholder discovery sessions with federal program managers.",
-      "Captured business requirements, identified risks and dependencies for the delivery roadmap.",
-      "Iteratively refined test coverage with a senior QA professional, adding edge cases around security failures, browser compatibility, and identity service disruptions.",
-      "Tracked sprint deliverables in ClickUp across a cross-functional team of 6 following Agile Scrum.",
+      "Built and published a proof-of-concept AI agent in Microsoft Copilot Studio, completing the full publishing workflow.",
+      "Set up the SharePoint knowledge-sourcing and Entra ID authentication pattern that the production assistant later adopted.",
+      "Built an 80+ question validation suite across 10+ test categories for the AI reporting assistant.",
+      "Checked every expected answer against raw source data so the assistant had full coverage before release.",
     ],
     metrics: [
-      { value: "33", label: "Test cases authored" },
-      { value: "10+", label: "Federal agencies served" },
-      { value: "6", label: "Person Scrum team" },
+      { value: "80+", label: "Validation questions" },
+      { value: "10+", label: "Test categories" },
+      { value: "Prod", label: "Pattern adopted" },
     ],
-    stack: [
-      "HLTS Test Case Format",
-      "UAT",
-      "Power BI",
-      "ClickUp",
-      "Azure DevSecOps",
-      "RBAC",
-      "Agile Scrum",
-    ],
+    stack: ["Microsoft Copilot Studio", "SharePoint", "Entra ID (SSO/B2B)", "Microsoft 365", "Azure"],
   },
   {
     num: "03",
-    type: "Frontend / E-Commerce",
-    title: "Street Stashed",
-    tagline: "Pixel-perfect UI for a Next.js streetwear e-commerce platform.",
-    tags: ["Next.js", "React", "TypeScript"],
+    type: "Full-Stack / Team",
+    title: "RollCall",
+    tagline: "ROTC attendance platform. I built the Event Management module from a blank file.",
+    tags: ["Streamlit", "MongoDB", "RBAC"],
     overview:
-      "Street Stashed is a streetwear e-commerce startup built on Next.js, React, and TypeScript. I joined as a developer intern and was shipping impactful improvements to production within my first week.",
+      "RollCall is an attendance tracking platform for an ROTC detachment, built by a student team. I owned the Event Management module and several pieces of the app's foundation.",
     contributions: [
-      "Developed responsive UI components using Tailwind CSS with mobile-first principles.",
-      "Resolved critical mobile layout issues affecting listings, navigation, and checkout flows.",
-      "Delivered pixel-perfect implementations matched to design specs across devices.",
-      "Collaborated through code reviews, sprint planning, and GitHub workflows in a cross-functional agile team.",
-      "Debugged configuration and performance bottlenecks via rigorous cross-device testing.",
-      "Documented builds with detailed stakeholder reports ensuring production-ready code quality.",
+      "Built Event Management end to end: event creation, auto-populated event types, and inline editing with pre-filled forms.",
+      "Resolved 4 reviewer-flagged issues across two PR review cycles, including a database update-tracking bug that reported valid edits as failures.",
+      "Replaced a hardcoded PT/LLAB weekday schedule with a database-backed settings page, with role-based access for admin, cadre, flight commander and cadet.",
+      "Designed the app's SVG logo and wrote the full README: architecture, setup, environment config and contributor guidelines.",
     ],
     metrics: [
-      { value: "1 wk", label: "To first shipped improvement" },
-      { value: "100%", label: "Mobile-first components" },
-      { value: "3", label: "Core flows delivered" },
+      { value: "4", label: "User roles" },
+      { value: "4", label: "Review issues resolved" },
+      { value: "0→1", label: "Module built" },
     ],
-    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "GitHub", "Agile"],
+    stack: ["Python", "Streamlit", "MongoDB", "streamlit-authenticator", "Git/GitHub"],
   },
   {
     num: "04",
-    type: "VR Research",
-    title: "VR IV Needle Simulation",
-    tagline: "Led VR medical simulation research with 50+ participants at Kent State.",
-    tags: ["VR", "Research", "Haptics"],
+    type: "Frontend / E-Commerce",
+    title: "StreetStashed Search Fix",
+    tagline: "Restored broken marketplace search and made filtered links shareable.",
+    tags: ["Next.js", "React", "URL State"],
     overview:
-      "Medical training simulations need to feel real to be effective. I led a VR-based IV needle insertion research project at Kent State University, analyzing how mesh deformation and haptic feedback affect usability and training outcomes.",
+      "StreetStashed is a fashion and lifestyle delivery platform. Marketplace search was broken in production. I found why, fixed it, and fixed two more bugs I found along the way.",
     contributions: [
-      "Led the research project analyzing mesh deformation and usability with haptic devices and VR interfaces.",
-      "Designed and conducted user studies with 50+ participants.",
-      "Measured cognitive workload using the NASA-TLX framework.",
-      "Evaluated system usability using the SUS (System Usability Scale) methodology.",
-      "Analyzed and reported findings to guide the next iteration of the simulation.",
+      "Traced the search failure to component state that never synced with URL parameters, then built a useSearchParams/useEffect sync layer across search and filters.",
+      "Found and fixed two more defects in testing: category filters silently not applying, and search state resetting on refresh.",
+      "Made filtered views persistent and shareable by extending URL-parameter handling.",
+      "Fixed broken image placeholders on every product page with error-safe fallbacks, loop prevention and lazy loading, then swapped in a branded asset.",
     ],
     metrics: [
-      { value: "50+", label: "Study participants" },
-      { value: "2", label: "Evaluation frameworks" },
-      { value: "Lead", label: "Research role" },
+      { value: "3", label: "Defects fixed" },
+      { value: "100%", label: "Product pages fixed" },
+      { value: "E2E", label: "Search restored" },
     ],
-    stack: [
-      "VR Interfaces",
-      "Haptic Devices",
-      "NASA-TLX",
-      "SUS",
-      "Quantitative Analysis",
-      "User Studies",
+    stack: ["Next.js", "React", "TypeScript", "useSearchParams", "Tailwind CSS", "GitHub"],
+  },
+  {
+    num: "05",
+    type: "VR Research",
+    title: "VR IV Needle Usability Study",
+    tagline: "Turned 5,000+ raw responses into learning-curve trends that reshaped training.",
+    tags: ["VR", "Haptics", "Data Analysis"],
+    overview:
+      "Kent State researchers were testing whether VR and haptic simulation can teach IV needle insertion. I ran the sessions and turned the raw data into findings the team used to redesign the training.",
+    contributions: [
+      "Ran VR and haptic IV insertion simulations for 50+ biotech students across 100+ attempts each.",
+      "Calibrated headsets and haptic devices and guided standardized NASA-TLX and SUS assessments.",
+      "Cleaned and structured 5,000+ raw usability responses into trial-range datasets.",
+      "Computed average SUS and NASA-TLX workload scores to show learning-curve trends that informed the training redesign.",
     ],
+    metrics: [
+      { value: "50+", label: "Participants" },
+      { value: "5K+", label: "Responses analyzed" },
+      { value: "100+", label: "Attempts each" },
+    ],
+    stack: ["VR Headsets", "Haptic Devices", "NASA-TLX", "SUS", "Google Sheets", "Data Cleaning"],
+  },
+  {
+    num: "06",
+    type: "Frontend / Design",
+    title: "This Portfolio",
+    tagline: "Hand-built React site with a live ECG career tracker and zero animation libraries.",
+    tags: ["React", "TypeScript", "SVG"],
+    overview:
+      "I wanted a portfolio that feels like a product, not a resume. Every animation here is written by hand in React, CSS and SVG, with no animation library, and it deploys automatically through GitHub Actions.",
+    contributions: [
+      "Built with React 18, TypeScript, Vite and Tailwind, deployed to GitHub Pages through a CI workflow.",
+      "Designed a live ECG 'heartbeat' career tracker: an SVG path draws itself and unlocks nine career levels like a game.",
+      "Wrote custom hooks for scroll reveal, hero parallax, animated counters, 3D card tilt and a cursor spotlight.",
+      "Respects prefers-reduced-motion and works on phone and desktop.",
+    ],
+    metrics: [
+      { value: "0", label: "Animation libraries" },
+      { value: "9", label: "Career levels" },
+      { value: "CI", label: "Auto-deploy" },
+    ],
+    stack: ["React 18", "TypeScript", "Vite", "Tailwind CSS", "SVG", "GitHub Actions"],
   },
 ];
 
@@ -414,7 +428,7 @@ export default function Projects() {
       </p>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((p, i) => (
           <div
             key={p.num}
@@ -428,7 +442,7 @@ export default function Projects() {
                 open(p, i);
               }
             }}
-            className={`scroll-reveal reveal-delay-${i + 1} card-glow shimmer-top rounded-[20px] p-9 flex flex-col cursor-pointer group`}
+            className={`scroll-reveal reveal-delay-${(i % 3) + 1} tilt-card card-glow shimmer-top rounded-[20px] p-9 flex flex-col cursor-pointer group`}
             style={{
               border: "1px solid rgba(255,255,255,0.08)",
               background: "rgba(255,255,255,0.02)",

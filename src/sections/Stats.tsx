@@ -1,10 +1,10 @@
 import { useCounter } from "../hooks/useCounter";
 
 const stats = [
-  { target: 3.5, display: "3.5", suffix: "", label: "GPA · Kent State University", sub: "Alpha Lambda Delta Honor Society · International Scholarship · May 2027" },
-  { target: 10, display: "10", suffix: "+", label: "Federal Agencies Supported", sub: "VA, DoD, USPTO, FDA, HHS, HUD, USDA, DLA, Army & more · Supporting Effort FAST Team" },
-  { target: 33, display: "33", suffix: "", label: "Test Cases Authored", sub: "Federal cloud portal · Security, RBAC, auth & performance benchmarking" },
-  { target: 50, display: "50", suffix: "+", label: "Research Participants", sub: "VR IV Needle Simulation · NASA-TLX · SUS usability metrics" },
+  { target: 3.5, display: "3.5", suffix: "", label: "GPA · Kent State University", sub: "B.S. Computer Science, Minor in Data Analytics · Alpha Lambda Delta · May 2027" },
+  { target: 51, display: "51", suffix: "", label: "Federal Test Cases Designed", sub: "Role-based intranet portal + 22-case regression suite · VA/VHA, DoD, GSA" },
+  { target: 80, display: "80", suffix: "+", label: "AI Validation Questions", sub: "Across 10+ test categories, each checked against raw source data" },
+  { target: 200, display: "200", suffix: "+", label: "Student Employees Scheduled", sub: "Kent State dining ops · 30% fewer no-shows · 25% fewer stockouts" },
 ];
 
 function StatCard({ s, delay }: { s: typeof stats[0]; delay: number }) {
@@ -16,7 +16,7 @@ function StatCard({ s, delay }: { s: typeof stats[0]; delay: number }) {
   return (
     <div
       ref={ref}
-      className={`scroll-reveal reveal-delay-${delay} card-glow shimmer-top rounded-2xl p-8 cursor-default`}
+      className={`scroll-reveal reveal-delay-${delay} tilt-card card-glow shimmer-top rounded-2xl p-8 cursor-default`}
       style={{ border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}
     >
       <div
@@ -66,7 +66,7 @@ export default function Stats() {
           className="text-2xl md:text-3xl font-normal mb-4"
           style={{ fontFamily: "'Instrument Serif', serif", color: "hsl(240,4%,75%)", lineHeight: 1.4 }}
         >
-          "Building things that actually matter."
+          "I break things on purpose, so they never break for the people who depend on them."
         </p>
         <p className="text-sm" style={{ color: "hsl(240,4%,50%)" }}>
           Priyadharsan Jayaseelan

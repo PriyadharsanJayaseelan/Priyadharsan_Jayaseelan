@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 
 const roles = [
   "Software QA Engineer.",
-  "Federal Systems Builder.",
+  "Bug Hunter.",
+  "AI Agent Builder.",
   "Frontend Developer.",
   "VR Researcher.",
-  "Leader of 250+ People.",
-  "Problem Solver.",
+  "Leader of 200+ People.",
 ];
 
 export default function Typewriter() {
