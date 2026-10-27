@@ -7,15 +7,15 @@ export function openStoryModal() {
 
 /* ── Milestone data ─────────────────────────────────────────── */
 const MILESTONES = [
-  { level: "01", date: "Aug 2023", title: "Arrived in US",        sub: "KSU Global Scholarship",        color: "#38bdf8" },
-  { level: "02", date: "Jan 2024", title: "Alpha Lambda Delta",   sub: "Academic Honor Society",         color: "#a78bfa" },
-  { level: "03", date: "Aug 2024", title: "First Paycheck",       sub: "KSU Food Service Worker",        color: "#4ade80" },
-  { level: "04", date: "Jan 2025", title: "Student Manager",      sub: "KSU Dining · 3 units",           color: "#fb923c" },
-  { level: "05", date: "Jan 2025", title: "VR Research",          sub: "KSU Aeronautics Lab",            color: "#f472b6" },
-  { level: "06", date: "May 2025", title: "HR Manager",           sub: "University Hiring Ops",          color: "#34d399" },
-  { level: "07", date: "Sep 2025", title: "Leads 250+ People",    sub: "Operational Lead · 3 units",     color: "#fbbf24" },
-  { level: "08", date: "Jan 2026", title: "Software Dev Intern",  sub: "StreetStashed · Next.js / TS",   color: "#60a5fa" },
-  { level: "09", date: "May 2026", title: "Federal AI Engineer",  sub: "FAST / Pivotal ITS · DoD / VA",  color: "#f87171" },
+  { level: "01", date: "Aug 2023", title: "Arrived in US",        sub: "KSU Global Scholarship",         color: "#38bdf8" },
+  { level: "02", date: "Jan 2024", title: "Alpha Lambda Delta",   sub: "National Honor Society",         color: "#a78bfa" },
+  { level: "03", date: "Aug 2024", title: "First Paycheck",       sub: "Kent State Dining",              color: "#4ade80" },
+  { level: "04", date: "Jan 2025", title: "VR Research",          sub: "50+ participants · 5K+ responses", color: "#f472b6" },
+  { level: "05", date: "2025",     title: "Leads 200+ People",    sub: "Lead Operations Coordinator",    color: "#fbbf24" },
+  { level: "06", date: "Oct 2025", title: "PCI DSS Certified",    sub: "KSU Information Services",       color: "#34d399" },
+  { level: "07", date: "Fall 2025", title: "Shipped RollCall",    sub: "Streamlit · MongoDB · RBAC",     color: "#fb923c" },
+  { level: "08", date: "Jan 2026", title: "Software Dev Intern",  sub: "StreetStashed · Next.js",        color: "#60a5fa" },
+  { level: "09", date: "May 2026", title: "Federal QA Engineer",  sub: "Pivotal ITS / FAST · VA · DoD",  color: "#f87171" },
 ];
 
 /* ── Layout constants ───────────────────────────────────────── */

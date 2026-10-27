@@ -221,3 +221,43 @@ body {
   background: rgba(255, 255, 255, 0.15);
   color: #fff;
 }
+
+/* ─── 3D tilt cards ─────────────────────────────────── */
+.tilt-card {
+  --rx: 0deg;
+  --ry: 0deg;
+  --mx: 50%;
+  --my: 50%;
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.25s ease-out, opacity 0.75s ease-out, border-color 0.3s, background 0.3s, box-shadow 0.3s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+.tilt-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(420px circle at var(--mx) var(--my), rgba(255, 255, 255, 0.07), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.tilt-card.scroll-reveal.visible { transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)); }
+.tilt-card:hover::before { opacity: 1; }
+
+/* ─── Skill pills ───────────────────────────────────── */
+.skill-pill {
+  transition: opacity 0.3s, transform 0.3s, border-color 0.3s, background 0.3s, box-shadow 0.3s, color 0.3s !important;
+}
+
+/* ─── Reduced motion ────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .scroll-reveal { opacity: 1 !important; transform: none !important; }
+}

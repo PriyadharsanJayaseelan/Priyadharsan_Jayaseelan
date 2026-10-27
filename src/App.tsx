@@ -13,7 +13,11 @@ import Contact from "./sections/Contact";
 import Marquee from "./components/Marquee";
 import Divider from "./components/Divider";
 import Agencies from "./sections/Agencies";
+import Skills from "./sections/Skills";
 import { useScrollReveal } from "./hooks/useScrollReveal";
+import { useTilt } from "./hooks/useTilt";
+import { useScramble } from "./hooks/useScramble";
+import { useCursorGlow } from "./hooks/useCursorGlow";
 
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
@@ -25,6 +29,9 @@ export default function App() {
   }, []);
 
   useScrollReveal();
+  useTilt();
+  useScramble();
+  useCursorGlow();
 
   return (
     <div
@@ -69,6 +76,11 @@ export default function App() {
 
       {/* ── Projects ── */}
       <Projects />
+
+      <Divider />
+
+      {/* ── Skills ── */}
+      <Skills />
 
       <Divider />
 
