@@ -103,28 +103,17 @@ export default function Agencies() {
 
   return (
     <section className="py-24 max-w-7xl mx-auto px-8">
-      {/* Label */}
-      <div
-        className="scroll-reveal flex items-center gap-3 text-xs tracking-widest uppercase mb-4"
-        style={{ color: "hsl(240,4%,50%)" }}
-      >
-        Federal Agencies Served
-        <span
-          className="flex-1 h-px max-w-[80px]"
-          style={{ background: "rgba(255,255,255,0.08)" }}
-        />
-      </div>
 
       <h2
         className="scroll-reveal reveal-delay-1 text-5xl md:text-6xl font-normal mb-4"
         style={{
-          fontFamily: "'Instrument Serif', serif",
+          fontFamily: "var(--font-display)",
           letterSpacing: "-0.02em",
           lineHeight: "1.05",
         }}
       >
         Trusted by{" "}
-        <em className="not-italic" style={{ color: "hsl(240,4%,66%)" }}>
+        <em className="not-italic">
           government.
         </em>
       </h2>
@@ -146,13 +135,13 @@ export default function Agencies() {
         <div
           className="absolute inset-y-0 left-0 z-10 w-28 pointer-events-none"
           style={{
-            background: "linear-gradient(to right, hsl(201,100%,13%), transparent)",
+            background: "linear-gradient(to right, #050B14, transparent)",
           }}
         />
         <div
           className="absolute inset-y-0 right-0 z-10 w-28 pointer-events-none"
           style={{
-            background: "linear-gradient(to left, hsl(201,100%,13%), transparent)",
+            background: "linear-gradient(to left, #050B14, transparent)",
           }}
         />
 

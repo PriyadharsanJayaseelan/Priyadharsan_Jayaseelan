@@ -35,7 +35,7 @@ export default function App() {
 
   return (
     <div
-      style={{ background: "hsl(201,100%,13%)", minHeight: "100vh", position: "relative" }}
+      style={{ background: "#050B14", minHeight: "100vh", position: "relative" }}
     >
       {/* ── Grain texture overlay ── */}
       <div

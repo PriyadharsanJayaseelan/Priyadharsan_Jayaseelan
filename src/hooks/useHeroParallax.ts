@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
  * so no React re-renders. Desktop only; respects reduced motion.
  */
 export function useHeroParallax() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLDivElement>(null);
   const lineLeftRef = useRef<HTMLSpanElement>(null);
   const lineRightRef = useRef<HTMLSpanElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);

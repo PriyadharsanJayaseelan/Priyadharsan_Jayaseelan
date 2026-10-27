@@ -9,24 +9,17 @@ export default function Contact() {
         className="px-8 py-32 text-center max-w-7xl mx-auto"
         style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
       >
-        {/* Label */}
-        <div
-          className="scroll-reveal inline-flex items-center gap-3 text-xs tracking-widest uppercase mb-6"
-          style={{ color: "hsl(240,4%,50%)" }}
-        >
-          Let's Connect
-        </div>
 
         {/* Title */}
         <h2
           className="scroll-reveal reveal-delay-1 text-5xl md:text-6xl font-normal text-white mb-5"
           style={{
-            fontFamily: "'Instrument Serif', serif",
+            fontFamily: "var(--font-display)",
             letterSpacing: "-0.02em",
           }}
         >
           Got something{" "}
-          <em className="not-italic" style={{ color: "hsl(240,4%,66%)" }}>
+          <em className="not-italic">
             interesting?
           </em>
         </h2>
@@ -44,7 +37,7 @@ export default function Contact() {
           onClick={openEmailPicker}
           className="scroll-reveal reveal-delay-3 cursor-pointer transition-all duration-200 inline-block bg-transparent"
           style={{
-            fontFamily: "'Instrument Serif', serif",
+            fontFamily: "var(--font-display)",
             fontSize: "clamp(1rem, 2vw, 1.4rem)",
             color: "#fff",
             border: "none",

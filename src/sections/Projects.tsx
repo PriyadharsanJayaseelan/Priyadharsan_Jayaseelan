@@ -279,7 +279,7 @@ function ProjectModal({
           </div>
           <h3
             className="text-4xl sm:text-5xl font-normal text-white mb-3"
-            style={{ fontFamily: "'Instrument Serif', serif", lineHeight: 1.1 }}
+            style={{ fontFamily: "var(--font-display)", lineHeight: 1.1 }}
           >
             {project.title}
           </h3>
@@ -300,7 +300,7 @@ function ProjectModal({
               >
                 <div
                   className="text-2xl sm:text-3xl text-white mb-1"
-                  style={{ fontFamily: "'Instrument Serif', serif" }}
+                  style={{ fontFamily: "var(--font-display)" }}
                 >
                   {m.value}
                 </div>
@@ -393,29 +393,18 @@ export default function Projects() {
 
   return (
     <section id="work" className="px-8 py-32 max-w-7xl mx-auto">
-      {/* Label */}
-      <div
-        className="scroll-reveal flex items-center gap-3 text-xs tracking-widest uppercase mb-4"
-        style={{ color: "hsl(240,4%,50%)" }}
-      >
-        Selected Work
-        <span
-          className="flex-1 h-px max-w-[80px]"
-          style={{ background: "rgba(255,255,255,0.08)" }}
-        />
-      </div>
 
       {/* Title */}
       <h2
         className="scroll-reveal reveal-delay-1 text-5xl md:text-6xl font-normal mb-4"
         style={{
-          fontFamily: "'Instrument Serif', serif",
+          fontFamily: "var(--font-display)",
           letterSpacing: "-0.02em",
           lineHeight: "1.05",
         }}
       >
         The{" "}
-        <em className="not-italic" style={{ color: "hsl(240,4%,66%)" }}>
+        <em className="not-italic">
           Work.
         </em>
       </h2>
@@ -469,7 +458,7 @@ export default function Projects() {
             <h3
               className="text-2xl font-normal text-white mb-3"
               style={{
-                fontFamily: "'Instrument Serif', serif",
+                fontFamily: "var(--font-display)",
                 lineHeight: "1.2",
               }}
             >

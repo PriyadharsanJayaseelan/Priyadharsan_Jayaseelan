@@ -21,7 +21,7 @@ function StatCard({ s, delay }: { s: typeof stats[0]; delay: number }) {
     >
       <div
         className="text-6xl font-normal mb-3 text-white"
-        style={{ fontFamily: "'Instrument Serif', serif", lineHeight: 1 }}
+        style={{ fontFamily: "var(--font-display)", lineHeight: 1 }}
       >
         {displayed}{s.suffix}
       </div>
@@ -36,20 +36,13 @@ function StatCard({ s, delay }: { s: typeof stats[0]; delay: number }) {
 export default function Stats() {
   return (
     <section id="about" className="px-8 py-32 max-w-7xl mx-auto">
-      <div
-        className="scroll-reveal flex items-center gap-3 text-xs tracking-widest uppercase mb-4"
-        style={{ color: "hsl(240,4%,50%)" }}
-      >
-        What Sets Me Apart
-        <span className="flex-1 h-px max-w-[80px]" style={{ background: "rgba(255,255,255,0.08)" }} />
-      </div>
 
       <h2
         className="scroll-reveal reveal-delay-1 text-5xl md:text-6xl font-normal mb-16"
-        style={{ fontFamily: "'Instrument Serif', serif", letterSpacing: "-0.02em", lineHeight: "1.05" }}
+        style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.02em", lineHeight: "1.05" }}
       >
         Numbers that{" "}
-        <em className="not-italic" style={{ color: "hsl(240,4%,66%)" }}>speak.</em>
+        <em className="not-italic">speak.</em>
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -64,7 +57,7 @@ export default function Stats() {
       >
         <p
           className="text-2xl md:text-3xl font-normal mb-4"
-          style={{ fontFamily: "'Instrument Serif', serif", color: "hsl(240,4%,75%)", lineHeight: 1.4 }}
+          style={{ fontFamily: "var(--font-display)", color: "hsl(240,4%,75%)", lineHeight: 1.4 }}
         >
           "I break things on purpose, so they never break for the people who depend on them."
         </p>
