@@ -10,9 +10,11 @@ const CLEVELAND: LL = [41.41, -81.85];
 const KENT: LL = [41.15, -81.36];
 const PITTSBURGH: LL = [40.44, -79.99];
 const RALEIGH: LL = [35.78, -78.64];
+const WASHINGTON: LL = [38.89, -77.03];
 
 /* ── Script ─────────────────────────────────────────────────── */
-type Kind = "home" | "flight" | "ping" | "link" | "outro";
+type Kind = "home" | "flight" | "ping" | "link" | "federal" | "outro";
+type Fx = "shock" | "sunrise" | "scan" | "swarm" | "launch";
 interface Chapter {
   kind: Kind;
   date: string;
@@ -23,19 +25,26 @@ interface Chapter {
   dur: number;
   to?: LL;
   place: string;
+  heading?: number; // camera bearing in degrees (0 = looking north)
+  tilt?: number;    // how far the camera leans toward the horizon
+  hop?: number;     // crane-up height during the transition
+  orbit?: number;   // degrees the camera circles while the chapter plays
+  fx?: Fx;
 }
 
+const AGENCIES = ["U.S. Army", "Department of Defense", "VA / VHA", "Homeland Security", "GSA", "and more"];
+
 const CHAPTERS: Chapter[] = [
-  { kind: "home", date: "Tamil Nadu, India", title: "Where it starts.", line: "Grew up curious about how things work, and how they break.", at: TAMIL_NADU, dist: 2.1, dur: 6000, place: "Tamil Nadu, IN" },
-  { kind: "flight", date: "August 2023", title: "Chennai to Cleveland.", line: "Eighteen, one suitcase, and a Global Scholarship to Kent State.", at: CHENNAI, to: CLEVELAND, dist: 2.3, dur: 12000, place: "In flight" },
-  { kind: "ping", date: "January 2024", title: "Alpha Lambda Delta.", line: "National honor society, for a 3.5+ GPA in my first year.", at: KENT, dist: 1.55, dur: 6000, place: "Kent, OH" },
-  { kind: "ping", date: "August 2024", title: "First paycheck.", line: "Kent State dining. Where I learned how real operations run.", at: KENT, dist: 1.5, dur: 6000, place: "Kent, OH" },
-  { kind: "ping", date: "Spring 2025", title: "Into the research lab.", line: "Ran VR and haptic IV-needle studies: 50+ students, 5,000+ responses.", at: KENT, dist: 1.45, dur: 6500, place: "Kent, OH" },
-  { kind: "ping", date: "2025", title: "Leading 200+ people.", line: "Lead student operations coordinator. No-shows down 30%.", at: KENT, dist: 1.5, dur: 6000, place: "Kent, OH" },
-  { kind: "ping", date: "Fall 2025", title: "Shipped RollCall.", line: "Built the event system for an ROTC attendance app, from a blank file.", at: KENT, dist: 1.45, dur: 6000, place: "Kent, OH" },
-  { kind: "link", date: "January 2026", title: "First dev internship.", line: "StreetStashed, remote to Pittsburgh. Fixed their broken marketplace search.", at: KENT, to: PITTSBURGH, dist: 1.4, dur: 7000, place: "Uplink: Pittsburgh, PA" },
-  { kind: "link", date: "May 2026", title: "Federal software QA.", line: "Pivotal ITS, remote to North Carolina. Caught a privilege-escalation bug before it shipped.", at: KENT, to: RALEIGH, dist: 1.55, dur: 8000, place: "Uplink: Raleigh, NC" },
-  { kind: "outro", date: "Next destination", title: "Your team.", line: "Graduating May 2027. Open to new-grad and internship roles.", at: KENT, dist: 3.3, dur: 999999, place: "Kent, OH" },
+  { kind: "home", date: "Tamil Nadu, India", title: "Where it starts.", line: "Grew up curious about how things work, and how they break.", at: TAMIL_NADU, dist: 2.1, dur: 6000, place: "Tamil Nadu, IN", orbit: 8 },
+  { kind: "flight", date: "August 2023", title: "Chennai to Cleveland.", line: "Seventeen, one suitcase, and a Global Scholarship to Kent State.", at: CHENNAI, to: CLEVELAND, dist: 2.3, dur: 13000, place: "In flight" },
+  { kind: "ping", fx: "shock", date: "January 2024", title: "Alpha Lambda Delta.", line: "National honor society, for a 3.5+ GPA in my first year.", at: KENT, dist: 1.5, dur: 6500, place: "Kent, OH", heading: -40, tilt: 16, hop: 0.5, orbit: 18 },
+  { kind: "ping", fx: "sunrise", date: "August 2024", title: "First paycheck.", line: "Kent State dining. Where I learned how real operations run.", at: KENT, dist: 1.42, dur: 7500, place: "Kent, OH", heading: 35, tilt: 15, hop: 0.35, orbit: -10 },
+  { kind: "ping", fx: "scan", date: "Spring 2025", title: "Into the research lab.", line: "Ran VR and haptic IV-needle studies: 50+ students, 5,000+ responses.", at: KENT, dist: 1.28, dur: 7000, place: "Kent State lab", heading: 0, tilt: 2, hop: 0.45, orbit: 30 },
+  { kind: "ping", fx: "swarm", date: "2025", title: "Leading 200+ people.", line: "Lead student operations coordinator. No-shows down 30%.", at: KENT, dist: 1.62, dur: 7500, place: "Kent, OH", heading: -70, tilt: 13, hop: 0.3, orbit: 14 },
+  { kind: "ping", fx: "launch", date: "Fall 2025", title: "Shipped RollCall.", line: "Built the event system for an ROTC attendance app, from a blank file.", at: KENT, dist: 1.3, dur: 7000, place: "Kent, OH", heading: 80, tilt: 20, hop: 0.4, orbit: -16 },
+  { kind: "link", date: "January 2026", title: "First dev internship.", line: "StreetStashed, remote to Pittsburgh. Fixed their broken marketplace search.", at: KENT, to: PITTSBURGH, dist: 1.4, dur: 7000, place: "Uplink: Pittsburgh, PA", heading: 20, tilt: 14, hop: 0.25, orbit: 10 },
+  { kind: "federal", date: "May 2026", title: "Federal software QA.", line: "Pivotal ITS, remote to North Carolina. Testing secure systems for the U.S. Army, DoD, VA, Homeland Security and more.", at: KENT, to: RALEIGH, dist: 1.66, dur: 11000, place: "Uplink: Raleigh, NC", heading: -15, tilt: 13, hop: 0.3, orbit: 10 },
+  { kind: "outro", date: "Next destination", title: "Your team.", line: "Graduating May 2027. Open to new-grad and internship roles.", at: KENT, dist: 3.3, dur: 999999, place: "Kent, OH", orbit: 0 },
 ];
 
 /* ── Geo math (matches three.js SphereGeometry UVs) ─────────── */
@@ -71,6 +80,16 @@ const lerpLon = (a: number, b: number, t: number) => {
 function fmtLL([lat, lon]: LL) {
   return `${Math.abs(lat).toFixed(2)}°${lat >= 0 ? "N" : "S"}  ${Math.abs(lon).toFixed(2)}°${lon >= 0 ? "E" : "W"}`;
 }
+function destPoint([lat, lon]: LL, bearing: number, distDeg: number): LL {
+  const p1 = lat * DEG, l1 = lon * DEG, th = bearing * DEG, d = distDeg * DEG;
+  const p2 = Math.asin(Math.sin(p1) * Math.cos(d) + Math.cos(p1) * Math.sin(d) * Math.cos(th));
+  const l2 = l1 + Math.atan2(Math.sin(th) * Math.sin(d) * Math.cos(p1), Math.cos(d) - Math.sin(p1) * Math.sin(p2));
+  return [p2 / DEG, ((l2 / DEG + 540) % 360) - 180];
+}
+function bearing([a1, b1]: LL, [a2, b2]: LL) {
+  const p1 = a1 * DEG, p2 = a2 * DEG, dl = (b2 - b1) * DEG;
+  return Math.atan2(Math.sin(dl) * Math.cos(p2), Math.cos(p1) * Math.sin(p2) - Math.sin(p1) * Math.cos(p2) * Math.cos(dl)) / DEG;
+}
 function arcPoints(a: LL, b: LL, lift: number, n = 220) {
   const va = ll2v(a), vb = ll2v(b);
   return Array.from({ length: n }, (_, i) => {
@@ -90,7 +109,7 @@ const earthVert = /* glsl */ `
     gl_Position = projectionMatrix * viewMatrix * wp;
   }`;
 const earthFrag = /* glsl */ `
-  uniform sampler2D dayMap; uniform sampler2D nightMap; uniform sampler2D waterMap;
+  uniform sampler2D dayMap; uniform sampler2D nightMap;
   uniform vec3 sunDir;
   varying vec2 vUv; varying vec3 vN; varying vec3 vPos;
   void main() {
@@ -99,16 +118,12 @@ const earthFrag = /* glsl */ `
     float d = dot(N, sunDir);
     vec3 day = texture2D(dayMap, vUv).rgb;
     vec3 night = texture2D(nightMap, vUv).rgb;
-    float water = texture2D(waterMap, vUv).r;
     float lit = smoothstep(-0.08, 0.35, d);
     vec3 col = day * (0.015 + 1.35 * max(d, 0.0)) * lit;
     // city lights only where it's dark
     col += night * vec3(1.0, 0.78, 0.5) * 2.4 * (1.0 - smoothstep(-0.2, 0.08, d));
-    // sun glint on oceans
-    vec3 H = normalize(sunDir + V);
-    col += vec3(1.0, 0.92, 0.8) * pow(max(dot(N, H), 0.0), 900.0) * water * 0.22 * lit;
     // warm terminator + blue limb
-    col += vec3(1.0, 0.5, 0.25) * 0.025 * (1.0 - smoothstep(0.0, 0.08, abs(d))) * (1.0 - water * 0.7);
+    col += vec3(1.0, 0.5, 0.25) * 0.025 * (1.0 - smoothstep(0.0, 0.08, abs(d)));
     float fres = pow(1.0 - max(dot(N, V), 0.0), 3.0);
     col += vec3(0.35, 0.6, 1.0) * fres * 0.75 * smoothstep(-0.25, 0.5, d);
     gl_FragColor = vec4(col, 1.0);
@@ -143,6 +158,7 @@ export default function StoryFlight({ onClose }: { onClose: () => void }) {
   const [chapter, setChapter] = useState(0);
   const [playing, setPlaying] = useState(true);
   const [bars, setBars] = useState(false);
+  const [agencies, setAgencies] = useState(0);
 
   // refs shared with the render loop
   const chapterRef = useRef(0);
@@ -207,11 +223,10 @@ export default function StoryFlight({ onClose }: { onClose: () => void }) {
     };
     const dayMap = tex("earth-blue-marble.jpg", true);
     const nightMap = tex("earth-night.jpg", true);
-    const waterMap = tex("earth-water.png", false);
 
     const sunDir = new THREE.Vector3(1, 0.3, 0.5).normalize();
     const earthMat = new THREE.ShaderMaterial({
-      uniforms: { dayMap: { value: dayMap }, nightMap: { value: nightMap }, waterMap: { value: waterMap }, sunDir: { value: sunDir } },
+      uniforms: { dayMap: { value: dayMap }, nightMap: { value: nightMap }, sunDir: { value: sunDir } },
       vertexShader: earthVert,
       fragmentShader: earthFrag,
     });
@@ -293,6 +308,7 @@ export default function StoryFlight({ onClose }: { onClose: () => void }) {
     const mKent = marker(KENT, AMBER);
     const mPit = marker(PITTSBURGH, CYAN);
     const mRal = marker(RALEIGH, CYAN);
+    const mDC = marker(WASHINGTON, CYAN);
 
     function arc(a: LL, b: LL, lift: number, color: THREE.Color, opacity: number) {
       const pts = arcPoints(a, b, lift);
@@ -305,6 +321,93 @@ export default function StoryFlight({ onClose }: { onClose: () => void }) {
     const flightArc = arc(CHENNAI, CLEVELAND, 0.09, AMBER, 0.95);
     const pitArc = arc(KENT, PITTSBURGH, 0.004, CYAN, 0.95);
     const ralArc = arc(KENT, RALEIGH, 0.012, CYAN, 0.95);
+    const dcArc = arc(RALEIGH, WASHINGTON, 0.006, CYAN, 0.95);
+
+    /* ── per-chapter effects, all anchored on Kent ── */
+    const ADD = THREE.AdditiveBlending;
+    const kentFx = new THREE.Group();
+    {
+      const p = ll2v(KENT, 1.0012);
+      kentFx.position.copy(p);
+      kentFx.lookAt(p.clone().multiplyScalar(2));
+      scene.add(kentFx);
+    }
+    const fxMat = (color: string | THREE.Color) =>
+      new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0, side: THREE.DoubleSide, blending: ADD, depthWrite: false });
+
+    // honor shockwave
+    const shocks = [0, 1, 2].map(() => {
+      const m = new THREE.Mesh(new THREE.RingGeometry(0.86, 1, 128), fxMat("#FFD27A"));
+      kentFx.add(m);
+      return m;
+    });
+
+    // research lab radar-scan disc
+    const scanMat = new THREE.ShaderMaterial({
+      uniforms: { time: { value: 0 }, fade: { value: 0 } },
+      vertexShader: "varying vec2 vP; void main(){ vP = position.xy; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }",
+      fragmentShader: `uniform float time; uniform float fade; varying vec2 vP;
+        void main(){
+          float r = length(vP);
+          float a = atan(vP.y, vP.x) / 6.28318 + 0.5;
+          float beam = pow(fract(a - time * 0.32), 12.0) * 0.95;
+          float f = fract(r * 5.0);
+          float ring = (1.0 - smoothstep(0.0, 0.035, min(f, 1.0 - f))) * 0.32;
+          float cross = (1.0 - smoothstep(0.0, 0.008, abs(vP.x))) * 0.25 + (1.0 - smoothstep(0.0, 0.008, abs(vP.y))) * 0.25;
+          float edge = 1.0 - smoothstep(0.95, 1.0, r);
+          gl_FragColor = vec4(vec3(0.36, 0.88, 0.9) * (beam + ring + cross) * edge * fade, 1.0);
+        }`,
+      transparent: true, blending: ADD, depthWrite: false, side: THREE.DoubleSide,
+    });
+    const scan = new THREE.Mesh(new THREE.CircleGeometry(1, 128), scanMat);
+    scan.scale.setScalar(0.075);
+    scan.position.z = 0.0006;
+    kentFx.add(scan);
+
+    // 200+ people: lights converge on Kent
+    const SW = 220;
+    const swStart: THREE.Vector3[] = [];
+    const swDelay: number[] = [];
+    for (let n = 0; n < SW; n++) {
+      const ang = Math.random() * Math.PI * 2;
+      const d = 2 + Math.pow(Math.random(), 0.7) * 8;
+      const lat = KENT[0] + d * Math.sin(ang);
+      const lon = KENT[1] + (d * Math.cos(ang)) / Math.cos(lat * DEG);
+      swStart.push(ll2v([lat, lon], 1.001));
+      swDelay.push(Math.random() * 0.5);
+    }
+    const swPos = new Float32Array(SW * 3);
+    const swGeo = new THREE.BufferGeometry();
+    swGeo.setAttribute("position", new THREE.BufferAttribute(swPos, 3));
+    const swarm = new THREE.Points(swGeo, new THREE.PointsMaterial({ color: AMBER, size: 3, sizeAttenuation: false, transparent: true, blending: ADD, depthWrite: false }));
+    swarm.visible = false;
+    swarm.frustumCulled = false;
+    scene.add(swarm);
+    const kentV = ll2v(KENT, 1.001);
+
+    // RollCall launch beam
+    const launch = new THREE.Mesh(new THREE.CylinderGeometry(0.0005, 0.0016, 1, 16, 1, true), fxMat("#7FE9EE"));
+    launch.rotation.x = Math.PI / 2;
+    kentFx.add(launch);
+    const spark = new THREE.Mesh(new THREE.SphereGeometry(0.0022, 16, 16), fxMat("#FFFFFF"));
+    kentFx.add(spark);
+    const launchRing = new THREE.Mesh(new THREE.RingGeometry(0.9, 1, 96), fxMat("#5CE1E6"));
+    kentFx.add(launchRing);
+
+    // DC agency pings
+    const dcFx = new THREE.Group();
+    {
+      const p = ll2v(WASHINGTON, 1.0012);
+      dcFx.position.copy(p);
+      dcFx.lookAt(p.clone().multiplyScalar(2));
+      scene.add(dcFx);
+    }
+    const dcRings = AGENCIES.map(() => {
+      const m = new THREE.Mesh(new THREE.RingGeometry(0.9, 1, 96), fxMat("#5CE1E6"));
+      dcFx.add(m);
+      return m;
+    });
+    let shownAgencies = 0;
 
     /* aircraft */
     const shape = new THREE.Shape();
@@ -318,43 +421,57 @@ export default function StoryFlight({ onClose }: { onClose: () => void }) {
     const basis = new THREE.Matrix4();
 
     /* camera state */
-    const cam = { lat: CHAPTERS[0].at[0] - 20, lon: CHAPTERS[0].at[1] - 30, dist: 4.2 };
+    const cam = { lat: CHAPTERS[0].at[0] - 20, lon: CHAPTERS[0].at[1] - 30, dist: 4.2, heading: 0, tilt: 14, sun: 0 };
     let from = { ...cam };
     let tweenT = 0;
+    const SUN0 = new THREE.Vector3(-0.95, 0.35, 0.55).normalize();
 
-    function placeCamera(lat: number, lon: number, rawDist: number) {
+    function placeCamera(lat: number, lon: number, rawDist: number, heading: number, tiltMax: number, sunYaw: number) {
       // portrait screens need more distance to fit the same view
       const a = camera.aspect;
       const dist = a < 1 ? 1 + (rawDist - 1) * (1 + (1 - a) * 1.1) : rawDist;
-      const tilt = 14 * THREE.MathUtils.clamp((3.2 - dist) / 1.8, 0, 1);
-      const pos = ll2v([lat - tilt, lon], dist);
-      const target = ll2v([lat, lon], THREE.MathUtils.clamp((3.4 - dist) / 1.2, 0, 1));
-      camera.position.copy(pos);
-      camera.up.set(0, 1, 0);
-      camera.lookAt(target);
+      const tilt = tiltMax * THREE.MathUtils.clamp((3.2 - dist) / 1.8, 0, 1);
+      const ground = destPoint([lat, lon], heading + 180, tilt);
+      camera.position.copy(ll2v(ground, dist));
+      const normal = ll2v([lat, lon]);
+      const fwd = ll2v(destPoint([lat, lon], heading, 4)).sub(normal).normalize();
+      camera.up.copy(normal.clone().multiplyScalar(tilt / 14).add(fwd)).normalize();
+      camera.lookAt(normal.multiplyScalar(THREE.MathUtils.clamp((3.4 - dist) / 1.2, 0, 1)));
       camera.updateMatrixWorld();
-      // sun stays behind-left of the camera so the frame always holds day, dusk and city lights
+      // sun sits behind-left of the camera; sunYaw swings it round the far side for night
+      const c = Math.cos(sunYaw), s = Math.sin(sunYaw);
+      const sx = SUN0.x * c + SUN0.z * s, sz = -SUN0.x * s + SUN0.z * c;
       const right = new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld, 0);
       const up = new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld, 1);
       const back = new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld, 2);
-      sunDir.copy(right.multiplyScalar(-0.95).add(up.multiplyScalar(0.35)).add(back.multiplyScalar(0.55))).normalize();
+      sunDir.copy(right.multiplyScalar(sx).add(up.multiplyScalar(SUN0.y)).add(back.multiplyScalar(sz))).normalize();
     }
 
     function enterChapter(i: number) {
+      // start the move from where the camera really is, including the previous chapter's orbit
+      const prev = CHAPTERS[chapterRef.current];
+      const prevOrbit = prev.kind === "flight" ? 0 : (prev.orbit ?? 10) * ease(Math.min(elapsedRef.current / prev.dur, 1));
+      from = { ...cam, heading: cam.heading + prevOrbit };
       chapterRef.current = i;
       elapsedRef.current = 0;
       setChapter(i);
-      from = { ...cam };
       tweenT = reduced ? 1 : 0;
       const c = CHAPTERS[i];
       mHome.g.visible = i <= 1;
       mKent.g.visible = i >= 1;
       mPit.g.visible = i >= 7;
       mRal.g.visible = i >= 8;
+      mDC.g.visible = i > 8;
       flightArc.geo.setDrawRange(0, i > 1 ? flightArc.pts.length : 0);
       pitArc.geo.setDrawRange(0, i > 7 ? pitArc.pts.length : 0);
       ralArc.geo.setDrawRange(0, i > 8 ? ralArc.pts.length : 0);
+      dcArc.geo.setDrawRange(0, i > 8 ? dcArc.pts.length : 0);
       plane.visible = c.kind === "flight";
+      swarm.visible = c.fx === "swarm";
+      [...shocks, launch, spark, launchRing, ...dcRings].forEach((m) => ((m.material as THREE.MeshBasicMaterial).opacity = 0));
+      scanMat.uniforms.fade.value = 0;
+      shownAgencies = i > 8 ? AGENCIES.length : 0;
+      setAgencies(shownAgencies);
     }
 
     /* resize */
@@ -390,7 +507,7 @@ export default function StoryFlight({ onClose }: { onClose: () => void }) {
       if (hud.fill.current) hud.fill.current.style.width = `${(c.kind === "outro" ? 1 : p) * 100}%`;
 
       // camera target for this chapter
-      let target = { lat: c.at[0], lon: c.at[1], dist: c.dist };
+      let target = { lat: c.at[0], lon: c.at[1], dist: c.dist, heading: c.heading ?? 0, tilt: c.tilt ?? 14, sun: 0 };
       let readLL: LL = c.at;
       let alt = 0, spd = 0, remain = 0;
 
@@ -410,29 +527,92 @@ export default function StoryFlight({ onClose }: { onClose: () => void }) {
         alt = Math.round(38000 * climb / 100) * 100;
         spd = Math.round(160 + 326 * climb);
         remain = Math.round(13870 * (1 - fp));
-        target = { lat: readLL[0], lon: readLL[1], dist: 2.05 + 1.1 * Math.sin(Math.PI * fp) };
+        // chase camera: sit behind the aircraft, looking along its track
+        const ahead = v2ll(flightArc.pts[Math.min(idx + 12, flightArc.pts.length - 1)]);
+        const hdg = idx < flightArc.pts.length - 13 ? bearing(readLL, ahead) : cam.heading;
+        cam.heading = lerpLon(cam.heading, hdg, Math.min(1, dt * 1.5));
+        target = { lat: readLL[0], lon: readLL[1], dist: 2.05 + 1.1 * Math.sin(Math.PI * fp), heading: cam.heading, tilt: 14, sun: 0 };
       } else if (c.kind === "link" && c.to) {
         const arcObj = c.to === PITTSBURGH ? pitArc : ralArc;
         const lp = ease(THREE.MathUtils.clamp((p - 0.15) / 0.5, 0, 1));
         arcObj.geo.setDrawRange(0, Math.max(2, Math.floor(lp * arcObj.pts.length)));
         const mid = v2ll(slerp(ll2v(c.at), ll2v(c.to), 0.62));
         mid[0] -= 2.5;
-        target = { lat: mid[0], lon: mid[1], dist: c.dist };
+        target = { ...target, lat: mid[0], lon: mid[1] };
         readLL = c.to;
+      } else if (c.kind === "federal") {
+        const l1 = ease(THREE.MathUtils.clamp((p - 0.06) / 0.22, 0, 1));
+        const l2 = ease(THREE.MathUtils.clamp((p - 0.3) / 0.14, 0, 1));
+        ralArc.geo.setDrawRange(0, Math.max(2, Math.floor(l1 * ralArc.pts.length)));
+        dcArc.geo.setDrawRange(0, l2 > 0 ? Math.max(2, Math.floor(l2 * dcArc.pts.length)) : 0);
+        mDC.g.visible = l2 >= 1;
+        const n = Math.min(AGENCIES.length, Math.max(0, Math.floor((p - 0.44) / 0.07) + 1));
+        if (n !== shownAgencies) { shownAgencies = n; setAgencies(n); }
+        dcRings.forEach((m, j) => {
+          const age = (p - (0.44 + j * 0.07)) * c.dur / 1000;
+          const k = THREE.MathUtils.clamp(age / 1.4, 0, 1);
+          m.scale.setScalar(0.004 + k * 0.05);
+          (m.material as THREE.MeshBasicMaterial).opacity = age > 0 ? (1 - k) * 0.9 : 0;
+        });
+        target = { ...target, lat: 38.6, lon: -79.2 };
+        readLL = l2 >= 1 ? WASHINGTON : RALEIGH;
       }
 
-      // ease camera from previous framing toward the target
-      if (tweenT < 1) tweenT = Math.min(1, tweenT + dt / (c.kind === "flight" ? 1.6 : 2.6));
+      // chapter effects at Kent
+      if (c.fx === "shock") {
+        shocks.forEach((m, j) => {
+          const k = THREE.MathUtils.clamp((p - 0.12 - j * 0.12) / 0.55, 0, 1);
+          m.scale.setScalar(0.003 + ease(k) * 0.16);
+          (m.material as THREE.MeshBasicMaterial).opacity = k > 0 ? Math.pow(1 - k, 1.5) * 0.95 : 0;
+        });
+      } else if (c.fx === "sunrise") {
+        // dusk falls, city lights come up, then the sun rises over Ohio
+        target.sun = p < 0.22 ? 3.0 * ease(p / 0.22) : 3.0 * (1 - ease(THREE.MathUtils.clamp((p - 0.45) / 0.45, 0, 1)));
+      } else if (c.fx === "scan") {
+        scanMat.uniforms.time.value = t;
+        scanMat.uniforms.fade.value = THREE.MathUtils.clamp(p / 0.15, 0, 1) * (1 - THREE.MathUtils.smoothstep(p, 0.92, 1));
+        scan.scale.setScalar(0.02 + 0.06 * ease(THREE.MathUtils.clamp(p / 0.3, 0, 1)));
+      } else if (c.fx === "swarm") {
+        let arrived = 0;
+        for (let n = 0; n < SW; n++) {
+          const q = THREE.MathUtils.clamp((p * 1.3 - 0.1 - swDelay[n]) / 0.55, 0, 1);
+          const e = ease(q);
+          if (q >= 1) arrived++;
+          const v = slerp(swStart[n], kentV, e).multiplyScalar(1 + 0.025 * Math.sin(Math.PI * e));
+          swPos.set([v.x, v.y, v.z], n * 3);
+        }
+        swGeo.attributes.position.needsUpdate = true;
+        (swarm.material as THREE.PointsMaterial).opacity = 0.95;
+        const team = Math.round((arrived / SW) * 200);
+        if (hud.dist.current) hud.dist.current.textContent = arrived >= SW * 0.97 ? "Team: 200+" : `Team: ${team}`;
+      } else if (c.fx === "launch") {
+        const h = ease(THREE.MathUtils.clamp((p - 0.12) / 0.4, 0, 1)) * 0.11;
+        launch.scale.set(1, Math.max(h, 0.0001), 1);
+        launch.position.z = h / 2;
+        (launch.material as THREE.MeshBasicMaterial).opacity = h > 0 ? 0.38 : 0;
+        spark.position.z = h;
+        (spark.material as THREE.MeshBasicMaterial).opacity = h > 0 ? 1 : 0;
+        const k = THREE.MathUtils.clamp((p - 0.12) / 0.4, 0, 1);
+        launchRing.scale.setScalar(0.003 + ease(k) * 0.09);
+        (launchRing.material as THREE.MeshBasicMaterial).opacity = k > 0 ? (1 - k) * 0.9 : 0;
+      }
+
+      // ease camera from previous framing toward the target, craning up mid-move
+      if (tweenT < 1) tweenT = Math.min(1, tweenT + dt / (c.kind === "flight" ? 1.6 : 2.4));
       const k = c.kind === "flight" && tweenT >= 1 ? 1 : ease(tweenT);
-      const drift = reduced ? 0 : Math.sin(t * 0.15) * 0.6;
+      const hop = reduced ? 0 : (c.hop ?? 0) * Math.sin(Math.PI * k);
       cam.lat = THREE.MathUtils.lerp(from.lat, target.lat, k);
       cam.lon = lerpLon(from.lon, target.lon, k);
       cam.dist = THREE.MathUtils.lerp(from.dist, target.dist, k);
-      if (c.kind !== "flight" && tweenT >= 1) {
-        // slow handheld drift once settled
-        placeCamera(cam.lat + drift * 0.6, cam.lon + drift, cam.dist - (reduced ? 0 : p * 0.08));
-      } else {
-        placeCamera(cam.lat, cam.lon, cam.dist);
+      if (c.kind !== "flight") cam.heading = lerpLon(from.heading, target.heading, k);
+      cam.tilt = THREE.MathUtils.lerp(from.tilt, target.tilt, k);
+      cam.sun = c.fx === "sunrise" ? target.sun : THREE.MathUtils.lerp(from.sun, 0, k);
+      const orbit = reduced ? 0 : (c.orbit ?? 10) * ease(p);
+      const push = reduced ? 0 : p * 0.08;
+      placeCamera(cam.lat, cam.lon, cam.dist + hop - (c.kind === "flight" ? 0 : push), cam.heading + (c.kind === "flight" ? 0 : orbit), cam.tilt, cam.sun);
+      if (tweenT >= 1 && c.kind !== "flight") {
+        // keep the orbit continuous into the next chapter's transition
+        from.heading = cam.heading;
       }
 
       // markers
@@ -440,12 +620,13 @@ export default function StoryFlight({ onClose }: { onClose: () => void }) {
       mKent.tick(t + 0.3, i === 1 ? p : 1);
       mPit.tick(t + 0.6);
       mRal.tick(t + 0.9);
+      mDC.tick(t + 0.2);
 
       // HUD
       if (hud.coords.current) hud.coords.current.textContent = fmtLL(readLL);
       if (hud.alt.current) hud.alt.current.textContent = c.kind === "flight" ? `${alt.toLocaleString()} ft` : "On ground";
       if (hud.spd.current) hud.spd.current.textContent = c.kind === "flight" ? `${spd} kt` : "–";
-      if (hud.dist.current) hud.dist.current.textContent = c.kind === "flight" ? `${remain.toLocaleString()} km to go` : c.place;
+      if (hud.dist.current && c.fx !== "swarm") hud.dist.current.textContent = c.kind === "flight" ? `${remain.toLocaleString()} km to go` : c.kind === "federal" && readLL === WASHINGTON ? "Uplink: Washington, DC" : c.place;
 
       renderer.render(scene, camera);
       raf = requestAnimationFrame(loop);
@@ -462,7 +643,7 @@ export default function StoryFlight({ onClose }: { onClose: () => void }) {
         if (Array.isArray(mat)) mat.forEach((x) => x.dispose());
         else mat?.dispose();
       });
-      [dayMap, nightMap, waterMap].forEach((x) => x.dispose());
+      [dayMap, nightMap].forEach((x) => x.dispose());
       renderer.dispose();
       mount.removeChild(renderer.domElement);
     };
@@ -513,6 +694,19 @@ export default function StoryFlight({ onClose }: { onClose: () => void }) {
         <div className="sweep" />
         <span className="blip" />
       </div>
+
+      {/* film light-leak on every cut */}
+      {!titleCard && chapter > 0 && <div key={`leak-${chapter}`} className="flight-leak" aria-hidden />}
+
+      {/* federal clients contact list */}
+      {c.kind === "federal" && agencies > 0 && (
+        <div className="flight-agencies">
+          <div className="head">Clients supported</div>
+          {AGENCIES.slice(0, agencies).map((a) => (
+            <div key={a} className="row"><span className="tick">✓</span>{a}</div>
+          ))}
+        </div>
+      )}
 
       {/* subtitles */}
       {!titleCard && (
