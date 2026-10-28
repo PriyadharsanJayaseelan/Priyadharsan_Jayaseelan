@@ -11,6 +11,13 @@ const KENT: LL = [41.15, -81.36];
 const PITTSBURGH: LL = [40.44, -79.99];
 const RALEIGH: LL = [35.78, -78.64];
 const WASHINGTON: LL = [38.89, -77.03];
+// cities across the country where these agencies operate (bases, VA medical centers, field offices)
+const NATION: LL[] = [
+  [36.85, -76.29], [42.36, -71.06], [33.75, -84.39], [41.88, -87.63], [25.76, -80.19],
+  [29.95, -90.07], [44.98, -93.27], [39.1, -94.58], [29.76, -95.37], [29.42, -98.49],
+  [39.74, -104.99], [31.76, -106.49], [40.76, -111.89], [33.45, -112.07], [34.05, -118.24],
+  [32.72, -117.16], [47.61, -122.33],
+];
 
 /* ── Script ─────────────────────────────────────────────────── */
 type Kind = "home" | "flight" | "ping" | "link" | "federal" | "outro";
@@ -43,7 +50,7 @@ const CHAPTERS: Chapter[] = [
   { kind: "ping", fx: "swarm", date: "2025", title: "Leading 200+ people.", line: "Lead student operations coordinator. No-shows down 30%.", at: KENT, dist: 1.62, dur: 7500, place: "Kent, OH", heading: -70, tilt: 13, hop: 0.3, orbit: 14 },
   { kind: "ping", fx: "launch", date: "Fall 2025", title: "Shipped RollCall.", line: "Built the event system for an ROTC attendance app, from a blank file.", at: KENT, dist: 1.3, dur: 7000, place: "Kent, OH", heading: 80, tilt: 20, hop: 0.4, orbit: -16 },
   { kind: "link", date: "January 2026", title: "First dev internship.", line: "StreetStashed, remote to Pittsburgh. Fixed their broken marketplace search.", at: KENT, to: PITTSBURGH, dist: 1.4, dur: 7000, place: "Uplink: Pittsburgh, PA", heading: 20, tilt: 14, hop: 0.25, orbit: 10 },
-  { kind: "federal", date: "May 2026", title: "Federal software QA.", line: "Pivotal ITS, remote to North Carolina. Testing secure systems for the U.S. Army, DoD, VA, Homeland Security and more.", at: KENT, to: RALEIGH, dist: 1.66, dur: 11000, place: "Uplink: Raleigh, NC", heading: -15, tilt: 13, hop: 0.3, orbit: 10 },
+  { kind: "federal", date: "May 2026", title: "Federal software QA.", line: "Pivotal ITS, remote to North Carolina. Testing secure systems for agencies that serve the whole country.", at: KENT, to: RALEIGH, dist: 1.66, dur: 16000, place: "Uplink: Raleigh, NC", heading: -15, tilt: 13, hop: 0.3, orbit: 0 },
   { kind: "outro", date: "Next destination", title: "Your team.", line: "Graduating May 2027. Open to new-grad and internship roles.", at: KENT, dist: 3.3, dur: 999999, place: "Kent, OH", orbit: 0 },
 ];
 
@@ -268,7 +275,7 @@ export default function StoryFlight({ onClose }: { onClose: () => void }) {
     const group = new THREE.Group();
     scene.add(group);
 
-    function marker(ll: LL, color: THREE.Color) {
+    function marker(ll: LL, color: THREE.Color, size = 1) {
       const g = new THREE.Group();
       const p = ll2v(ll, 1.0015);
       g.position.copy(p);
@@ -294,7 +301,7 @@ export default function StoryFlight({ onClose }: { onClose: () => void }) {
       return {
         g,
         tick(t: number, strength = 1) {
-          g.scale.setScalar(Math.max(0.5, camera.position.length() - 1) / 0.6);
+          g.scale.setScalar((size * Math.max(0.5, camera.position.length() - 1)) / 0.6);
           rings.forEach((r, i) => {
             const k = (t * 0.55 + i / 3) % 1;
             r.scale.setScalar(0.004 + k * 0.022);
@@ -409,6 +416,12 @@ export default function StoryFlight({ onClose }: { onClose: () => void }) {
     });
     let shownAgencies = 0;
 
+    // nationwide uplinks fanning out from Washington, nearest first
+    const dcV = ll2v(WASHINGTON);
+    const nation = NATION.map((ll) => ({ ll, ang: dcV.angleTo(ll2v(ll)) }))
+      .sort((a, b) => a.ang - b.ang)
+      .map(({ ll, ang }) => ({ arc: arc(WASHINGTON, ll, 0.008 + ang * 0.09, CYAN, 0.7), mark: marker(ll, CYAN, 0.5) }));
+
     /* aircraft */
     const shape = new THREE.Shape();
     [[0, 1], [0.12, 0.35], [0.95, -0.05], [0.95, -0.2], [0.12, 0.05], [0.1, -0.55], [0.38, -0.8], [0.38, -0.92], [0, -0.82], [-0.38, -0.92], [-0.38, -0.8], [-0.1, -0.55], [-0.12, 0.05], [-0.95, -0.2], [-0.95, -0.05], [-0.12, 0.35]].forEach(
@@ -471,6 +484,10 @@ export default function StoryFlight({ onClose }: { onClose: () => void }) {
       [...shocks, launch, spark, launchRing, ...dcRings].forEach((m) => ((m.material as THREE.MeshBasicMaterial).opacity = 0));
       scanMat.uniforms.fade.value = 0;
       shownAgencies = i > 8 ? AGENCIES.length : 0;
+      nation.forEach(({ arc: a, mark }) => {
+        a.geo.setDrawRange(0, i > 8 ? a.pts.length : 0);
+        mark.g.visible = i > 8;
+      });
       setAgencies(shownAgencies);
     }
 
@@ -541,21 +558,46 @@ export default function StoryFlight({ onClose }: { onClose: () => void }) {
         target = { ...target, lat: mid[0], lon: mid[1] };
         readLL = c.to;
       } else if (c.kind === "federal") {
-        const l1 = ease(THREE.MathUtils.clamp((p - 0.06) / 0.22, 0, 1));
-        const l2 = ease(THREE.MathUtils.clamp((p - 0.3) / 0.14, 0, 1));
+        // 1) Kent → Raleigh  2) Raleigh → DC  3) pull back and light up the whole country
+        const l1 = ease(THREE.MathUtils.clamp((p - 0.04) / 0.14, 0, 1));
+        const l2 = ease(THREE.MathUtils.clamp((p - 0.19) / 0.1, 0, 1));
         ralArc.geo.setDrawRange(0, Math.max(2, Math.floor(l1 * ralArc.pts.length)));
         dcArc.geo.setDrawRange(0, l2 > 0 ? Math.max(2, Math.floor(l2 * dcArc.pts.length)) : 0);
         mDC.g.visible = l2 >= 1;
-        const n = Math.min(AGENCIES.length, Math.max(0, Math.floor((p - 0.44) / 0.07) + 1));
+
+        const START = 0.34, SPAN = 0.42;
+        let links = 0;
+        nation.forEach(({ arc: a, mark }, j) => {
+          const q = ease(THREE.MathUtils.clamp((p - START - (j / nation.length) * SPAN) / 0.1, 0, 1));
+          a.geo.setDrawRange(0, q > 0 ? Math.max(2, Math.floor(q * a.pts.length)) : 0);
+          mark.g.visible = q >= 1;
+          if (q >= 1) links++;
+        });
+
+        const n = Math.min(AGENCIES.length, Math.max(0, Math.floor((p - START) / 0.075) + 1));
         if (n !== shownAgencies) { shownAgencies = n; setAgencies(n); }
         dcRings.forEach((m, j) => {
-          const age = (p - (0.44 + j * 0.07)) * c.dur / 1000;
+          const age = (p - (START + j * 0.075)) * c.dur / 1000;
           const k = THREE.MathUtils.clamp(age / 1.4, 0, 1);
           m.scale.setScalar(0.004 + k * 0.05);
           (m.material as THREE.MeshBasicMaterial).opacity = age > 0 ? (1 - k) * 0.9 : 0;
         });
-        target = { ...target, lat: 38.6, lon: -79.2 };
+
+        // camera: regional shot, then a wide national pull-back
+        const wide = ease(THREE.MathUtils.clamp((p - 0.28) / 0.32, 0, 1));
+        const portrait = camera.aspect < 1;
+        target = {
+          ...target,
+          lat: THREE.MathUtils.lerp(38.6, portrait ? 40.5 : 36.5, wide),
+          lon: THREE.MathUtils.lerp(-79.2, -96, wide),
+          dist: THREE.MathUtils.lerp(c.dist, portrait ? 2.75 : 2.35, wide),
+          tilt: THREE.MathUtils.lerp(c.tilt ?? 13, portrait ? 2 : 6, wide),
+          heading: THREE.MathUtils.lerp(c.heading ?? 0, 0, wide),
+        };
         readLL = l2 >= 1 ? WASHINGTON : RALEIGH;
+        if (hud.dist.current) {
+          hud.dist.current.textContent = links > 0 ? `Nationwide: ${links} uplinks` : l2 >= 1 ? "Uplink: Washington, DC" : c.place;
+        }
       }
 
       // chapter effects at Kent
@@ -621,12 +663,13 @@ export default function StoryFlight({ onClose }: { onClose: () => void }) {
       mPit.tick(t + 0.6);
       mRal.tick(t + 0.9);
       mDC.tick(t + 0.2);
+      nation.forEach(({ mark }, j) => mark.tick(t + j * 0.37, 0.8));
 
       // HUD
       if (hud.coords.current) hud.coords.current.textContent = fmtLL(readLL);
       if (hud.alt.current) hud.alt.current.textContent = c.kind === "flight" ? `${alt.toLocaleString()} ft` : "On ground";
       if (hud.spd.current) hud.spd.current.textContent = c.kind === "flight" ? `${spd} kt` : "–";
-      if (hud.dist.current && c.fx !== "swarm") hud.dist.current.textContent = c.kind === "flight" ? `${remain.toLocaleString()} km to go` : c.kind === "federal" && readLL === WASHINGTON ? "Uplink: Washington, DC" : c.place;
+      if (hud.dist.current && c.fx !== "swarm" && c.kind !== "federal") hud.dist.current.textContent = c.kind === "flight" ? `${remain.toLocaleString()} km to go` : c.place;
 
       renderer.render(scene, camera);
       raf = requestAnimationFrame(loop);
