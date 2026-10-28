@@ -11,7 +11,9 @@ export function useCursorGlow() {
       borderRadius: "50%",
       pointerEvents: "none",
       zIndex: "9999",
-      transform: "translate(-50%, -50%)",
+      left: "-210px",
+      top: "-210px",
+      willChange: "transform",
       background:
         "radial-gradient(circle, rgba(148,163,184,0.06) 0%, transparent 70%)",
       transition: "opacity 0.3s ease",
@@ -20,8 +22,7 @@ export function useCursorGlow() {
     document.body.appendChild(el);
 
     const move = (e: MouseEvent) => {
-      el.style.left = `${e.clientX}px`;
-      el.style.top = `${e.clientY}px`;
+      el.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
       el.style.opacity = "1";
     };
     const hide = () => (el.style.opacity = "0");
