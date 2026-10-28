@@ -116,10 +116,11 @@ vec4 disk(vec4 e){
   if (rn < 0.005) return vec4(0.0);
   float rr = R_IN + (rn - 0.01) / 0.98 * (R_OUT - R_IN);
   float ang = (dec16(e.ba) - 0.5) * 6.2831853;
-  float sw = ang + time * 1.05 / sqrt(rr);
-  // periodic in angle, so no seam where atan wraps
-  vec2 c = vec2(cos(sw), sin(sw));
-  float bands = fbm(vec2(rr * 2.2, 0.0) + c * 0.9) * 0.7 + fbm(vec2(rr * 7.0, 3.0) + vec2(cos(sw * 3.0), sin(sw * 3.0)) * 0.6) * 0.3;
+  // Keplerian spin: inner orbits faster. Sample noise in the rotating disk plane
+  // (periodic in angle, so no seam), stretched along the orbit into streaks.
+  float sw = ang - time * 2.2 / pow(rr / 2.6, 1.5);
+  vec2 c = vec2(cos(sw), sin(sw)) * rr;
+  float bands = fbm(vec2(rr * 2.4, 0.0) + c * 0.55) * 0.65 + fbm(vec2(rr * 8.0, 3.0) + c * 1.6) * 0.35;
   float fall = smoothstep(R_IN, 3.4, rr) * (1.0 - smoothstep(7.0, R_OUT, rr));
   float temp = clamp(1.0 - (rr - R_IN) / 9.0, 0.0, 1.0);
   vec3 hot = mix(vec3(1.0, 0.42, 0.12), vec3(1.0, 0.82, 0.55), temp);
