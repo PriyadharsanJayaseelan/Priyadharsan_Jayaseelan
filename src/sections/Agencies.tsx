@@ -135,13 +135,13 @@ export default function Agencies() {
         <div
           className="absolute inset-y-0 left-0 z-10 w-28 pointer-events-none"
           style={{
-            background: "linear-gradient(to right, #050B14, transparent)",
+            background: "linear-gradient(to right, #000000, transparent)",
           }}
         />
         <div
           className="absolute inset-y-0 right-0 z-10 w-28 pointer-events-none"
           style={{
-            background: "linear-gradient(to left, #050B14, transparent)",
+            background: "linear-gradient(to left, #000000, transparent)",
           }}
         />
 

@@ -14,6 +14,7 @@ import Marquee from "./components/Marquee";
 import Divider from "./components/Divider";
 import Agencies from "./sections/Agencies";
 import Skills from "./sections/Skills";
+import Starfield from "./components/Starfield";
 import { useScrollReveal } from "./hooks/useScrollReveal";
 import { useTilt } from "./hooks/useTilt";
 import { useScramble } from "./hooks/useScramble";
@@ -35,7 +36,7 @@ export default function App() {
 
   return (
     <div
-      style={{ background: "#050B14", minHeight: "100vh", position: "relative" }}
+      style={{ minHeight: "100vh", position: "relative" }}
     >
       {/* ── Grain texture overlay ── */}
       <div
@@ -51,6 +52,8 @@ export default function App() {
           backgroundSize: "200px 200px",
         }}
       />
+
+      <Starfield />
 
       {/* ── Scroll progress bar ── */}
       <ScrollProgress />
