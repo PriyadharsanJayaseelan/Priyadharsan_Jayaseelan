@@ -134,7 +134,7 @@ export default function EmailPicker() {
         onClick={close}
         className="absolute inset-0 transition-opacity duration-300"
         style={{
-          background: "rgba(0,15,30,0.7)",
+          background: "rgba(0,0,0,0.78)",
           backdropFilter: "blur(10px)",
           WebkitBackdropFilter: "blur(10px)",
           opacity: visible ? 1 : 0,
@@ -145,7 +145,7 @@ export default function EmailPicker() {
       <div
         className="relative w-full max-w-md rounded-3xl p-8 transition-all duration-300"
         style={{
-          background: "hsl(201,80%,10%)",
+          background: "#0B0B0D",
           border: "1px solid rgba(255,255,255,0.12)",
           boxShadow: "0 24px 80px rgba(0,0,0,0.5)",
           opacity: visible ? 1 : 0,
