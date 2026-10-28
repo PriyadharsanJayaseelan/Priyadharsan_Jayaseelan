@@ -1,51 +1,8 @@
-import { useRef } from "react";
 import Typewriter from "../components/Typewriter";
-import HoloCrystal from "../components/HoloCrystal";
+import BlackHole from "../components/BlackHole";
 import { openEmailPicker } from "../components/EmailPicker";
 import { openStoryModal } from "../components/StoryModal";
 import { useHeroParallax } from "../hooks/useHeroParallax";
-
-/* HUD readouts. Every number comes straight from the resume. */
-function Panel({
-  title,
-  status,
-  children,
-  panelRef,
-  className = "",
-  delay,
-}: {
-  title: string;
-  status: string;
-  children: React.ReactNode;
-  panelRef?: React.Ref<HTMLDivElement>;
-  className?: string;
-  delay: number;
-}) {
-  return (
-    <div
-      ref={panelRef}
-      className={`hud-panel ${className.includes("absolute") ? "" : "relative"} ${className}`}
-      style={{ animationDelay: `${delay}ms` }}
-    >
-      <div className="flex items-center justify-between gap-3 mb-2">
-        <span className="hud-title">{title}</span>
-        <span className="hud-status">{status}</span>
-      </div>
-      {children}
-    </div>
-  );
-}
-
-function Bars() {
-  const heights = [38, 62, 48, 80, 56, 92, 70, 86, 64, 100];
-  return (
-    <div className="flex items-end gap-[3px] h-9 mt-2" aria-hidden="true">
-      {heights.map((v, i) => (
-        <span key={i} className="hud-bar" style={{ height: `${v}%`, animationDelay: `${1400 + i * 70}ms` }} />
-      ))}
-    </div>
-  );
-}
 
 const IconGitHub = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -61,49 +18,39 @@ const IconLinkedIn = () => (
 export default function Hero() {
   const { videoRef, badgeRef, bodyRef } = useHeroParallax();
 
-  // stable ref list so the canvas effect only runs once
-  const panelRefs = useRef([
-    { current: null as HTMLDivElement | null },
-    { current: null as HTMLDivElement | null },
-    { current: null as HTMLDivElement | null },
-    { current: null as HTMLDivElement | null },
-  ]).current as React.RefObject<HTMLDivElement>[];
-
   return (
-    <section id="hero" className="hero-grid relative min-h-screen overflow-hidden">
-      {/* ambient glows */}
-      <div aria-hidden className="absolute -top-40 -left-40 w-[620px] h-[620px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(92,225,230,0.10), transparent 65%)" }} />
-      <div aria-hidden className="absolute top-1/3 -right-40 w-[560px] h-[560px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(139,124,246,0.12), transparent 65%)" }} />
+    <section id="hero" className="relative min-h-screen overflow-hidden bg-black">
+      {/* Gargantua */}
+      <div ref={videoRef} className="absolute inset-0" style={{ willChange: "transform" }}>
+        <BlackHole className="absolute inset-0" />
+      </div>
+      <div aria-hidden className="hero-shade absolute inset-0 pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 pt-28 pb-20 lg:pt-32 grid lg:grid-cols-[1fr_1.15fr] gap-10 lg:gap-6 items-center min-h-screen">
-        {/* ── Text column ── */}
-        <div ref={bodyRef} style={{ willChange: "transform, opacity" }}>
-          <div ref={badgeRef} className="hero-in inline-flex items-center gap-2.5 text-sm mb-7" style={{ color: "var(--dim)" }}>
-            <span className="w-2 h-2 rounded-full animate-pulse-dot" style={{ background: "var(--cyan)", boxShadow: "0 0 10px var(--cyan)" }} />
-            Open to 2027 new-grad and internship roles
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 min-h-screen flex flex-col justify-end pb-20 sm:pb-24 pt-32">
+        <div ref={bodyRef} className="max-w-2xl" style={{ willChange: "transform, opacity" }}>
+          <div ref={badgeRef} className="hero-in term-line mb-6">
+            <span className="text-[var(--gold)]">$</span> whoami
           </div>
 
-          <h1
-            className="hero-in text-[2.6rem] leading-[1.02] sm:text-6xl lg:text-[4.4rem] font-semibold text-white"
-            style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.025em", animationDelay: "120ms" }}
-          >
-            I find the bugs<br />before your users do.
+          <h1 className="hero-in title-wide text-[1.45rem] leading-[1.2] sm:text-5xl lg:text-6xl text-white" style={{ animationDelay: "150ms" }}>
+            Priyadharsan<br />Jayaseelan
           </h1>
 
-          <p className="hero-in mt-7 text-lg max-w-md leading-relaxed" style={{ color: "var(--dim)", animationDelay: "240ms" }}>
-            Priyadharsan Jayaseelan. Computer science at Kent State, testing secure software for federal clients.
+          <p className="hero-in mt-7 text-xl sm:text-2xl text-white/90 leading-snug" style={{ animationDelay: "300ms" }}>
+            I find the bugs before your users do.
+          </p>
+          <p className="hero-in mt-3 text-base leading-relaxed max-w-lg" style={{ color: "var(--dim)", animationDelay: "380ms" }}>
+            Computer science at Kent State. Testing secure software for federal clients.
           </p>
 
-          <p className="hero-in mt-4 text-base flex flex-wrap items-baseline gap-x-2" style={{ color: "var(--dim)", animationDelay: "320ms" }}>
-            <span>Right now:</span>
+          <p className="hero-in mt-6 term-line flex flex-wrap gap-x-2" style={{ animationDelay: "460ms" }}>
+            <span style={{ color: "var(--dim)" }}>status:</span>
             <span className="text-white"><Typewriter /></span>
           </p>
 
-          <div className="hero-in flex flex-wrap items-center gap-3 mt-10" style={{ animationDelay: "420ms" }}>
-            <a href="#work" className="btn-primary">See my work</a>
-            <button onClick={openStoryModal} className="btn-ghost">Play my story</button>
+          <div className="hero-in flex flex-wrap items-center gap-3 mt-10" style={{ animationDelay: "560ms" }}>
+            <button onClick={openStoryModal} className="btn-primary">Play my story</button>
+            <a href="#work" className="btn-ghost">See my work</a>
             <button onClick={openEmailPicker} className="btn-ghost">Email me</button>
             <span className="flex items-center gap-1 ml-1">
               <a href="https://github.com/PriyadharsanJayaseelan" target="_blank" rel="noreferrer" className="icon-link" aria-label="GitHub"><IconGitHub /></a>
@@ -111,56 +58,10 @@ export default function Hero() {
             </span>
           </div>
         </div>
+      </div>
 
-        {/* ── Holo stage ── */}
-        <div
-          ref={videoRef}
-          className="relative w-full aspect-square max-w-[640px] mx-auto lg:mr-0"
-          style={{ willChange: "transform" }}
-        >
-          <HoloCrystal targets={panelRefs} className="absolute inset-0" />
-          <div aria-hidden className="hud-scan" />
-
-          {/* panels: absolutely placed around the crystal on desktop */}
-          <Panel panelRef={panelRefs[0]} delay={700} title="Test framework" status="Passing"
-            className="hidden lg:block absolute left-0 top-[4%] w-[188px]">
-            <div className="hud-big">51 <span>cases</span></div>
-            <div className="hud-sub">22 in the regression suite</div>
-          </Panel>
-          <Panel panelRef={panelRefs[1]} delay={900} title="RBAC audit" status="Fixed"
-            className="hidden lg:block absolute right-0 top-[10%] w-[196px]">
-            <div className="hud-sub text-white/90">Privilege escalation found in report metadata</div>
-            <div className="hud-meter mt-2.5"><span style={{ width: "100%" }} /></div>
-          </Panel>
-          <Panel panelRef={panelRefs[2]} delay={1100} title="AI assistant QA" status="Verified"
-            className="hidden lg:block absolute left-[2%] bottom-[8%] w-[200px]">
-            <div className="hud-big">80+ <span>questions</span></div>
-            <Bars />
-          </Panel>
-          <Panel panelRef={panelRefs[3]} delay={1300} title="Operations" status="Live"
-            className="hidden lg:block absolute right-0 bottom-[16%] w-[188px]">
-            <div className="hud-big">200+ <span>staff</span></div>
-            <div className="hud-sub">30% fewer no-shows</div>
-            <div className="hud-meter mt-2"><span style={{ width: "70%" }} /></div>
-          </Panel>
-        </div>
-
-        {/* panels as a grid on phones and tablets */}
-        <div className="lg:hidden grid grid-cols-2 gap-3 -mt-4">
-          <Panel delay={500} title="Test framework" status="Passing">
-            <div className="hud-big">51 <span>cases</span></div>
-            <div className="hud-sub">22 in regression</div>
-          </Panel>
-          <Panel delay={600} title="RBAC audit" status="Fixed">
-            <div className="hud-sub text-white/90">Privilege escalation caught</div>
-          </Panel>
-          <Panel delay={700} title="AI assistant QA" status="Verified">
-            <div className="hud-big">80+ <span>checks</span></div>
-          </Panel>
-          <Panel delay={800} title="Operations" status="Live">
-            <div className="hud-big">200+ <span>staff</span></div>
-          </Panel>
-        </div>
+      <div className="absolute bottom-6 right-6 sm:right-8 z-10 term-line text-[11px] hidden sm:block" style={{ color: "var(--dim)" }}>
+        Gargantua, rendered live on your GPU
       </div>
     </section>
   );

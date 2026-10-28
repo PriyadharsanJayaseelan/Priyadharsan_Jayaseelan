@@ -90,7 +90,7 @@ export default function Timeline() {
                 className="absolute top-1.5 w-2.5 h-2.5 rounded-full"
                 style={{
                   border: "1px solid rgba(255,255,255,0.35)",
-                  background: "#050B14",
+                  background: "#000000",
                   left: "50%",
                   transform: "translateX(-50%)",
                   boxShadow: "0 0 8px rgba(255,255,255,0.1)",
