@@ -214,7 +214,7 @@ body {
   width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: hsl(201, 100%, 9%);
+  background: #000;
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.1);
@@ -327,7 +327,7 @@ body {
 
 .flight-hud { position: absolute; z-index: 5; top: calc(clamp(56px, 11vh, 110px) + 22px); left: clamp(16px, 4vw, 48px);
   font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; color: #E6F1FF; min-width: 250px;
-  padding: 12px 14px; background: rgba(5,11,20,0.55); border: 1px solid rgba(255,181,71,0.28); border-radius: 6px;
+  padding: 12px 14px; background: rgba(10,10,12,0.55); border: 1px solid rgba(255,181,71,0.28); border-radius: 6px;
   backdrop-filter: blur(6px); opacity: 0; transform: translateY(-8px); transition: opacity 1s 0.4s, transform 1s 0.4s; font-variant-numeric: tabular-nums; }
 .flight-hud.on { opacity: 1; transform: none; }
 .flight-hud-row { display: flex; justify-content: space-between; gap: 18px; padding: 3px 0; }
@@ -335,7 +335,7 @@ body {
 
 .flight-radar { position: absolute; z-index: 5; top: calc(clamp(56px, 11vh, 110px) + 22px); right: clamp(16px, 4vw, 48px);
   width: 118px; height: 118px; border-radius: 50%; border: 1px solid rgba(255,181,71,0.35); overflow: hidden;
-  background: radial-gradient(circle, rgba(255,181,71,0.06) 0 34%, transparent 35% 36%, rgba(255,181,71,0.05) 37% 66%, transparent 67%), rgba(5,11,20,0.5);
+  background: radial-gradient(circle, rgba(255,181,71,0.06) 0 34%, transparent 35% 36%, rgba(255,181,71,0.05) 37% 66%, transparent 67%), rgba(10,10,12,0.5);
   opacity: 0; transition: opacity 1s 0.6s; }
 .flight-radar.on { opacity: 1; }
 .flight-radar .sweep { position: absolute; inset: 0; background: conic-gradient(from 0deg, rgba(255,181,71,0.45), transparent 22%); animation: radar-sweep 3s linear infinite; }
@@ -371,7 +371,7 @@ body {
   100% { opacity: 0; transform: translateX(35%); }
 }
 .flight-agencies { position: absolute; z-index: 5; right: clamp(16px, 4vw, 48px); top: calc(clamp(56px, 11vh, 110px) + 160px);
-  min-width: 230px; padding: 12px 14px; border-radius: 6px; background: rgba(5, 11, 20, 0.6);
+  min-width: 230px; padding: 12px 14px; border-radius: 6px; background: rgba(10, 10, 12, 0.6);
   border: 1px solid rgba(92, 225, 230, 0.35); backdrop-filter: blur(6px);
   font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px; color: #E6F1FF; }
 .flight-agencies .head { color: #5CE1E6; margin-bottom: 6px; }
@@ -391,7 +391,7 @@ section:not(#hero) h2 {
   font-family: var(--font-display) !important; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.1em !important; font-size: clamp(1.55rem, 3.6vw, 3rem) !important; line-height: 1.15 !important;
 }
-section h3, .flight-sub h2 { font-family: var(--font-body) !important; font-weight: 600 !important; letter-spacing: -0.015em !important; }
+h3, .flight-sub h2 { font-family: var(--font-body) !important; font-weight: 600 !important; letter-spacing: -0.015em !important; }
 
 
 .hero-shade { background: linear-gradient(180deg, rgba(0,0,0,0.65) 0%, transparent 16%), linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 42%, transparent 62%), linear-gradient(0deg, #000 0%, transparent 28%); }

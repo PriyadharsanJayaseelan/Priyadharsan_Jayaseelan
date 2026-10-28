@@ -97,7 +97,7 @@ export default function Navbar({ scrolled }: NavProps) {
         className="md:hidden overflow-hidden transition-all duration-300"
         style={{
           maxHeight: menuOpen ? "280px" : "0",
-          background: "rgba(0,26,51,0.92)",
+          background: "rgba(0,0,0,0.94)",
           backdropFilter: "blur(20px)",
           borderBottom: menuOpen ? "1px solid rgba(255,255,255,0.08)" : "none",
         }}

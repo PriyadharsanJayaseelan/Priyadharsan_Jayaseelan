@@ -222,7 +222,7 @@ function ProjectModal({
         onClick={close}
         className="absolute inset-0 transition-opacity duration-500"
         style={{
-          background: "rgba(0,15,30,0.7)",
+          background: "rgba(0,0,0,0.78)",
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
           opacity: expanded && !closing ? 1 : 0,
@@ -233,7 +233,7 @@ function ProjectModal({
       <div
         style={{
           ...panelStyle,
-          background: "hsl(201,80%,10%)",
+          background: "#0B0B0D",
           border: "1px solid rgba(255,255,255,0.12)",
           boxShadow: "0 24px 80px rgba(0,0,0,0.5)",
           overflow: "hidden",
@@ -299,8 +299,8 @@ function ProjectModal({
                 }}
               >
                 <div
-                  className="text-2xl sm:text-3xl text-white mb-1"
-                  style={{ fontFamily: "var(--font-display)" }}
+                  className="text-xl sm:text-3xl text-white mb-1"
+                  style={{ fontFamily: "var(--font-display)", textTransform: "uppercase" }}
                 >
                   {m.value}
                 </div>
