@@ -60,9 +60,6 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-6 right-6 sm:right-8 z-10 term-line text-[11px] hidden sm:block" style={{ color: "var(--dim)" }}>
-        Gargantua, rendered live on your GPU
-      </div>
     </section>
   );
 }

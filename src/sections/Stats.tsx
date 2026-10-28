@@ -1,5 +1,4 @@
 import { useCounter } from "../hooks/useCounter";
-import Tars from "../components/Tars";
 
 const stats = [
   { target: 3.5, display: "3.5", suffix: "", label: "GPA · Kent State University", sub: "B.S. Computer Science, Minor in Data Analytics · Alpha Lambda Delta · May 2027" },
@@ -52,7 +51,7 @@ export default function Stats() {
         ))}
       </div>
 
-      <div className="mt-24 grid lg:grid-cols-2 gap-12 items-center">
+      <div className="mt-24">
       <div
         className="scroll-reveal reveal-delay-2 pl-8"
         style={{ borderLeft: "2px solid rgba(255,255,255,0.1)" }}
@@ -67,7 +66,6 @@ export default function Stats() {
           Priyadharsan Jayaseelan
         </p>
       </div>
-        <Tars />
       </div>
     </section>
   );
